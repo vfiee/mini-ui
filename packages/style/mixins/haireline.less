@@ -1,0 +1,40 @@
+@import "../var.less";
+
+@calcScale7: "calc((100% / 0.7) * -0.15)";
+@calcScale3: "calc((100% / 0.3) * -0.35)";
+
+.hairline-base() {
+  content: "";
+  position: absolute;
+  box-sizing: border-box;
+  pointer-events: none;
+  z-index: 1;
+}
+
+// stylelint-disable
+.hairline(@color: @border-color) {
+  .hairline-base();
+
+  border: 0 solid @color;
+  border-radius: inherit;
+
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+    only screen and (min-device-pixel-ratio: 1.5) {
+    transform: scale(0.7);
+    top: e(@calcScale7);
+    bottom: e(@calcScale7);
+    left: e(@calcScale7);
+    right: e(@calcScale7);
+  }
+
+  @media only screen and (-webkit-min-device-pixel-ratio: 2),
+    only screen and (min-device-pixel-ratio: 2) {
+    top: -50%;
+    right: -50%;
+    bottom: -50%;
+    left: -50%;
+    transform: scale(0.5);
+  }
+}
+
+// stylelint-enable
