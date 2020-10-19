@@ -24,11 +24,14 @@
     overflow: hidden;
     white-space: nowrap;
     padding: 0 10px;
+    &white {
+      color: #fff;
+    }
   }
 
   .__left__menu__ {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
 
     &hidden__ {
@@ -40,28 +43,15 @@
     }
 
     .__menu__item__wrap__ {
-      flex: 1;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100%;
-
-      // ._menu_icon {
-      //   &.back {
-      //     width: 18px;
-      //     height: 30px;
-      //   }
-
-      //   &.menu {
-      //     width: 34px;
-      //     height: 25px;
-      //   }
-
-      //   &.home {
-      //     width: 34px;
-      //     height: 34px;
-      //   }
-      // }
+    }
+  }
+  .__left__menu__full__ {
+    .__menu__item__wrap__ {
+      flex: 1;
     }
   }
 }

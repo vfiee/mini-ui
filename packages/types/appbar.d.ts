@@ -2,32 +2,13 @@
 import { ViewProps } from "@tarojs/components/types/View";
 import { IconProps, navigationBarTextStyle } from "./index";
 
-export declare interface MenuIcon {
-  white?: IconProps;
-  black?: IconProps;
-}
-
-export declare interface leftIconProps extends ViewProps {
-  home?: MenuIcon;
-  back?: MenuIcon;
-}
-
-export declare interface RightIconProps extends ViewProps {
-  menu?: MenuIcon;
-}
-
-export declare interface TitleProps extends ViewProps {
-  text?: string;
-}
-
 export declare interface NavigationBarProps extends ViewProps {
-  title?: string | TitleProps;
+  title?: string | React.ReactElement;
   backgroundColor?: string;
-  statusBarBackgroundColor?: string;
   type?: navigationBarTextStyle;
-  left?: leftIconProps;
+  left?: IconProps;
   middle?: ViewProps;
-  right?: RightIconProps;
+  right?: IconProps;
   onTitleClick?: Function;
   onLeftClick?: Function;
   onRightClick?: Function;

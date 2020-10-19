@@ -1,6 +1,6 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { getMenuButtonBoundingClientRect, get } from "utils";
-import { useMount, useSystemInfo } from "hooks";
+import { useSystemInfo } from "hooks";
 import { BaseObject, navigationBarTextStyle } from "types";
 
 export declare type menuProps = {
@@ -15,8 +15,8 @@ export declare type menuData = {
   system: Taro.getSystemInfoSync.Result;
 };
 
-const defaultMenuProps: menuProps = {
-  type: "white" as navigationBarTextStyle,
+const defaultMenuProps = {
+  type: "white",
 };
 
 const defaultColors = {
@@ -41,46 +41,37 @@ const useMenuButton = (props: menuProps = {}): menuData => {
   };
   const rectRef = useRef(getMenuButtonBoundingClientRect());
   const systemInfo = useSystemInfo();
-  const [style, setStyle] = useState({
-    wrapStyle: {},
-    menuStyle: {},
-    delimiterStyle: {},
-  });
-  useMount(() => {
-    const { width, height, top, right } = rectRef.current;
-    const { screenWidth, statusBarHeight } = systemInfo;
-    setStyle({
-      wrapStyle: {
-        position: "fixed",
-        zIndex: 1000,
-        boxSizing: "border-box",
-        width: screenWidth + "px",
-        paddingTop: statusBarHeight + "px",
-        paddingLeft: screenWidth - right + "px",
-        paddingRight: screenWidth - right + "px",
-        height: `${
-          height + statusBarHeight + (top - statusBarHeight + 2) * 2
-        }px`,
-      },
-      menuStyle: {
-        boxSizing: "border-box",
-        width: width + `px`,
-        height: height + `px`,
-        borderRadius: height / 2 + `px`,
-        borderWidth: "1px",
-        borderStyle: "solid",
-        borderColor: get(defaultColors, `border.${typeStyle}`),
-        backgroundColor: get(defaultColors, `background.${typeStyle}`),
-      },
-      delimiterStyle: {
-        width: `1px`,
-        height: "18px",
-        backgroundColor: get(defaultColors, `delimiter.${typeStyle}`),
-      },
-    });
+  const { width, height, top, right } = rectRef.current;
+  const { screenWidth, statusBarHeight } = systemInfo;
+  const menuRef = useRef({
+    wrapStyle: {
+      position: "relative",
+      zIndex: 1000,
+      boxSizing: "border-box",
+      width: screenWidth + "px",
+      paddingTop: statusBarHeight + "px",
+      paddingLeft: screenWidth - right + "px",
+      paddingRight: screenWidth - right + "px",
+      height: `${height + statusBarHeight + (top - statusBarHeight + 2) * 2}px`,
+    },
+    menuStyle: {
+      boxSizing: "border-box",
+      width: width + `px`,
+      height: height + `px`,
+      borderRadius: height / 2 + `px`,
+      borderWidth: "1px",
+      borderStyle: "solid",
+      borderColor: get(defaultColors, `border.${typeStyle}`),
+      backgroundColor: get(defaultColors, `background.${typeStyle}`),
+    },
+    delimiterStyle: {
+      width: `1px`,
+      height: "18px",
+      backgroundColor: get(defaultColors, `delimiter.${typeStyle}`),
+    },
   });
   return {
-    ...style,
+    ...menuRef.current,
     system: systemInfo,
     rect: rectRef.current,
   };
