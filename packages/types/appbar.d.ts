@@ -1,4 +1,6 @@
+/// <reference types="react" />
 import { ViewProps } from "@tarojs/components/types/View";
+import { IconProps, navigationBarTextStyle } from "./index";
 
 export declare interface MenuIcon {
   white?: IconProps;
@@ -30,3 +32,12 @@ export declare interface NavigationBarProps extends ViewProps {
   onLeftClick?: Function;
   onRightClick?: Function;
 }
+
+declare const AppBar: {
+  (props: NavigationBarProps): JSX.Element;
+  options: {
+    addGlobalClass: boolean;
+  };
+};
+
+export default AppBar;

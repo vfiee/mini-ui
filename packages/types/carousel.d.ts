@@ -1,6 +1,8 @@
+/// <reference types="react" />
 import { StandardProps } from "@tarojs/components";
 import { SwiperProps } from "@tarojs/components/types/Swiper";
 import { SwiperItemProps } from "@tarojs/components/types/SwiperItem";
+import { BaseObject } from "./index";
 
 export declare interface ExtendSwiperProps
   extends CustomIndicatorProps,
@@ -44,7 +46,7 @@ export declare interface CustomIndicatorProps {
   wrapperClassName?: string;
 }
 
-declare interface IndicatorProps extends StandardProps {
+export declare interface IndicatorProps extends StandardProps {
   current: number;
   data: BaseObject[];
   dotActiveLine?: boolean;
@@ -55,6 +57,11 @@ declare interface IndicatorProps extends StandardProps {
   indicatorPosition?: IndicatorPosition;
 }
 
-declare interface ExtendSwiperItemPropsWithData extends ExtendSwiperItemProps {
+export declare interface ExtendSwiperItemPropsWithData
+  extends ExtendSwiperItemProps {
   data: BaseObject;
 }
+
+declare const Carousel: (props: CarouselProps) => JSX.Element;
+
+export default Carousel;

@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { ScrollViewProps } from "@tarojs/components/types/ScrollView";
 import { BaseObject, CustomStyle } from "./index";
 
@@ -42,3 +43,11 @@ export declare enum PullingStatus {
   success,
   error,
 }
+
+declare const List: {
+  (props: ListProps): JSX.Element;
+  options: {
+    addGlobalClass: boolean;
+  };
+};
+export default List;

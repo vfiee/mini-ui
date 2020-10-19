@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { StandardProps } from "@tarojs/components";
 
 export declare type PromiseFn = (args?: any) => Promise<any>;
@@ -37,3 +38,11 @@ export declare interface AuthorizeProps extends StandardProps {
   onAuthorize?: Function;
   service?: AuthorizeService;
 }
+
+declare const Authorize: {
+  (props: AuthorizeProps): JSX.Element;
+  options: {
+    addGlobalClass: boolean;
+  };
+};
+export default Authorize;

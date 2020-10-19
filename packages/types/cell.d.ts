@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { ViewProps } from "@tarojs/components/types/View";
 import { CustomElement, CustomStyle, IconProps } from "./index";
 
@@ -33,3 +34,9 @@ export declare interface CellProps extends ViewProps {
   arrowDirection?: ArrowDirection;
   children?: CustomElement;
 }
+
+declare const Cell: (props: CellProps) => JSX.Element;
+
+declare const CellGroup: (props: CellGroupProps) => JSX.Element;
+
+export { Cell as default, CellGroup };

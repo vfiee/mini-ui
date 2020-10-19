@@ -1,3 +1,4 @@
+/// <reference types="react" />
 export declare interface OverlayProps {
   show: boolean;
   className?: string;
@@ -10,3 +11,7 @@ export declare interface OverlayProps {
   style?: React.CSSProperties | string;
   children?: React.ReactElement | string;
 }
+
+declare const Overlay: (props: OverlayProps) => JSX.Element;
+
+export default Overlay;

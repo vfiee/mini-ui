@@ -7,7 +7,11 @@ import resolve from "@rollup/plugin-node-resolve";
 import postcss from "rollup-plugin-postcss";
 import alias from "@rollup/plugin-alias";
 import copy from "rollup-plugin-copy";
+import { terser } from "rollup-plugin-terser";
+import sizes from "rollup-plugin-sizes";
 import pkg from "./package.json";
+
+const isProd = process.env.BUILD === "production";
 
 function getPath(src) {
   return path.resolve(process.cwd(), src);
@@ -22,6 +26,7 @@ function isImage(id) {
 const externalPaths = {
   hooks: `${pkg.name}/lib/hooks`,
   utils: `${pkg.name}/lib/utils`,
+  types: `${pkg.name}/lib/types`,
 };
 
 function external(id, parent) {
@@ -96,6 +101,8 @@ function commonPlugins() {
         },
       },
     }),
+    isProd && terser(),
+    sizes(),
   ];
 }
 
@@ -104,6 +111,7 @@ function createStyleConfig(src) {
     postcss({
       extract: true,
       extensions: [".less"],
+      minimize: isProd,
     }),
   ];
   return _.reduce(
@@ -177,7 +185,7 @@ function build() {
   buildCommonExternalPaths(getPath("packages/hooks"), "hooks");
   buildCommonExternalPaths(getPath("packages/utils"), "utils");
   buildCommonExternalPaths(getPath("packages/components"), "components");
-  console.log(`externalPaths:`, externalPaths);
+  // console.log(`externalPaths:`, externalPaths);
   // 全局引用
   const config = {
     external,
@@ -189,7 +197,6 @@ function build() {
       file: getPath("lib/index.js"),
     },
     plugins: [
-      ...commonPlugins(),
       copy({
         targets: [
           {
@@ -202,6 +209,17 @@ function build() {
           },
         ],
       }),
+      ...commonPlugins(),
+      // typescript({
+      //   clean: true,
+      //   useTsconfigDeclarationDir: true,
+      //   tsconfigOverride: {
+      //     compilerOptions: {
+      //       declaration: false,
+      //       declarationDir: "./typescript",
+      //     },
+      //   },
+      // }),
     ],
   };
   return [

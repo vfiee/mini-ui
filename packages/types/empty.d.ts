@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { IconProps } from "./index";
 
 export declare type EmptyType = "empty" | "network" | "error";
@@ -10,6 +11,14 @@ export declare interface EmptyProps {
   onClick?: Function;
 }
 
-declare type DefaultIconProps = {
+export declare type DefaultIconProps = {
   [key: string]: IconProps;
 };
+
+declare const Empty: {
+  (props: EmptyProps): JSX.Element;
+  options: {
+    addGlobalClass: boolean;
+  };
+};
+export default Empty;

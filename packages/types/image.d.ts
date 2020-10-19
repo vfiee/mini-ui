@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { ImageProps as _ImageProps } from "@tarojs/components/types/Image";
 
 export declare interface ImageProps extends _ImageProps {
@@ -13,3 +14,12 @@ export declare interface ImageProps extends _ImageProps {
   width?: string;
   height?: string;
 }
+
+declare const Component: {
+  (props: ImageProps): JSX.Element;
+  options: {
+    addGlobalClass: boolean;
+  };
+};
+
+export default Component;

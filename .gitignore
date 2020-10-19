@@ -4,6 +4,7 @@ deploy_versions/
 .rn_temp/
 node_modules/
 .DS_Store
-example/
 package-lock.json
 yarn.lock
+lib/
+example/

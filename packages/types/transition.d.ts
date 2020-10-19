@@ -1,3 +1,4 @@
+/// <reference types="react" />
 export declare type TransitionType =
   | "fade"
   | "fadeUp"
@@ -15,3 +16,19 @@ export declare interface TransitionProps {
   name: TransitionType;
   children: React.ReactElement;
 }
+
+declare const Transition: (
+  props: TransitionProps
+) => React.ReactElement<
+  any,
+  | string
+  | ((
+      props: any
+    ) => React.ReactElement<
+      any,
+      string | any | (new (props: any) => React.Component<any, any, any>)
+    > | null)
+  | (new (props: any) => React.Component<any, any, any>)
+> | null;
+
+export default Transition;

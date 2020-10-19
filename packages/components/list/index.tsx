@@ -9,7 +9,16 @@ import { ScrollView, View, Slot } from "@tarojs/components";
 import Loading from "components/loading";
 import { isEmpty, isFunction, isReactComponentType } from "utils";
 import { useMount, useUpdate } from "hooks";
-import { ListProps, PullingStatus } from "types";
+import { ListProps } from "types";
+
+declare enum PullingStatus {
+  static,
+  pulling,
+  overPulling,
+  loading,
+  success,
+  error,
+}
 
 const pullStatusText = [
   "",

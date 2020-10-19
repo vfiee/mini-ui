@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { CustomStyle } from "./index";
 
 export declare type LoadingType = "circular" | "spinner";
@@ -13,3 +14,11 @@ export declare interface LoadingProps {
   style?: CustomStyle;
   children?: string | React.ReactElement;
 }
+
+declare const Loading: {
+  (props: LoadingProps): JSX.Element;
+  options: {
+    addGlobalClass: boolean;
+  };
+};
+export default Loading;

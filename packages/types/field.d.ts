@@ -1,22 +1,11 @@
-import { InputProps as _InputProps } from "@tarojs/components/types/input";
-import { CommonEventFunction } from "@tarojs/components/types";
-import { TextareaProps } from "@tarojs/components/types/Textarea";
+/// <reference types="react" />
 import {
   CustomStyle,
   CustomTextAlign,
   CustomElement,
   IconProps,
 } from "./index";
-
-export declare interface InputProps extends _InputProps {
-  isTextarea?: boolean;
-  // Textarea
-  fixed?: boolean;
-  autoHeight?: boolean;
-  showConfirmBar?: boolean;
-  disableDefaultPadding?: boolean;
-  onLineChange?: CommonEventFunction<TextareaProps.onLineChangeEventDetail>;
-}
+import { InputProps } from "./baseInput";
 
 declare type FieldType =
   | "text"
@@ -82,3 +71,7 @@ export declare interface FieldProps
   onLeftIconClick?: Function;
   onRightIconClick?: Function;
 }
+
+declare const Field: (props: FieldProps) => JSX.Element;
+
+export default Field;

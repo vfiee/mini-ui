@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { ViewProps } from "@tarojs/components/types/View";
 
 export declare interface IconProps extends ViewProps {
@@ -11,3 +12,12 @@ export declare interface IconProps extends ViewProps {
   style?: React.CSSProperties | string;
   children?: string | React.ReactElement;
 }
+
+declare const Icon: {
+  (props: IconProps): JSX.Element;
+  options: {
+    addGlobalClass: boolean;
+  };
+};
+
+export default Icon;

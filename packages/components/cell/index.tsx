@@ -146,7 +146,7 @@ const Cell = (props: CellProps) => {
 const defaultCellGroupProps: CellGroupProps = {
   border: true,
 };
-const CellGroup = (props: CellGroupProps): typeof CellGroup => {
+const CellGroup = (props: CellGroupProps) => {
   const { title, titleClass, titleStyle, border, className, ...restProps } = {
     ...defaultCellGroupProps,
     ...props,
