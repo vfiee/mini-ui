@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { getMenuButtonBoundingClientRect, get } from "utils";
 import { useSystemInfo } from "hooks";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { BaseObject, navigationBarTextStyle } from "types";
 
 export declare type menuProps = {

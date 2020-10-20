@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Image } from "@tarojs/components";
 import Icon from "components/icon";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { ImageProps } from "types";
 
 const defaultImageProps: ImageProps = {

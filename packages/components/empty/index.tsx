@@ -1,6 +1,7 @@
 import React from "react";
 import { View } from "@tarojs/components";
 import Icon from "components/icon";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { IconProps, DefaultIconProps, EmptyProps } from "types";
 
 const defaultIcons: DefaultIconProps = {

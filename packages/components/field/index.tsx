@@ -4,8 +4,9 @@ import Icon from "components/icon";
 import Cell from "components/cell";
 import { compact, isFunction, isUndefined, mergeStyle, pick } from "utils";
 import { useUpdate } from "hooks";
-import Input from "./baseInput";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { IconProps, CellProps, InputProps, FieldProps } from "types";
+import Input from "./baseInput";
 
 const defaultFieldProps = {
   type: "text",

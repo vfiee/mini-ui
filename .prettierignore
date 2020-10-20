@@ -1,0 +1,12 @@
+packages/assets
+*.png
+*.jpg
+*.svg
+*.webp
+*.gif
+*.jpeg
+*.eot
+*.svg
+*.ttf
+*.woff
+*.woff2

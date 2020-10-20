@@ -1,6 +1,7 @@
 import React from "react";
 import { View } from "@tarojs/components";
 import { mergeStyle } from "utils";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { LoadingProps } from "types";
 
 const defaultLoadingPorps: LoadingProps = {

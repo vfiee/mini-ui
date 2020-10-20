@@ -1,5 +1,6 @@
 import React from "react";
 import { View } from "@tarojs/components";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { DividerProps } from "types";
 
 const defaultEmptyProps: DividerProps = {

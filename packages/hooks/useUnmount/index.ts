@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
-import { fn } from "../useMount";
+
+declare type fn = (...args: any) => void;
 
 const useUnmount = (fns: fn | fn[]) => {
   const fnsRef = useRef(fns);

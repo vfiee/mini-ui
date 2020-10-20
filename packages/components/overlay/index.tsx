@@ -3,6 +3,7 @@ import { View } from "@tarojs/components";
 import { useMenuButton } from "hooks";
 import { mergeStyle } from "utils";
 import Transition from "components/transition";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { OverlayProps } from "types";
 
 const defaultOverlayProps: OverlayProps = {

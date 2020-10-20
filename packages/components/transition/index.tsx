@@ -1,6 +1,7 @@
 import React from "react";
 import { useTransition } from "hooks";
 import { mergeStyle } from "utils";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { TransitionProps } from "types";
 
 const Transition = (props: TransitionProps) => {

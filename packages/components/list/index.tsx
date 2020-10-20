@@ -9,6 +9,7 @@ import { ScrollView, View, Slot } from "@tarojs/components";
 import Loading from "components/loading";
 import { isEmpty, isFunction, isReactComponentType } from "utils";
 import { useMount, useUpdate } from "hooks";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { ListProps } from "types";
 
 declare enum PullingStatus {

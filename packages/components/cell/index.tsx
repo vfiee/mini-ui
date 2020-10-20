@@ -2,6 +2,7 @@ import React, { useMemo, isValidElement } from "react";
 import { View } from "@tarojs/components";
 import Icon from "components/icon";
 import { isFunction, isNull, isUndefined, navigateTo, redirectTo } from "utils";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { IconProps, CellProps, CellGroupProps } from "types";
 
 const defaultCellProps = {

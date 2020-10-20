@@ -2,6 +2,7 @@ import React from "react";
 import { login } from "@tarojs/taro";
 import { Button } from "@tarojs/components";
 import { isFunction, isPromise, ensureAuthScope } from "utils";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { AuthorizeProps, AuthorizeService, PromiseFn, Service } from "types";
 
 const SUCCESS_MSG = {

@@ -1,0 +1,14 @@
+{
+  "extends": [
+    "taro/react",
+    "prettier"
+  ],
+  "rules": {
+    "jsx-quotes": [
+      2,
+      "prefer-double"
+    ],
+    "react/jsx-quotes": 0
+  },
+  "ignorePatterns": "*.d.ts"
+}

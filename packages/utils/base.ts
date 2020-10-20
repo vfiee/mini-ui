@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { BaseObject } from "types";
 
 export const objectProto = Object.prototype;

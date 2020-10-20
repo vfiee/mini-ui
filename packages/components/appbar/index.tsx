@@ -3,6 +3,7 @@ import { CoverView } from "@tarojs/components";
 import Icon from "components/icon";
 import { useMenuButton } from "hooks";
 import { mergeStyle } from "utils";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { NavigationBarProps } from "types";
 
 const defaultNavigationBarProps: NavigationBarProps = {

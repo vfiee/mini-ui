@@ -1,4 +1,5 @@
 import { getSetting, authorize, showModal, openSetting } from "@tarojs/taro";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { AuthScope } from "types";
 
 /**

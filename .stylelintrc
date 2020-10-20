@@ -1,0 +1,26 @@
+{
+  "extends": "stylelint-config-standard",
+  "ignoreFiles": [
+    "**/*.png",
+    "**/*.jpg",
+    "**/*.gif",
+    "**/*.jpeg",
+    "**/*.svg",
+    "**/*.eot",
+    "**/*.ttf",
+    "**/*.woff",
+    "**/*.woff2",
+    "**/iconfont.less",
+    "**/remixicon.less"
+  ],
+  "ignorePath": "packages/assets/**/*",
+  "font-family-no-missing-generic-family-keyword": [
+    true,
+    {
+      "ignoreValues": [
+        "iconfont",
+        "remixicon"
+      ]
+    }
+  ]
+}

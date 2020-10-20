@@ -3,9 +3,13 @@ import { Swiper, SwiperItem, View, Text } from "@tarojs/components";
 import Image from "components/image";
 import { mergeStyle, isEmpty, compact, get } from "utils";
 import {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   IndicatorProps,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   CarouselProps,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   CarouselData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ExtendSwiperItemPropsWithData,
 } from "types";
 

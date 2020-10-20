@@ -1,6 +1,9 @@
 import { useRef } from "react";
 
-export declare type compareFunction<T> = (prev: T | undefined, next: T) => boolean;
+export declare type compareFunction<T> = (
+  prev: T | undefined,
+  next: T
+) => boolean;
 
 const usePrevious = <T>(
   state: T,

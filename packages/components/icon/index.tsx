@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { View, Image, CoverView, CoverImage } from "@tarojs/components";
 import { mergeStyle } from "utils";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { IconProps } from "types";
 
 const defaultIconProps = {

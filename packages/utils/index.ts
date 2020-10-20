@@ -2,6 +2,7 @@ import qs from "qs";
 import get from "lodash.get";
 import kebabcase from "lodash.kebabcase";
 import { createSelectorQuery } from "@tarojs/taro";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { BaseObject, BaseMap } from "types";
 import { getSystemInfoSync } from "./system";
 import { isObject, isFunction, isEmpty } from "./base";
