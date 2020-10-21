@@ -7,5 +7,6 @@ node_modules/
 package-lock.json
 yarn.lock
 lib
-example
+example/*
 yarn-error.log
+script/build.js

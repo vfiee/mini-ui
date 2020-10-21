@@ -4,7 +4,7 @@ const msgPath = process.env.HUSKY_GIT_PARAMS;
 const msg = require("fs").readFileSync(msgPath, "utf-8").trim();
 
 const releaseRE = /^v\d/;
-const commitRE = /^(revert: )?(feat|fix|docs|refactor|perf|test|workflow|build|ci|chore|types|style|wip|release|deps|script)(\(.+\))?: .{1,50}/;
+const commitRE = /^(revert: )?(feat|fix|docs|refactor|perf|test|workflow|ci|chore|types|style|wip|release|deps|script)(\(.+\))?: .{1,50}/;
 // chore 构建过程或辅助工具的变动
 
 if (!releaseRE.test(msg) && !commitRE.test(msg)) {
@@ -15,7 +15,7 @@ if (!releaseRE.test(msg) && !commitRE.test(msg)) {
        `Proper commit message format is required for automated changelog generation.`
      )}
      Example:
-      ${chalk.green(`feat: add git commit-msg hook`)}
+      ${chalk.green(`feat(ui): add git commit-msg hook`)}
     `
   );
   process.exit(1);

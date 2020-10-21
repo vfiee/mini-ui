@@ -1,5 +1,9 @@
-## <small>0.0.1-alpha (2020-10-20)</small>
+## 1.0.0-alpha.3 (2020-10-21)
 
+- release: v1.0.0-alpha.2 ([0874d7e](https://github.com/VFiee/commit/0874d7e))
+- test: test commit ([32268da](https://github.com/VFiee/commit/32268da))
+- script: add release script ([a69c814](https://github.com/VFiee/commit/a69c814))
+- workflow: 生成 changelog ([40d0268](https://github.com/VFiee/commit/40d0268))
 - workflow: 添加 eslint 校验 ([bc6b64a](https://github.com/VFiee/commit/bc6b64a))
 - workflow: 添加 git 提交验证 ([0d45ef0](https://github.com/VFiee/commit/0d45ef0))
 - docs: update README.md ([70c2023](https://github.com/VFiee/commit/70c2023))
