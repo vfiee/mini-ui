@@ -46,7 +46,7 @@ const useMenuButton = (props: menuProps = {}): menuData => {
   const { screenWidth, statusBarHeight } = systemInfo;
   const menuRef = useRef({
     wrapStyle: {
-      position: "relative",
+      position: "fixed",
       zIndex: 1000,
       boxSizing: "border-box",
       width: screenWidth + "px",
