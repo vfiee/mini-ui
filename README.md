@@ -76,6 +76,24 @@ class Home extends React.Component {
 
 <img width="300" height="300" src="./preview.png" alt="扫码预览" />
 
+## 计划
+
+|                    完成                    |    组件    |       说明       |
+| :----------------------------------------: | :--------: | :--------------: |
+| <input type="checkbox" checked disabled /> |   AppBar   | 自定义顶部导航栏 |
+| <input type="checkbox" checked disabled /> | Authorize  |     获取授权     |
+|     <input type="checkbox" disabled />     |  Carousel  |      轮播图      |
+|     <input type="checkbox" disabled />     |    Cell    |                  |
+|     <input type="checkbox" disabled />     |  Divider   |      分隔符      |
+|     <input type="checkbox" disabled />     |   Empty    |       空白       |
+|     <input type="checkbox" disabled />     |   Field    |                  |
+|     <input type="checkbox" disabled />     |    Icon    |     iconfont     |
+|     <input type="checkbox" disabled />     |   Image    |       图片       |
+|     <input type="checkbox" disabled />     |    List    |       列表       |
+|     <input type="checkbox" disabled />     |  Loading   |       加载       |
+|     <input type="checkbox" disabled />     |  Overlay   |       遮罩       |
+|     <input type="checkbox" disabled />     | Transition |     过渡动画     |
+
 ## 开源协议
 
 本项目基于 [MIT](https://zh.wikipedia.org/wiki/MIT許可證) 协议

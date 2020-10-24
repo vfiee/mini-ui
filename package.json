@@ -2,6 +2,7 @@
   "name": "@vyron/mini-ui",
   "version": "1.0.0-alpha",
   "main": "lib/index.js",
+  "module": "lib/index.js",
   "types": "lib/types/index.d.ts",
   "author": "vyron",
   "license": "MIT",

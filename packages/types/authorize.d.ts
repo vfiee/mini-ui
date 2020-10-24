@@ -1,27 +1,13 @@
 /// <reference types="react" />
 import { StandardProps } from "@tarojs/components";
 
-export declare type PromiseFn = (args?: any) => Promise<any>;
-
-export declare type Service = {
-  params: object;
-  fn: PromiseFn;
-  needMiniCode?: boolean;
-  codeKey?: string;
-};
-
 export declare type AuthScope =
-  | "userInfo"
-  | "address"
-  | "invoice"
   | "werun"
   | "record"
   | "camera"
   | "userLocation"
-  | "invoiceTitle"
-  | "writePhotosAlbum";
-
-export declare type AuthorizeService = PromiseFn | Service;
+  | "writePhotosAlbum"
+  | "userLocationBackground";
 
 export declare type OpenType =
   | "contact"
@@ -31,12 +17,11 @@ export declare type OpenType =
   | "scope";
 
 export declare interface AuthorizeProps extends StandardProps {
-  authorize: boolean;
+  authorize?: boolean;
   openType?: OpenType;
   authScope?: AuthScope;
-  children?: React.ReactElement | string;
   onAuthorize?: Function;
-  service?: AuthorizeService;
+  children?: React.ReactElement | string | string[];
 }
 
 declare const Authorize: {

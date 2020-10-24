@@ -1,117 +1,77 @@
-import React from "react";
-import { login } from "@tarojs/taro";
+import React, { useMemo, useCallback } from "react";
 import { Button } from "@tarojs/components";
-import { isFunction, isPromise, ensureAuthScope } from "utils";
+import { isFunction, ensureAuthScope } from "utils";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { AuthorizeProps, AuthorizeService, PromiseFn, Service } from "types";
-
-const SUCCESS_MSG = {
-  getPhoneNumber: "getPhoneNumber:ok",
-  getUserInfo: "getUserInfo:ok",
-};
-
-async function getService(
-  service: AuthorizeService,
-  param: object = {}
-): Promise<any> {
-  if (service === void 0) {
-    throw `service is undefined!`;
-  }
-  if (isPromise(service)) {
-    return (service as PromiseFn)(param);
-  }
-  let { params, fn, needMiniCode, codeKey } = service as Service;
-  params = {
-    ...params,
-    ...param,
-  };
-  if (needMiniCode) {
-    params[codeKey || "code"] = await login();
-  }
-  return fn(params);
-}
-
-async function onGetPhoneNumber(eve: any) {
-  const { errMsg, ...rest } = eve.detail;
-  if (errMsg !== SUCCESS_MSG.getPhoneNumber) {
-    return;
-  }
-  try {
-    let userinfo = await getService(this.service, rest);
-    // dispatch({type:"userinfo/update",payload:{userinfo}});
-    onSuccess.bind(this, userinfo, eve)();
-  } catch (error) {}
-}
-
-async function onGetUserInfo(eve: any) {
-  const { errMsg, ...rest } = eve.detail;
-  if (errMsg !== SUCCESS_MSG.getUserInfo) {
-    return;
-  }
-  try {
-    let userinfo = await getService(this.service, rest);
-    // dispatch({type:"userinfo/update",payload:{userinfo}});
-    onSuccess.bind(this, userinfo, eve)();
-  } catch (error) {}
-}
+import { AuthorizeProps } from "types";
 
 function authorizeScope(eve: any) {
-  ensureAuthScope(this.authScope)
-    .then(() => {
-      this.onAuthorize && this.onAuthorize(eve);
-    })
-    .catch(() => {
-      console.log(`未授权:${this.authScope}`);
-    });
+  this.authScope &&
+    ensureAuthScope(this.authScope)
+      .then(() => {
+        this.onAuthorize && this.onAuthorize({ authorized: true }, eve);
+      })
+      .catch((err) => {
+        // console.log(`未授权:${this.authScope}`, err);
+        this.onAuthorize &&
+          this.onAuthorize({ authorized: false, error: err }, eve);
+      });
 }
 
-function onSuccess(...args: any) {
-  isFunction(this.onAuthorize) && this.onAuthorize(...args);
+function onSuccess(fn: Function, ...args: any) {
+  isFunction(fn) && fn(...args);
 }
+
+const OPENTYPE_EVENTNAME = {
+  contact: "onContact",
+  launchApp: "onLaunchapp",
+  getUserInfo: "onGetUserInfo",
+  getPhoneNumber: "onGetPhoneNumber",
+};
 
 const Authorize = (props: AuthorizeProps) => {
-  const { authorize, onAuthorize, className = "", openType, ...rest } = props;
-  function onClick(eve: any) {
-    if (!openType) return;
-    const openTypeFns = {
-      contact: onSuccess.bind(props),
-      launchApp: onSuccess.bind(props),
-      scope: authorizeScope.bind(props),
-      getUserInfo: onGetUserInfo.bind(props),
-      getPhoneNumber: onGetPhoneNumber.bind(props),
-    };
+  const {
+    authorize,
+    onAuthorize,
+    authScope,
+    className = "",
+    openType,
+    ...rest
+  } = props;
+  const onClick = useCallback(
+    (eve: any) => {
+      if (props.openType === "scope") {
+        authorizeScope.call(props, eve);
+      }
+    },
+    [props]
+  );
+  const buttonProps = useMemo(
+    (...args) => {
+      const fn = onSuccess.bind(null, onAuthorize, ...args);
+      let _props = {};
+      if (authorize) {
+        _props = { onClick: fn };
+      } else {
+        const eventName = openType && OPENTYPE_EVENTNAME[openType];
+        _props = {
+          openType,
+        };
+        if (eventName) {
+          _props[eventName] = fn;
+        } else {
+          _props["onClick"] = onClick;
+        }
+      }
+      return _props;
+    },
+    [openType, authorize, onClick, onAuthorize]
+  );
 
-    if (!isFunction(openTypeFns[openType])) return;
-    openTypeFns[openType](eve);
-  }
   return (
-    <React.Fragment>
-      {!authorize ? (
-        // @ts-ignore
-        <Button
-          {...rest}
-          openType={openType}
-          onClick={onClick}
-          onContact={onClick}
-          onLaunchapp={onClick}
-          onGetUserInfo={onClick}
-          onGetPhoneNumber={onClick}
-          className={`__authorize__ ${className}`}
-        >
-          {props?.children}
-        </Button>
-      ) : (
-        // @ts-ignore
-        <Button
-          {...rest}
-          openType=""
-          onClick={(eve) => onAuthorize && onAuthorize(eve)}
-          className={`__authorize__ ${className}`}
-        >
-          {props?.children}
-        </Button>
-      )}
-    </React.Fragment>
+    // @ts-ignore
+    <Button {...rest} {...buttonProps} className={`__authorize__ ${className}`}>
+      {props.children}
+    </Button>
   );
 };
 

@@ -165,6 +165,9 @@ function createCommonConfig({
           },
           external,
           plugins: commonPlugins(),
+          watch: {
+            include: "packages/**",
+          },
           ...rollupConfig,
         },
       ];
