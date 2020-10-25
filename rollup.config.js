@@ -6,7 +6,6 @@ import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import postcss from "rollup-plugin-postcss";
 import alias from "@rollup/plugin-alias";
-import copy from "rollup-plugin-copy";
 import { terser } from "rollup-plugin-terser";
 import sizes from "rollup-plugin-sizes";
 import cssnanoPreset from "cssnano-preset-default";
@@ -39,13 +38,10 @@ function external(id, parent) {
   // );
   return (
     // 外部库
-    Object.keys(pkg.dependencies).includes(id) ||
-    /^react$/.test(id) ||
-    /^react-dom$/.test(id) ||
-    /^@tarojs\/taro/.test(id) ||
-    /^@tarojs\/runtime/.test(id) ||
-    /^@tarojs\/components/.test(id) ||
-    /^@tarojs\/react/.test(id) ||
+    Object.keys({
+      ...pkg.dependencies,
+      ...pkg.peerDependencies,
+    }).includes(id) ||
     // 内部依赖
     (/^components/i.test(id) && !!parent) ||
     (/^hooks/i.test(id) && !!parent) ||
@@ -184,48 +180,40 @@ function buildCommonExternalPaths(src, type) {
   });
 }
 
+function createBuildAllConfigs() {
+  const input = getPath("packages/index.ts");
+  return [
+    {
+      input,
+      external,
+      output: {
+        format: "es",
+        sourcemap: true,
+        paths: externalPaths,
+        file: pkg.module,
+      },
+      plugins: commonPlugins(),
+    },
+    {
+      input,
+      external,
+      output: {
+        format: "cjs",
+        sourcemap: true,
+        paths: externalPaths,
+        file: pkg.main,
+      },
+      plugins: commonPlugins(),
+    },
+  ];
+}
+
 function build() {
   // 添加 externalPaths
   buildCommonExternalPaths(getPath("packages/hooks"), "hooks");
   buildCommonExternalPaths(getPath("packages/utils"), "utils");
   buildCommonExternalPaths(getPath("packages/components"), "components");
   // console.log(`externalPaths:`, externalPaths);
-  // 全局引用
-  const config = {
-    external,
-    input: getPath("packages/index.ts"),
-    output: {
-      format: "es",
-      sourcemap: true,
-      paths: externalPaths,
-      file: getPath("lib/index.js"),
-    },
-    plugins: [
-      copy({
-        targets: [
-          {
-            dest: getPath("lib"),
-            src: getPath("packages/assets"),
-          },
-          {
-            dest: getPath("lib"),
-            src: getPath("packages/types"),
-          },
-        ],
-      }),
-      ...commonPlugins(),
-      // typescript({
-      //   clean: true,
-      //   useTsconfigDeclarationDir: true,
-      //   tsconfigOverride: {
-      //     compilerOptions: {
-      //       declaration: false,
-      //       declarationDir: "./typescript",
-      //     },
-      //   },
-      // }),
-    ],
-  };
   return [
     // style
     ...createStyleConfig(getPath("packages/components")),
@@ -241,10 +229,11 @@ function build() {
     }),
     // components
     ...createCommonConfig({
-      defaultConfig: [config],
       src: getPath("packages/components"),
       target: getPath("lib/components"),
     }),
+    // all
+    ...createBuildAllConfigs(),
   ];
 }
 

@@ -112,7 +112,6 @@ const CarouselItem = (props: SwiperItemPropsWithData) => {
     srcKey,
     ...restProps
   } = props;
-  console.log(`props:`, props);
 
   const src = useMemo(() => (srcKey ? data[srcKey] : data["src"]), [
     data,
