@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import Taro from "@tarojs/taro";
 import { View } from "@tarojs/components";
 import { AppBar } from "@vyron/mini-ui";
-import backIcon from "images/back-white-icon.png";
-import homeWhiteIcon from "images/home-white-icon.png";
+import backIcon from "images/appbar/back-white-icon.png";
+import homeWhiteIcon from "images/appbar/home-white-icon.png";
 import "./index.less";
 
 const APPBAR_KEYS = ["ALL", "BACK", "HOME"];

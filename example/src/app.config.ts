@@ -1,5 +1,10 @@
 export default {
-  pages: ["pages/index/index", "pages/appbar/index", "pages/authorize/index"],
+  pages: [
+    "pages/index/index",
+    "pages/appbar/index",
+    "pages/authorize/index",
+    "pages/carousel/index",
+  ],
   window: {
     navigationBarTitleText: "WeChat",
     navigationBarTextStyle: "black",
