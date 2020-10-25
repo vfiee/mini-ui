@@ -12,7 +12,9 @@ export declare interface CustomIndicatorProps {
   wrapperClassName?: string;
 }
 
-export declare interface SwiperProps extends CustomIndicatorProps, _SwiperProps {}
+export declare interface SwiperProps
+  extends CustomIndicatorProps,
+    _SwiperProps {}
 
 export declare interface SwiperItemProps extends _SwiperItemProps {
   extra?: ({ data: BaseObject, current: number }) => CustomElement;
