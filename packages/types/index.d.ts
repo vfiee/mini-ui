@@ -38,7 +38,7 @@ export declare type ExtractAllType<T> = T extends { [key: string]: infer U }
 
 export declare type ExtractArrayType<T> = T extends (infer U)[] ? U : T;
 
-export declare type CustomElement = React.ReactElement | string;
+export declare type CustomElement = React.ReactElement | string | string[];
 
 export declare type CustomStyle = React.CSSProperties | string;
 

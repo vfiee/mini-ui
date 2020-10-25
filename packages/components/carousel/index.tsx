@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useMemo, useCallback } from "react";
+import { previewImage } from "@tarojs/taro";
 import { Swiper, SwiperItem, View, Text } from "@tarojs/components";
 import Image from "components/image";
 import { mergeStyle, isEmpty, compact, get } from "utils";
@@ -10,7 +11,7 @@ import {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   CarouselData,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  ExtendSwiperItemPropsWithData,
+  SwiperItemPropsWithData,
 } from "types";
 
 const IndicatorDots = (props: IndicatorProps) => {
@@ -52,7 +53,10 @@ const IndicatorDots = (props: IndicatorProps) => {
 };
 const IndicatorNumber = (props: IndicatorProps) => {
   const { data, current, className, wrapperClassName, ...restProps } = props;
-  const extraText = get(data, `[${current}]._text`, "");
+  const extraText = useMemo(() => get(data, `[${current}]._text`, ""), [
+    current,
+    data,
+  ]);
   return (
     <View className={wrapperClassName}>
       <View {...restProps} className={`__numbers__ ${className ?? ""}`}>
@@ -98,25 +102,36 @@ const Indicator = (props: IndicatorProps) => {
   );
 };
 
-const CarouselItem = (props: ExtendSwiperItemPropsWithData) => {
-  const { data, onClick, extra, className = "", style, ...restProps } = props;
-  const { src } = data || {};
+const CarouselItem = (props: SwiperItemPropsWithData) => {
+  const {
+    data,
+    onClick,
+    className,
+    image,
+    current,
+    srcKey,
+    ...restProps
+  } = props;
+  console.log(`props:`, props);
+
+  const src = useMemo(() => (srcKey ? data[srcKey] : data["src"]), [
+    data,
+    srcKey,
+  ]);
+  const { className: imageCls, ...restImageProps } = image ?? {};
   return (
     <SwiperItem
       {...restProps}
       key={data.id}
-      className={`__swiper__item__ ${className}`}
       onClick={onClick?.bind(null, data)}
+      className={`__swiper__item__ ${className ?? ""}`}
     >
-      <View className="__content__">
-        <Image
-          src={src}
-          mode="aspectFit"
-          errorIcon="icon-error_img"
-          className="__carousel__img__"
-        />
-      </View>
-      {extra?.(data)}
+      <Image
+        {...restImageProps}
+        src={src}
+        className={`__carousel__img__ ${imageCls ?? ""} `}
+      />
+      {props?.extra?.({ data, current })}
     </SwiperItem>
   );
 };
@@ -124,48 +139,88 @@ const CarouselItem = (props: ExtendSwiperItemPropsWithData) => {
 const Carousel = (props: CarouselProps) => {
   const {
     data,
-    style = "",
-    className = "",
-    swiperProps = {},
-    swiperItemProps,
+    style,
+    className,
+    swiper,
+    swiperItem,
+    image,
+    srcKey,
+    preview,
+    showMenu,
   } = props;
   const {
+    onClick,
     onChange,
     customIndicator,
-    onClick,
     dotActiveLine,
     wrapperClassName,
     indicatorType,
     indicatorPosition,
     ...restProps
-  } = swiperProps;
-  const carouselData = (!isEmpty(data) ? data : [{}]) as CarouselData;
-  const [current, setCurrent] = useState(swiperProps?.current ?? 0);
-  const onSwiperChange = (eve) => {
-    setCurrent(eve.detail.current);
-    onChange?.call(null, eve);
-  };
+  } = swiper ?? {};
+  const carouselData = useMemo(
+    () => (!isEmpty(data) ? data : [{}]) as CarouselData,
+    [data]
+  );
+  const [current, setCurrent] = useState(swiper?.current ?? 0);
+  const onSwiperChange = useCallback(
+    (eve) => {
+      setCurrent(eve.detail.current);
+      onChange?.call(null, eve);
+    },
+    [onChange]
+  );
+  const showOriginIndicator = useMemo(
+    () => !customIndicator && carouselData.length > 1,
+    [carouselData, customIndicator]
+  );
+  const showCustomIndicator = useMemo(
+    () => !!(customIndicator && carouselData.length > 1),
+    [carouselData, customIndicator]
+  );
+  const onSwiperClick = useCallback(
+    (eve) => {
+      onClick?.(eve);
+      if (preview && !isEmpty(data)) {
+        const urls: string[] = carouselData.map((_data) =>
+          get(_data, srcKey || "src", "")
+        );
+        previewImage(
+          {
+            urls,
+            current: urls[current],
+          },
+          // @ts-ignore
+          showMenu
+        );
+      }
+    },
+    [carouselData, current, data, onClick, preview, showMenu, srcKey]
+  );
   return (
-    <View className={`__carousel__ ${className}`} style={style}>
+    <View className={`__carousel__ ${className ?? ""}`} style={style}>
       <Swiper
         {...restProps}
         current={current}
+        onClick={onSwiperClick}
         onChange={onSwiperChange}
-        indicatorDots={!customIndicator && carouselData.length > 1}
-        className={`__swiper__ ${swiperProps?.className ?? ""}`}
+        indicatorDots={showOriginIndicator}
+        className={`__swiper__ ${swiper?.className ?? ""}`}
       >
         {carouselData.map((item, index) => (
           <CarouselItem
-            {...swiperItemProps}
+            {...swiperItem}
+            current={current}
+            srcKey={srcKey}
+            image={image}
             key={index}
             data={item}
-            onClick={onClick}
           />
         ))}
       </Swiper>
       {props?.extra}
       {props?.children}
-      {!!(customIndicator && carouselData.length > 1) && (
+      {showCustomIndicator && (
         <Indicator
           {...{
             current,
@@ -174,8 +229,8 @@ const Carousel = (props: CarouselProps) => {
             wrapperClassName,
             indicatorPosition,
             data: carouselData,
-            indicatorColor: swiperProps?.indicatorColor,
-            indicatorActiveColor: swiperProps?.indicatorActiveColor,
+            indicatorColor: swiper?.indicatorColor,
+            indicatorActiveColor: swiper?.indicatorActiveColor,
           }}
         />
       )}

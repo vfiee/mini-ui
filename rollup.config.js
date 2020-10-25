@@ -9,6 +9,7 @@ import alias from "@rollup/plugin-alias";
 import copy from "rollup-plugin-copy";
 import { terser } from "rollup-plugin-terser";
 import sizes from "rollup-plugin-sizes";
+import cssnanoPreset from "cssnano-preset-default";
 import pkg from "./package.json";
 
 const isProd = process.env.BUILD === "production";
@@ -107,11 +108,11 @@ function commonPlugins() {
 }
 
 function createStyleConfig(src) {
-  const plugins = [
+  const createStylePlugins = (name) => [
     postcss({
-      extract: true,
+      minimize: cssnanoPreset,
       extensions: [".less"],
-      minimize: isProd,
+      extract: path.resolve(`lib/style/${name}.css`),
     }),
   ];
   return _.reduce(
@@ -122,7 +123,7 @@ function createStyleConfig(src) {
         output: {
           file: `lib/style/${dir}.css`,
         },
-        plugins,
+        plugins: createStylePlugins(dir),
       });
       return configs;
     },
@@ -132,7 +133,7 @@ function createStyleConfig(src) {
         output: {
           file: `lib/style/index.css`,
         },
-        plugins,
+        plugins: createStylePlugins("index"),
       },
     ]
   );
