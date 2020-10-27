@@ -1,5 +1,5 @@
 export default {
-  navigationBarTitleText: "首页",
+  navigationBarTitleText: "AppBar",
   navigationStyle: "custom",
   navigationBarTextStyle: "white",
   navigationBarBackgroundColor: "#00ab84",

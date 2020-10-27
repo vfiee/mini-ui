@@ -7,7 +7,7 @@ import homeWhiteIcon from "images/appbar/home-white-icon.png";
 import "./index.less";
 
 const APPBAR_KEYS = ["ALL", "BACK", "HOME"];
-export default class Index extends Component {
+export default class AppBarExample extends Component {
   state = {
     appbarKey: APPBAR_KEYS[0],
   };
@@ -16,6 +16,9 @@ export default class Index extends Component {
     key !== this.state.appbarKey && this.setState({ appbarKey: key });
   };
   render() {
+    console.log("appbar:", AppBar);
+    console.log("appbarKey:", this.state.appbarKey);
+
     const { appbarKey } = this.state;
     return (
       <View className="index">
@@ -89,7 +92,7 @@ export default class Index extends Component {
           {APPBAR_KEYS.map((key) => (
             <View
               key={key}
-              className={`item ${key === this.state.appbarKey ? "active" : ""}`}
+              className={`item ${key === appbarKey ? "active" : ""}`}
               onClick={() => this.setAppbarKey(key)}
             >
               {key}

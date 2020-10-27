@@ -50,7 +50,7 @@ const showActionSheets = (itemList, key, instance) => {
   });
 };
 
-export default class Index extends Component {
+export default class CarouselExample extends Component {
   state = {
     circular: false,
     showMenu: false,
@@ -60,6 +60,8 @@ export default class Index extends Component {
     indicatorPosition: INDICATOR_POSITION[0],
   };
   render() {
+    console.log(Carousel);
+
     const {
       circular,
       showMenu,

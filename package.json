@@ -21,12 +21,12 @@
   "scripts": {
     "clean": "rimraf lib",
     "example": "cd example && yarn dev",
-    "dev": "yarn clean && rollup -c --watch",
+    "dev": "yarn clean && yarn cp:assets && rollup -c --watch",
     "build": "yarn clean && yarn cp:assets && rollup -c --environment BUILD:production",
     "cp:assets": "cp-cli packages/assets lib/assets && cp-cli packages/types lib/types",
     "reinstall": "rimraf node_modules yarn.lock yarn-error.log && yarn install",
     "release": "yarn build && node script/release",
-    "lint": "eslint packages --max-warnings 0",
+    "lint": "eslint packages",
     "lint:style": "stylelint packages --fix",
     "prettier": "prettier packages --write",
     "changelog": "conventional-changelog -i CHANGELOG.md -s -r 0 && prettier CHANGELOG.md --write"
@@ -53,6 +53,8 @@
     "@rollup/plugin-commonjs": "^15.1.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
     "@rollup/plugin-typescript": "^6.0.0",
+    "@tarojs/components": "^3.0.14",
+    "@tarojs/taro": "^3.0.14",
     "@types/lodash": "^4.14.161",
     "@types/node": "^14.11.5",
     "@types/react": "^16.9.49",
@@ -76,6 +78,7 @@
     "lodash": "^4.17.20",
     "minimist": "^1.2.5",
     "prettier": "^2.1.2",
+    "react": "^17.0.1",
     "rimraf": "^3.0.2",
     "rollup": "^2.32.1",
     "rollup-plugin-postcss": "^3.1.8",
@@ -92,10 +95,10 @@
     "lodash.kebabcase": "^4.1.1"
   },
   "peerDependencies": {
-    "@tarojs/components": "^3.0.15",
-    "@tarojs/react": "^3.0.15",
-    "@tarojs/runtime": "^3.0.15",
-    "@tarojs/taro": "^3.0.15",
+    "@tarojs/components": "^3.0.14",
+    "@tarojs/react": "^3.0.14",
+    "@tarojs/runtime": "^3.0.14",
+    "@tarojs/taro": "^3.0.14",
     "react": "^16.10.0",
     "react-dom": "^16.10.0"
   },

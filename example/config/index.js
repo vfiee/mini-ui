@@ -21,7 +21,7 @@ const config = {
   alias: {
     "@": getPath("src"),
     images: getPath("src/assets/images"),
-    "@vyron/mini-ui": getPath("../"),
+    "@vyron/mini-ui": getPath("../../mini-components"),
   },
   framework: "react",
   mini: {
@@ -29,7 +29,7 @@ const config = {
       limit: 0,
     },
     compile: {
-      exclude: [getPath("../lib")],
+      exclude: [getPath("../lib"), getPath("../dist")],
     },
     postcss: {
       pxtransform: {

@@ -4,6 +4,11 @@ export default {
     "pages/appbar/index",
     "pages/authorize/index",
     "pages/carousel/index",
+    "pages/divider/index",
+    "pages/empty/index",
+    "pages/icon/index",
+    "pages/image/index",
+    "pages/loading/index",
   ],
   window: {
     navigationBarTitleText: "WeChat",

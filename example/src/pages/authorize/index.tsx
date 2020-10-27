@@ -22,7 +22,7 @@ const OPEN_TYPE: OpenType[] = [
   "launchApp",
 ];
 
-export default class Index extends Component {
+export default class AuthorizeExample extends Component {
   state = {
     scope: SCOPE_LIST[0],
     openType: OPEN_TYPE[0],
@@ -40,6 +40,8 @@ export default class Index extends Component {
       });
   };
   render() {
+    console.log(Authorize);
+
     const { scope, openType } = this.state;
     return (
       <View>

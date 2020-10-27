@@ -46,4 +46,4 @@ export declare type CustomTextAlign = "left" | "center" | "right";
 
 export declare type navigationBarTextStyle = "black" | "white";
 
-export * from "./vyron-mini-ui";
+export * from "./mini-ui";
