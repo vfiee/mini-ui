@@ -52,3 +52,11 @@
 | `radius` |否| 外边框圆角 |`boolean` |`false` |
 | `width` |否| 宽度 |`string` |`100%` |
 | `height` |否| 高度 |`string` | `100%`|
+
+## 按需加载样式
+
+```less
+@import "~/@vyron/mini-ui/style/icon.less";
+@import "~/@vyron/mini-ui/style/image.less";
+@import "~/@vyron/mini-ui/style/carousel.less";
+```

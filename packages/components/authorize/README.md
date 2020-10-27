@@ -4,7 +4,7 @@
 1.小程序 Button 按钮的 OpenType 类型,[参考文档](https://developers.weixin.qq.com/miniprogram/dev/component/button.html)  
 2.请求获取用户侧授权信息,[参考文档](https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/authorize.html)
 
-## props
+## 参数
 
 |     参数      | 必填 | 说明                                                                                                                                  | 类型                | 默认值         |
 | :-----------: | :--: | :------------------------------------------------------------------------------------------------------------------------------------ | :------------------ | :------------- |
@@ -13,3 +13,9 @@
 |  `authScope`  |  否  | 类型 2 的授权类型                                                                                                                     | `werun              | record         | camera | userLocation | writePhotosAlbum | userLocationBackground` | - |
 | `onAuthorize` |  否  | 授权回调,在授权类型上有所不同,<br>1. 直接返回开发能力返回的结果.<br>2.第一个参数返回对象`{authorized:boolean}`,第二个参数返回事件对象 | `Function`          | -              |
 |  `children`   |  否  | 子元素                                                                                                                                | `React.ReactElement | string         | string[]` | - |
+
+## 按需加载样式
+
+```less
+@import "~/@vyron/mini-ui/style/authorize.css";
+```
