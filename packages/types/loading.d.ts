@@ -1,18 +1,17 @@
 /// <reference types="react" />
-import { CustomStyle } from "./index";
+import { ViewProps } from "@tarojs/components/types/View";
+import { CustomStyle, CustomElement } from "./index";
 
 export declare type LoadingType = "circular" | "spinner";
 
-export declare interface LoadingProps {
+export declare interface LoadingProps extends ViewProps {
   color?: string;
-  type?: LoadingType;
   size?: string;
-  textSize?: string;
+  type?: LoadingType;
   vertical?: boolean;
   block?: boolean;
-  className?: string;
-  style?: CustomStyle;
-  children?: string | React.ReactElement;
+  children?: CustomElement;
+  textProps?: ViewProps;
 }
 
 declare const Loading: {

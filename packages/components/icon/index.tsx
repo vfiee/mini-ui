@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { View, Image, CoverView, CoverImage } from "@tarojs/components";
-import { mergeStyle } from "utils";
+import { mergeStyle, isImage } from "utils";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { IconProps } from "types";
 
@@ -19,12 +19,13 @@ const Icon = (props: IconProps) => {
     className,
     fontFamily,
     isCover,
-    ...rest
+    ...restProps
   } = {
     ...defaultIconProps,
     ...props,
   };
-  const isImage = localImage || (type && type.indexOf("/") !== -1);
+  const isImageType =
+    localImage || (/^https?:\/\//.test(type) && isImage(type));
   const mergedStyle = useMemo(
     () =>
       mergeStyle(
@@ -36,25 +37,32 @@ const Icon = (props: IconProps) => {
       ),
     [style, color, size]
   );
-  const CView = isCover ? CoverView : View;
-  const CImage = isCover ? CoverImage : Image;
-  let imageProps = {
-    src: type,
-    className: "__icon__origin__image__",
-  };
-  if (!isCover) {
-    imageProps["mode"] = "aspectFill";
-  }
+
+  const CView = useMemo(() => (isCover ? CoverView : View), [isCover]);
+
+  const CImage = useMemo(() => (isCover ? CoverImage : Image), [isCover]);
+
+  const imageProps = useMemo(() => {
+    let _props = {
+      src: type,
+      className: "__icon__origin__image__",
+    };
+    if (!isCover) {
+      _props["mode"] = "aspectFill";
+    }
+    return _props;
+  }, [isCover, type]);
+
   return (
     <CView
-      {...rest}
+      {...restProps}
       style={mergedStyle}
-      className={`__icon__ ${isImage ? `__icon__image__` : fontFamily} ${
-        isImage ? "" : type
+      className={`__icon__ ${isImageType ? `__icon__image__` : fontFamily} ${
+        isImageType ? "" : type
       } ${className ?? ""}`}
     >
-      {isImage && <CImage {...imageProps} />}
-      {props.children}
+      {isImageType && <CImage {...imageProps} />}
+      {props?.children}
     </CView>
   );
 };

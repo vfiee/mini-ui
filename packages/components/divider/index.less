@@ -1,15 +1,17 @@
+@import "../../style/var.less";
+
 .__divider__ {
   width: 100%;
-  height: 100px;
+  height: @divider-height;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 24px;
-  line-height: 32px;
-  color: #999;
+  font-size: @divider-font-size;
+  line-height: 1.5;
+  color: @divider-font-color;
   overflow: hidden;
-  padding: 32px 0;
-  border-color: #eee;
+  box-sizing: border-box;
+  padding: @divider-pad 0;
   border-style: solid;
   border-width: 0;
 
@@ -18,19 +20,50 @@
     display: block;
     flex: 1;
     box-sizing: border-box;
-    height: 1px;
+    height: @divider-line-height;
     border-color: inherit;
     border-style: inherit;
-    border-width: 1px 0 0;
+    border-width: @divider-line-height 0 0;
   }
 
   &::before {
     content: "";
   }
+
+  &position__ {
+    &left__,
+    &right__,
+    &center__ {
+      &::before,
+      &::after {
+        content: "";
+      }
+
+      &::before {
+        margin-right: @divider-position-space;
+      }
+
+      &::after {
+        margin-left: @divider-position-space;
+      }
+    }
+
+    &left__ {
+      &::before {
+        max-width: 14%;
+      }
+    }
+
+    &right__ {
+      &::after {
+        max-width: 14%;
+      }
+    }
+  }
 }
 
 // stylelint-disable
-.__divider__hairline {
+.__divider__hairline__ {
   &::before,
   &::after {
     @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
@@ -45,32 +78,3 @@
 }
 
 // stylelint-enable
-
-.__divider__position__center,
-.__divider__position__left,
-.__divider__position__right {
-  &::before,
-  &::after {
-    content: "";
-  }
-
-  &::before {
-    margin-right: 32px;
-  }
-
-  &::after {
-    margin-left: 32px;
-  }
-}
-
-.__divider__position__left {
-  &::before {
-    max-width: 10%;
-  }
-}
-
-.__divider__position__right {
-  &::after {
-    max-width: 10%;
-  }
-}

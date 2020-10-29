@@ -13,6 +13,29 @@ export * from "./system";
 export * from "./style";
 
 export { get, kebabcase };
+/**
+ * 判断src是否为图片类型
+ * @param {string} src 图片地址
+ * @returns {boolean} 返回true或false
+ */
+export const isImage = (src: string) => {
+  return [".jpg", ".jpeg", ".png", ".gif", ".svg"].some((img) =>
+    src.includes(img)
+  );
+};
+/**
+ * 延迟执行函数
+ * @param {Function} fn 延迟执行的函数
+ * @param {number} time 延迟执行时间
+ */
+export const delayExecution = (fn: Function, time?: number) => {
+  if (time == null) {
+    return fn();
+  }
+  setTimeout(() => {
+    fn();
+  }, time);
+};
 
 // /**
 //  *

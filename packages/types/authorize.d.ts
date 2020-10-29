@@ -21,7 +21,7 @@ export declare interface AuthorizeProps extends StandardProps {
   openType?: OpenType;
   authScope?: AuthScope;
   onAuthorize?: Function;
-  children?: React.ReactElement | string | string[];
+  children?: React.ReactNode;
 }
 
 declare const Authorize: {

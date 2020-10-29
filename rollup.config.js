@@ -12,6 +12,7 @@ import cssnanoPreset from "cssnano-preset-default";
 import pkg from "./package.json";
 
 const isProd = process.env.BUILD === "production";
+const isBuildAll = process.env.BUILD_ALL === "false";
 
 function getPath(src) {
   return path.resolve(process.cwd(), src);
@@ -30,27 +31,17 @@ const externalPaths = {
 };
 
 function external(id, parent) {
-  // console.log(`external:`, id, `------   external parent:`, parent);
-  // console.log(`Object.keys(pkg):`, Object.keys(pkg.dependencies));
-  // console.log(
-  //   ` Object.keys(pkg).includes(id):`,
-  //   Object.keys(pkg.dependencies).includes(id)
-  // );
-  return (
-    // 外部库
-    Object.keys({
-      ...pkg.dependencies,
-      ...pkg.peerDependencies,
-    }).includes(id) ||
-    // 内部依赖
+  const isPkgDep = Object.keys({
+    ...pkg.dependencies,
+    ...pkg.peerDependencies,
+  }).includes(id);
+  const isInternalDep =
     (/^components/i.test(id) && !!parent) ||
     (/^hooks/i.test(id) && !!parent) ||
-    (/^utils/i.test(id) && !!parent) ||
-    // ts相关库
-    /tslib/.test(id) ||
-    // 把引入的图片当做外部依赖
-    isImage(id)
-  );
+    (/^utils/i.test(id) && !!parent);
+  const isTsLib = /tslib/.test(id);
+  const baseExternal = isPkgDep || isTsLib || isImage(id);
+  return isBuildAll ? baseExternal || isInternalDep : baseExternal;
 }
 
 function getDirs(src) {
@@ -163,7 +154,7 @@ function createCommonConfig({
           external,
           plugins: commonPlugins(),
           watch: {
-            include: "packages/**",
+            include: ["packages/**", "packages/types/**"],
           },
           ...rollupConfig,
         },
@@ -189,7 +180,6 @@ function createBuildAllConfigs() {
       output: {
         format: "es",
         sourcemap: true,
-        paths: externalPaths,
         file: pkg.module,
       },
       plugins: commonPlugins(),
@@ -200,7 +190,6 @@ function createBuildAllConfigs() {
       output: {
         format: "cjs",
         sourcemap: true,
-        paths: externalPaths,
         file: pkg.main,
       },
       plugins: commonPlugins(),
@@ -209,14 +198,14 @@ function createBuildAllConfigs() {
 }
 
 function build() {
-  // 添加 externalPaths
-  buildCommonExternalPaths(getPath("packages/hooks"), "hooks");
-  buildCommonExternalPaths(getPath("packages/utils"), "utils");
-  buildCommonExternalPaths(getPath("packages/components"), "components");
-  // console.log(`externalPaths:`, externalPaths);
-  return [
-    // style
-    ...createStyleConfig(getPath("packages/components")),
+  if (isBuildAll) {
+    // 添加 externalPaths
+    buildCommonExternalPaths(getPath("packages/hooks"), "hooks");
+    buildCommonExternalPaths(getPath("packages/utils"), "utils");
+    buildCommonExternalPaths(getPath("packages/components"), "components");
+    // console.log(`externalPaths:`, externalPaths);
+  }
+  const libConfigs = [
     // hooks
     ...createCommonConfig({
       target: getPath("lib/hooks"),
@@ -232,9 +221,14 @@ function build() {
       src: getPath("packages/components"),
       target: getPath("lib/components"),
     }),
-    // all
+  ];
+  const baseConfigs = [
+    // style
+    ...createStyleConfig(getPath("packages/components")),
+    // es cjs
     ...createBuildAllConfigs(),
   ];
+  return isBuildAll ? [...baseConfigs, ...libConfigs] : baseConfigs;
 }
 
 export default build();

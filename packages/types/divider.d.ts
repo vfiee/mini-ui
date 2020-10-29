@@ -1,12 +1,14 @@
 /// <reference types="react" />
 import { ViewProps } from "@tarojs/components/types/View";
+import { CustomElement } from "./index";
 
-declare type ContentPosition = "left" | "right" | "center";
+declare type Position = "left" | "right" | "center";
 
 export declare interface DividerProps extends ViewProps {
   text?: string;
   hairLine?: boolean;
-  contentPosition?: ContentPosition;
+  position?: Position;
+  children?: CustomElement;
 }
 
 declare const Divider: {

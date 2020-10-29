@@ -1,16 +1,15 @@
 /// <reference types="react" />
 import { ViewProps } from "@tarojs/components/types/View";
+import { CustomElement } from "./index";
 
 export declare interface IconProps extends ViewProps {
   isCover?: boolean;
   type: string;
   size?: string;
   color?: string;
-  className?: string;
   fontFamily?: string;
   localImage?: boolean;
-  style?: React.CSSProperties | string;
-  children?: string | React.ReactElement;
+  children?: CustomElement;
 }
 
 declare const Icon: {

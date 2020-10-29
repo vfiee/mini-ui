@@ -1,18 +1,18 @@
 /// <reference types="react" />
 import { ImageProps as _ImageProps } from "@tarojs/components/types/Image";
+import { CustomElement } from "types";
 
 export declare interface ImageProps extends _ImageProps {
-  src: string;
   showLoading?: boolean;
-  loadingIcon?: string;
-  loading?: React.ReactElement;
+  loading?: string | React.ReactElement;
   showError?: boolean;
-  errorIcon?: string;
-  error?: React.ReactElement;
+  error?: string | React.ReactElement;
   round?: boolean;
   radius?: string;
   width?: string;
   height?: string;
+  delay?: number;
+  children?: CustomElement;
 }
 
 declare const Component: {

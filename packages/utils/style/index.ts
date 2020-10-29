@@ -10,7 +10,9 @@ function objectToString(style: Style): string {
   }
   let res: string = "";
   for (const [key, value] of Object.entries(style)) {
-    res += `${kebabCase(key)}: ${value};`;
+    if (value != null) {
+      res += `${kebabCase(key)}: ${value};`;
+    }
   }
   return res;
 }

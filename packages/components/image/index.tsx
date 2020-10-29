@@ -1,24 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, isValidElement, useMemo } from "react";
 import { View, Image } from "@tarojs/components";
 import Icon from "components/icon";
+import { mergeStyle, delayExecution } from "utils";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { ImageProps } from "types";
 
-const defaultImageProps: ImageProps = {
-  src: "",
-  showLoading: true,
-  loadingIcon: "icon-morentu",
-  showError: true,
-  errorIcon: "icon-error_img",
-} as ImageProps;
+const defaultImageProps = {
+  showError: false,
+  showLoading: false,
+  loading: "icon-default-img",
+  error: "icon-error-img",
+};
 
 const Component = (props: ImageProps) => {
   const {
     showLoading,
-    loadingIcon,
     loading,
     showError,
-    errorIcon,
     error,
     round,
     radius,
@@ -26,52 +24,51 @@ const Component = (props: ImageProps) => {
     height,
     onLoad,
     onError,
+    delay,
     className,
     style,
-    src,
     ...restProps
   } = {
     ...defaultImageProps,
     ...props,
   };
   const [status, setStatus] = useState({
-    loading: !!src,
-    error: !src,
+    error: !props?.src,
+    loading: !!props?.src,
   });
   function _onLoad(eve) {
-    setStatus({ loading: false, error: false });
+    delayExecution(() => {
+      setStatus({ loading: false, error: false });
+    }, delay);
     onLoad && onLoad(eve);
   }
   function _onError(eve) {
-    setStatus({ loading: false, error: true });
+    delayExecution(() => {
+      setStatus({ loading: false, error: true });
+    }, delay);
     onError && onError(eve);
   }
-  function getStyle(_style) {
-    const baseStyle = {
-      width,
-      height,
-      borderRadius: radius,
-    };
-    if (!_style) return baseStyle;
-    return typeof _style === "string"
-      ? `${baseStyle}${style}`
-      : {
-          ...baseStyle,
-          ...(style as React.CSSProperties),
-        };
-  }
+  const memoStyle = useMemo(() => {
+    return mergeStyle(
+      {
+        width,
+        height,
+        borderRadius: radius,
+      },
+      style
+    );
+  }, [height, radius, style, width]);
 
   return (
     <View
       className={`__image__ ${round ? `__image__round__` : ""} ${
-        className || ""
+        className ?? ""
       }`}
-      style={getStyle(style)}
+      style={memoStyle}
     >
       {!status.error && (
         <Image
           {...restProps}
-          src={src}
           onLoad={_onLoad}
           onError={_onError}
           className="__image__origin__"
@@ -79,18 +76,25 @@ const Component = (props: ImageProps) => {
       )}
       {showLoading && status.loading && (
         <View className="__image__loading__">
-          {loading ? (
+          {isValidElement(loading) ? (
             loading
           ) : (
-            <Icon type={loadingIcon as string} size="32px" />
+            // @ts-ignore
+            <Icon type={loading} size="32px" />
           )}
         </View>
       )}
       {showError && status.error && (
         <View className="__image__error__">
-          {error ? error : <Icon type={errorIcon as string} size="32px" />}
+          {isValidElement(error) ? (
+            error
+          ) : (
+            // @ts-ignore
+            <Icon type={error} size="32px" />
+          )}
         </View>
       )}
+      {props?.children}
     </View>
   );
 };

@@ -1,14 +1,13 @@
 /// <reference types="react" />
-import { IconProps } from "./index";
+import { ViewProps } from "@tarojs/components/types/View";
+import { IconProps, CustomElement } from "./index";
 
 export declare type EmptyType = "empty" | "network" | "error";
 
-export declare interface EmptyProps {
-  image?: EmptyType | IconProps;
-  className?: string;
+export declare interface EmptyProps extends ViewProps {
   description?: string;
-  children?: string | React.ReactElement;
-  onClick?: Function;
+  children?: CustomElement;
+  image?: EmptyType | IconProps;
 }
 
 export declare type DefaultIconProps = {

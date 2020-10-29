@@ -77,7 +77,7 @@ const Cell = (props: CellProps) => {
       : rightIcon) as IconProps;
     if (arrow) {
       _iconProps = {
-        type: "icon-back5",
+        type: "back",
         className: `__cell__icon__arrow__ ${arrowDirection ?? ""}`,
       };
     }

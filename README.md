@@ -35,30 +35,30 @@ class Home extends React.Component {
     render(){
         return (
         <AppBar
-        type="white"
-        title="首页"
-        left={{
-            isCover: true,
-            localImage: true,
-            style: {
-            width: "18rpx",
-            height: "30rpx",
-            },
-            type: backIcon,
-        }}
-        right={{
-            isCover: true,
-            localImage: true,
-            style: {
-            width: "34rpx",
-            height: "34rpx",
-            },
-            type: homeWhiteIcon,
-        }}
-        onTitleClick={console.log}
-        onLeftClick={console.log}
-        onRightClick={console.log}
-        backgroundColor="#00ab84"
+            type="white"
+            title="首页"
+            left={{
+                isCover: true,
+                localImage: true,
+                style: {
+                width: "18rpx",
+                height: "30rpx",
+                },
+                type: backIcon,
+            }}
+            right={{
+                isCover: true,
+                localImage: true,
+                style: {
+                width: "34rpx",
+                height: "34rpx",
+                },
+                type: homeWhiteIcon,
+            }}
+            onTitleClick={console.log}
+            onLeftClick={console.log}
+            onRightClick={console.log}
+            backgroundColor="#00ab84"
         />
         )
     }
@@ -70,29 +70,35 @@ class Home extends React.Component {
 @import "../node_modules/@vyron/mini-ui/style/appbar.css";
 ```
 
-## 预览
-
-扫描二维码预览
-
-<img width="300" height="300" src="./preview.png" alt="扫码预览" />
-
 ## 计划
 
 |                    完成                    |    组件    |       说明       |
 | :----------------------------------------: | :--------: | :--------------: |
 | <input type="checkbox" checked disabled /> |   AppBar   | 自定义顶部导航栏 |
 | <input type="checkbox" checked disabled /> | Authorize  |     获取授权     |
-|     <input type="checkbox" disabled />     |  Carousel  |      轮播图      |
-|     <input type="checkbox" disabled />     |    Cell    |                  |
-|     <input type="checkbox" disabled />     |  Divider   |      分隔符      |
-|     <input type="checkbox" disabled />     |   Empty    |       空白       |
-|     <input type="checkbox" disabled />     |   Field    |                  |
-|     <input type="checkbox" disabled />     |    Icon    |     iconfont     |
-|     <input type="checkbox" disabled />     |   Image    |       图片       |
-|     <input type="checkbox" disabled />     |    List    |       列表       |
+| <input type="checkbox" checked disabled /> |  Carousel  |      轮播图      |
+| <input type="checkbox" checked disabled /> |  Divider   |      分隔符      |
+| <input type="checkbox" checked disabled /> |   Empty    |       空白       |
+| <input type="checkbox" checked disabled /> |    Icon    |     iconfont     |
+| <input type="checkbox" checked disabled /> |   Image    |       图片       |
 |     <input type="checkbox" disabled />     |  Loading   |       加载       |
 |     <input type="checkbox" disabled />     |  Overlay   |       遮罩       |
 |     <input type="checkbox" disabled />     | Transition |     过渡动画     |
+|     <input type="checkbox" disabled />     |    Cell    |      单元格      |
+|     <input type="checkbox" disabled />     |   Field    |      输入框      |
+|     <input type="checkbox" disabled />     |    Form    |    Form 表单     |
+|     <input type="checkbox" disabled />     |    List    |       列表       |
+|     <input type="checkbox" disabled />     |  SafeArea  |     安全区域     |
+|     <input type="checkbox" disabled />     |   Layout   |       布局       |
+|     <input type="checkbox" disabled />     |   Button   |       按钮       |
+|     <input type="checkbox" disabled />     |  Message   |       提示       |
+|     <input type="checkbox" disabled />     |   Modal    |      对话框      |
+
+## 预览
+
+扫描二维码预览
+
+<img width="300" height="300" src="./preview.png" alt="扫码预览" />
 
 ## 开源协议
 

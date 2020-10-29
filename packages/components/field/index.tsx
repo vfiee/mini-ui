@@ -234,7 +234,7 @@ const Field = (props: FieldProps) => {
         <Input {...getInputProps(_props)} />
         {clear && (
           <Icon
-            type="close-filled"
+            type="icon-close"
             className="__field__clear__"
             style={showClear ? "" : `display:none`}
             onClick={onClear}

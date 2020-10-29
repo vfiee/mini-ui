@@ -1,45 +1,58 @@
-import React from "react";
+import React, { useRef, isValidElement } from "react";
 import { View } from "@tarojs/components";
-import { mergeStyle } from "utils";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { LoadingProps } from "types";
 
-const defaultLoadingPorps: LoadingProps = {
+const defaultLoadingPorps = {
   color: "#999",
   type: "circular",
   size: "40rpx",
   vertical: false,
-  textSize: "28rpx",
   block: false,
 };
-const dots = Array.from({ length: 12 });
 const Loading = (props: LoadingProps) => {
-  const { className, color, type, size, textSize, vertical, block, style } = {
+  const {
+    color,
+    type,
+    size,
+    block,
+    style,
+    vertical,
+    className,
+    textProps,
+    ...restProps
+  } = {
     ...defaultLoadingPorps,
     ...props,
   };
+  const dots = useRef(Array.from({ length: 12 }));
+
   return (
     <View
-      className={`__loading__ ${className || ""} ${
-        vertical ? `__loading__vertical__` : ""
-      } ${block ? `__loading__block__` : ""}`}
+      {...restProps}
+      className={`__loading__ ${vertical ? `__loading__vertical__` : ""} ${
+        block ? `__loading__block__` : ""
+      } ${className ?? ""} `}
     >
       <View
         className={`__loading__${type}__`}
-        style={mergeStyle(style, {
-          color,
-          width: size,
-          height: size,
-        })}
+        style={{ color, width: size, height: size }}
       >
         {type === "spinner" &&
-          dots.map((_, index) => (
+          dots.current.map((_, index) => (
             <View className="__loading__spinner__dot__" key={index}></View>
           ))}
       </View>
-      <View className="__loading__text__" style={{ fontSize: textSize }}>
-        {props.children}
-      </View>
+      {isValidElement(props?.children) ? (
+        props?.children
+      ) : (
+        <View
+          {...textProps}
+          className={`__loading__text__ ${textProps?.className ?? ""}`}
+        >
+          {props?.children}
+        </View>
+      )}
     </View>
   );
 };

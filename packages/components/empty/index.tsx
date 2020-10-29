@@ -7,18 +7,18 @@ import { IconProps, DefaultIconProps, EmptyProps } from "types";
 const defaultIcons: DefaultIconProps = {
   empty: {
     size: "160rpx",
-    type: `icon-empty`,
+    type: `icon-empty-filled`,
     color: "#999",
   },
   error: {
     size: "160rpx",
-    color: "#FF5722",
-    type: `icon-network_error1`,
+    color: "#999",
+    type: `icon-network-error`,
   },
   network: {
     size: "160rpx",
-    color: "red",
-    type: `icon-network-error`,
+    color: "#999",
+    type: `icon-500`,
   },
 };
 
@@ -29,7 +29,7 @@ const defaultEmptyProps = {
 const defaultIconTypes = ["empty", "network", "error"];
 
 const Empty = (props: EmptyProps) => {
-  let { image, className, description, onClick } = {
+  let { image, className, description, ...restProps } = {
     ...defaultEmptyProps,
     ...props,
   };
@@ -39,10 +39,7 @@ const Empty = (props: EmptyProps) => {
   const iconProps: IconProps =
     typeof image === "string" ? defaultIcons[image] : image;
   return (
-    <View
-      className={`__empty__ ${className ?? ""}`}
-      onClick={(eve) => onClick?.(eve)}
-    >
+    <View {...restProps} className={`__empty__ ${className ?? ""}`}>
       <Icon {...iconProps} />
       {!!description && (
         <View className="__empty__description__">{description}</View>
