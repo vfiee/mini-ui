@@ -16,23 +16,31 @@
     "baseUrl": ".",
     "rootDirs": [
       ".",
-      "../lib"
+      "../packages"
     ],
     "jsx": "react",
     "jsxFactory": "React.createElement",
     "allowJs": true,
     "resolveJsonModule": true,
     "typeRoots": [
-      "../lib/types",
+      "../packages/types",
       "node_modules/@types",
-      "global.d.ts",
+      "global.d.ts"
     ],
     "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@Images/*": [
+        "./src/assets/images/*"
+      ],
       "@vyron/mini-ui": [
-        "../../mini-components"
+        "../../mini-components",
+        "../packages",
       ],
       "@vyron/mini-ui/*": [
-        "../../mini-components/lib/*"
+        "../lib/*",
+        "../packages/*",
       ]
     }
   },
@@ -40,5 +48,4 @@
     "node_modules",
     "dist"
   ],
-  "compileOnSave": false
 }

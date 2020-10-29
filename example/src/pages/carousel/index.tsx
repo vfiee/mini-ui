@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import { showActionSheet } from "@tarojs/taro";
 import { Block, View, PickerView, PickerViewColumn } from "@tarojs/components";
 import { Carousel, Loading } from "@vyron/mini-ui";
-// import ImageOne from "images/carousel/c-1.jpg";
-// import ImageTwo from "images/carousel/c-2.jpg";
-// import ImageThree from "images/carousel/c-3.jpg";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { IndicatorType, IndicatorPosition } from "@vyron/mini-ui/types";
 import "./index.less";
@@ -84,7 +81,7 @@ export default class CarouselExample extends Component {
             showLoading: true,
             loading: <Loading type="spinner" />,
             showError: true,
-            errorIcon: "icon-error_img",
+            errorIcon: "error-img",
           }}
           swiper={{
             circular: circular,

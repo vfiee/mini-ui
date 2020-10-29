@@ -37,5 +37,45 @@
   "compileType": "miniprogram",
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
-  "condition": {}
+  "condition": {
+    "miniprogram": {
+      "current": -1,
+      "list": [
+        {
+          "id": -1,
+          "name": "Divider",
+          "pathName": "pages/divider/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "Empty",
+          "pathName": "pages/empty/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "Icon",
+          "pathName": "pages/icon/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "Image",
+          "pathName": "pages/image/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "Loading",
+          "pathName": "pages/loading/index",
+          "scene": null
+        }
+      ]
+    }
+  }
 }

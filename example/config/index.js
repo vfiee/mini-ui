@@ -1,5 +1,25 @@
 /* eslint-disable */
 const path = require("path");
+const _ = require("lodash");
+
+const isLibMode = process.env.EXAMPLE_ENV === "dist";
+
+const commonAlias = {
+  "@": getPath("src"),
+  "@Images": getPath("src/assets/images"),
+};
+let allModeAlias = {
+  packages: {
+    "@vyron/mini-ui": getPath("../../mini-components/packages/index.ts"),
+    utils: getPath("../packages/utils"),
+    hooks: getPath("../packages/hooks"),
+    types: getPath("../packages/types"),
+    components: getPath("../packages/components"),
+  },
+  dist: {
+    "@vyron/mini-ui": getPath("../dist/index.es.js"),
+  },
+};
 
 const config = {
   projectName: "example",
@@ -18,18 +38,18 @@ const config = {
     patterns: [],
     options: {},
   },
-  alias: {
-    "@": getPath("src"),
-    images: getPath("src/assets/images"),
-    "@vyron/mini-ui": getPath("../../mini-components"),
-  },
+  alias: _.assign(
+    commonAlias,
+    _.get(allModeAlias, process.env.EXAMPLE_ENV, {})
+  ),
   framework: "react",
   mini: {
     imageUrlLoaderOption: {
       limit: 0,
     },
     compile: {
-      exclude: [getPath("../lib"), getPath("../dist")],
+      include: [getPath("../packages")],
+      exclude: [getPath("../lib"), getPath("../dist"), getPath("node_modules")],
     },
     postcss: {
       pxtransform: {
