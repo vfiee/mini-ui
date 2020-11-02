@@ -19,7 +19,7 @@
     "CHANGELOG.md"
   ],
   "scripts": {
-    "clean": "rimraf lib",
+    "clean": "rimraf lib dist",
     "example": "cd example && cross-env EXAMPLE_ENV=packages yarn dev",
     "example:dist": "cd example && cross-env EXAMPLE_ENV=dist yarn dev",
     "dev": "yarn clean && yarn cp:assets && rollup -c --watch",
