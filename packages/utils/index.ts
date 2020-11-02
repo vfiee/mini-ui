@@ -1,6 +1,6 @@
 import get from "lodash.get";
 import kebabcase from "lodash.kebabcase";
-import { createSelectorQuery } from "@tarojs/taro";
+import { createSelectorQuery, nextTick as _nextTick } from "@tarojs/taro";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { BaseObject, BaseMap } from "types";
 import { getSystemInfoSync } from "./system";
@@ -122,6 +122,9 @@ export const mapToObject = (map: BaseMap, initObj?: BaseObject): BaseObject => {
  *
  */
 export const nextTick = (fn: Function) => {
+  if (_nextTick) {
+    _nextTick(() => fn());
+  }
   setTimeout(() => {
     fn();
   }, 1000 / 30);
@@ -143,17 +146,4 @@ export function requestAnimationFrame(cb: Function) {
     .exec(() => {
       cb();
     });
-}
-
-/**
- * 判断元素是否为组件类型(函数组件或类组件)
- * @param {React.ComponentType} Component 检测的组件
- * @returns {boolean} 返回boolean
- */
-
-export function isReactComponentType(
-  Component: React.ComponentType | undefined
-): boolean {
-  if (Component == null) return false;
-  return isFunction(Component) || !!Component?.prototype.isReactComponent;
 }

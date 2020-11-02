@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { ScrollView, View, Slot } from "@tarojs/components";
 import Loading from "components/loading";
-import { isEmpty, isFunction, isReactComponentType } from "utils";
+import { isEmpty, isFunction } from "utils";
 import { useMount, useUpdate } from "hooks";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { ListProps } from "types";
@@ -272,7 +272,7 @@ const List = (props: ListProps) => {
       )}
       {props?.children}
       {!isEmpty(data) &&
-        isReactComponentType(ListComponent) &&
+        isValidElement(ListComponent) &&
         data?.map((_data, index) => (
           // @ts-ignore
           <ListComponent data={_data} key={_data?.id || index} />
