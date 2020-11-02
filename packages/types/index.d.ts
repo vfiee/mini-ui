@@ -46,4 +46,21 @@ export declare type CustomTextAlign = "left" | "center" | "right";
 
 export declare type navigationBarTextStyle = "black" | "white";
 
+export declare type TransitionType =
+  | "fade"
+  | "fadeUp"
+  | "fadeDown"
+  | "fadeLeft"
+  | "fadeRight"
+  | "slideUp"
+  | "slideDown"
+  | "slideLeft"
+  | "slideRight";
+
+export declare type TransitionStatus =
+  | "enter"
+  | "enterTo"
+  | "leave"
+  | "leaveTo";
+
 export * from "./mini-ui";

@@ -1,4 +1,6 @@
 /// <reference types="react" />
+import { CustomElement } from "./index";
+
 export declare type TransitionType =
   | "fade"
   | "fadeUp"

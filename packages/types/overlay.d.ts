@@ -1,15 +1,17 @@
 /// <reference types="react" />
-export declare interface OverlayProps {
-  show: boolean;
-  className?: string;
+import { ViewProps } from "@tarojs/components/types/View";
+import { ITouchEvent } from "@tarojs/components/types/common";
+import { CustomElement } from "./index";
+
+export declare interface OverlayProps extends ViewProps {
+  show?: boolean;
   customAppbar?: boolean;
   preventScroll?: boolean;
   opacity?: number | string;
   zIndex?: number | string;
   duration?: number | string;
-  onClick?: (eve: any) => void;
-  style?: React.CSSProperties | string;
-  children?: React.ReactElement | string;
+  children?: CustomElement;
+  onClick?: (event: ITouchEvent) => void;
 }
 
 declare const Overlay: (props: OverlayProps) => JSX.Element;
