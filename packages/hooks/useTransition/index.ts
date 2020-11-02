@@ -1,19 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useCallback, useRef } from "react";
 import { requestAnimationFrame } from "utils";
-
-// TODO: remove TransitionType to types/transition
-export declare type TransitionType =
-  | "fade"
-  | "fadeUp"
-  | "fadeDown"
-  | "fadeLeft"
-  | "fadeRight"
-  | "slideUp"
-  | "slideDown"
-  | "slideLeft"
-  | "slideRight";
-
-declare type TransitionStatus = "enter" | "enterTo" | "leave" | "leaveTo";
+import { useUpdate } from "hooks";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { TransitionType, TransitionStatus, BaseObject } from "types";
 
 const getClassNames = (name: TransitionType) => ({
   enter: `__${name}__enter__ __${name}__enter__active__ ${name}-enter-active`,
@@ -42,66 +31,92 @@ const useTransition = (props: useTransitionProps) => {
     onLeave,
     transitionDuration,
   } = props;
-  const [inited, setInited] = useState(false);
-  const [display, setDisplay] = useState(show);
-  const [className, setClassName] = useState("");
+  const statusRef = useRef<BaseObject>({
+    inited: false,
+    display: !!show,
+    className: "",
+  });
+  const update = useUpdate();
 
-  useEffect(() => {
-    if (show === display) {
-      return;
+  let status = useRef<TransitionStatus | null>();
+  let isTransitionEnd = useRef<boolean>(false);
+
+  const onTransitionEnd = useCallback(() => {
+    if (isTransitionEnd.current) return;
+    status.current = null;
+    isTransitionEnd.current = true;
+    statusRef.current = {
+      ...statusRef.current,
+      className: "",
+    };
+    if (!show && statusRef.current.display) {
+      statusRef.current = {
+        ...statusRef.current,
+        display: false,
+      };
     }
-    show ? enter() : leave();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [show]);
-  let status: null | TransitionStatus = null;
-  let transitionEnded: boolean;
-  function enter() {
-    status = "enter";
+    update();
+  }, [show, update]);
+
+  const enter = useCallback(() => {
+    status.current = "enter";
     const classes = getClassNames(name);
     beforeEnter && beforeEnter();
     requestAnimationFrame(() => {
       onEnter && onEnter();
-      !inited && setInited(true);
-      setDisplay(true);
-      setClassName(classes.enter);
+      statusRef.current = {
+        inited: true,
+        display: true,
+        className: classes.enter,
+      };
+      update();
       requestAnimationFrame(() => {
-        status = "enterTo";
-        transitionEnded = false;
-        setClassName(classes.enterTo);
+        status.current = "enterTo";
+        isTransitionEnd.current = false;
+        statusRef.current = {
+          ...statusRef.current,
+          className: classes.enterTo,
+        };
+        update();
       });
     });
-  }
-  function leave() {
-    status = "leave";
+  }, [beforeEnter, name, onEnter, update]);
+
+  const leave = useCallback(() => {
+    status.current = "leave";
     const classes = getClassNames(name);
     beforeLeave && beforeLeave();
     requestAnimationFrame(() => {
       onLeave && onLeave();
-      setClassName(classes.leave);
+      statusRef.current = {
+        ...statusRef.current,
+        className: classes.leave,
+      };
+      update();
       requestAnimationFrame(() => {
-        status = "leaveTo";
-        transitionEnded = false;
-        setTimeout(() => onTransitionEnd(), transitionDuration);
-        setClassName(classes.leaveTo);
+        status.current = "leaveTo";
+        isTransitionEnd.current = false;
+        setTimeout(() => onTransitionEnd(), transitionDuration * 1000);
+        statusRef.current = {
+          ...statusRef.current,
+          className: classes.leaveTo,
+        };
+        update();
       });
     });
-  }
-  function onTransitionEnd() {
-    if (transitionEnded) return;
-    status = null;
-    transitionEnded = true;
-    // setClassName("");
-    if (!show && display) {
-      setDisplay(false);
-    }
-  }
+  }, [beforeLeave, name, onLeave, onTransitionEnd, transitionDuration, update]);
+
+  useEffect(() => {
+    show ? enter() : leave();
+  }, [enter, leave, show]);
+
   return {
-    inited,
     status,
-    display,
-    className,
-    transitionDuration,
     onTransitionEnd,
+    transitionDuration,
+    inited: statusRef.current.inited,
+    display: statusRef.current.display,
+    className: statusRef.current.className,
   };
 };
 

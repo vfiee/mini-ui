@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useTransition } from "hooks";
 import { mergeStyle } from "utils";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { TransitionProps } from "types";
 
 const Transition = (props: TransitionProps) => {
-  const { name, show, duration = 300 } = props;
+  const { name, show = false, duration = 300 } = props;
   const {
     inited,
     display,
@@ -17,16 +17,26 @@ const Transition = (props: TransitionProps) => {
     name,
     transitionDuration: duration,
   });
+  const { type, key, props: _props, ...otherProps } = props.children;
+  const mergedStyle = useMemo(
+    () =>
+      mergeStyle(
+        {
+          transitionDuration: transitionDuration + "ms",
+          display: display ? "" : "none",
+        },
+        _props.style
+      ),
+    [_props.style, display, transitionDuration]
+  );
   if (!inited) return null;
-  const { type, props: _props, ...otherProps } = props.children;
   return React.createElement(type, {
     ...otherProps,
     ..._props,
+    key,
     onTransitionEnd,
+    style: mergedStyle,
     className: `__transition__ ${className} ${_props?.className ?? ""}`,
-    style: `transition-duration:${transitionDuration}ms;${
-      display ? "" : "display:none;"
-    }${_props.style ? mergeStyle(_props.style) : ""}`,
   });
 };
 
