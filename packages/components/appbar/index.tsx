@@ -1,5 +1,5 @@
 import React from "react";
-import { CoverView } from "@tarojs/components";
+import { CoverView, View } from "@tarojs/components";
 import Icon from "components/icon";
 import { useMenuButton } from "hooks";
 import { mergeStyle } from "utils";
@@ -9,6 +9,7 @@ import { NavigationBarProps } from "types";
 const defaultNavigationBarProps: NavigationBarProps = {
   title: "",
   type: "white",
+  isCoverView: false,
   backgroundColor: "#fff",
 };
 
@@ -23,6 +24,7 @@ const AppBar = (props: NavigationBarProps) => {
     onTitleClick,
     onLeftClick,
     onRightClick,
+    isCoverView,
     // viewprops
     style,
     className,
@@ -39,9 +41,11 @@ const AppBar = (props: NavigationBarProps) => {
   const mergeMenuStyle = !!(left && right)
     ? menuStyle
     : { ...menuStyle, backgroundColor: "transparent", borderWidth: 0 };
+
+  const AppBarView = isCoverView ? CoverView : View;
   return (
     <React.Fragment>
-      <CoverView
+      <AppBarView
         style={mergeStyle(
           {
             ...wrapStyle,
@@ -51,52 +55,52 @@ const AppBar = (props: NavigationBarProps) => {
         )}
         className={`__appbar__ ${className ?? ""}`}
       >
-        <CoverView
+        <AppBarView
           style={mergeMenuStyle}
           className={`__left__menu__ ${
             !!(left && right) ? "__left__menu__full__" : ""
           }`}
         >
           {!!left && (
-            <CoverView
+            <AppBarView
               className="__menu__item__wrap__"
               onClick={(eve) =>
                 onLeftClick?.({ menuStyle: mergeMenuStyle, rect }, eve)
               }
             >
               <Icon {...left} />
-            </CoverView>
+            </AppBarView>
           )}
           {!!(left && right) && (
-            <CoverView
+            <AppBarView
               className={`__delimiter__ ${delimiterCls ?? ""}`}
               style={mergeStyle(delimiterStyle, delimiterSty)}
             />
           )}
           {!!right && (
-            <CoverView
+            <AppBarView
               className="__menu__item__wrap__"
               onClick={(eve) =>
                 onRightClick?.({ menuStyle: mergeMenuStyle, rect }, eve)
               }
             >
               <Icon {...right} />
-            </CoverView>
+            </AppBarView>
           )}
-        </CoverView>
+        </AppBarView>
         {typeof title === "string" ? (
-          <CoverView
+          <AppBarView
             className={`__appbar__title__ __appbar__title__${type}`}
             onClick={(eve) => onTitleClick?.(eve)}
           >
             {title}
-          </CoverView>
+          </AppBarView>
         ) : (
           { title }
         )}
-        <CoverView style={{ width, height }} className="__right__menu__" />
-      </CoverView>
-      <CoverView style={restProps} />
+        <AppBarView style={{ width, height }} className="__right__menu__" />
+      </AppBarView>
+      <AppBarView style={restProps} />
     </React.Fragment>
   );
 };

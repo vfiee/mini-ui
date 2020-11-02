@@ -3,6 +3,7 @@ import { ViewProps } from "@tarojs/components/types/View";
 import { IconProps, navigationBarTextStyle } from "./index";
 
 export declare interface NavigationBarProps extends ViewProps {
+  isCoverView?: boolean;
   title?: string | React.ReactElement;
   backgroundColor?: string;
   type?: navigationBarTextStyle;
