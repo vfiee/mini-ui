@@ -4,7 +4,7 @@ import { createSelectorQuery, nextTick as _nextTick } from "@tarojs/taro";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { BaseObject, BaseMap } from "types";
 import { getSystemInfoSync } from "./system";
-import { isObject, isFunction } from "./base";
+import { isObject } from "./base";
 
 export * from "./base";
 
