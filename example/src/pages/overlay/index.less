@@ -1,0 +1,32 @@
+.overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &-child {
+    width: 200px;
+    height: 200px;
+    background-color: #fff;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 20px 40px;
+  .label {
+    font-size: 30px;
+    color: #333;
+    margin-right: 40px;
+  }
+  .content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+}

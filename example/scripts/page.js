@@ -2,6 +2,7 @@
 const fs = require("fs");
 const path = require("path");
 const _ = require("lodash");
+const prettier = require("prettier");
 
 const getDirs = (src) =>
   fs.readdirSync(src).filter((dir) => !dir.includes(".") && dir !== "index");
@@ -39,7 +40,7 @@ function main() {
   const indexTsx = indexTpl(result);
   fs.writeFileSync(
     path.resolve(__dirname, "../src/pages/index/index.tsx"),
-    indexTsx
+    prettier.format(indexTsx)
   );
 }
 

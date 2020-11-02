@@ -37,6 +37,7 @@
 		"@tarojs/cli": "3.0.15",
 		"@tarojs/mini-runner": "3.0.15",
 		"@tarojs/webpack-runner": "3.0.15",
+		"@types/prettier": "^2.1.5",
 		"@types/react": "^16.0.0",
 		"@types/webpack-env": "^1.13.6",
 		"@typescript-eslint/eslint-plugin": "^2.x",
@@ -47,6 +48,7 @@
 		"eslint-plugin-import": "^2.12.0",
 		"eslint-plugin-react": "^7.8.2",
 		"eslint-plugin-react-hooks": "^1.6.1",
+		"prettier": "^2.1.2",
 		"stylelint": "9.3.0",
 		"typescript": "^3.7.0"
 	},

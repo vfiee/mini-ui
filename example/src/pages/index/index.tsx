@@ -1,20 +1,14 @@
 import React from "react";
 import Taro from "@tarojs/taro";
 import { View } from "@tarojs/components";
-// @ts-ignore
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-// import * as MiniUI from "@vyron/mini-ui";
 import "./index.less";
 
-// console.log(MiniUI);
-
-export default class Home extends React.Component {
+export default class Index extends React.Component {
   navigator = (dir) => {
     Taro.navigateTo({ url: `/pages/${dir}/index` });
   };
   render() {
     return (
-      // <MiniUI.Transition show name="fade">
       <View className="wrap">
         <View className="item" onClick={() => this.navigator("appbar")}>
           Appbar
@@ -47,8 +41,15 @@ export default class Home extends React.Component {
         <View className="item" onClick={() => this.navigator("loading")}>
           Loading
         </View>
+
+        <View className="item" onClick={() => this.navigator("overlay")}>
+          Overlay
+        </View>
+
+        <View className="item" onClick={() => this.navigator("transition")}>
+          Transition
+        </View>
       </View>
-      // </MiniUI.Transition>
     );
   }
 }

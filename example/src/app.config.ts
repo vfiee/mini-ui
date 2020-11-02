@@ -9,6 +9,8 @@ export default {
     "pages/icon/index",
     "pages/image/index",
     "pages/loading/index",
+    "pages/overlay/index",
+    "pages/transition/index",
   ],
   window: {
     navigationBarTitleText: "WeChat",
