@@ -2,7 +2,7 @@
   "miniprogramRoot": "dist/weapp",
   "projectname": "mini-ui",
   "description": "",
-  "appid": "wx36e49f48ccae0712",
+  "appid": "wx0fcf8f7c3e535cd2",
   "setting": {
     "urlCheck": true,
     "es6": false,
@@ -41,6 +41,13 @@
     "miniprogram": {
       "current": -1,
       "list": [
+        {
+          "id": -1,
+          "name": "AppBar",
+          "pathName": "pages/appbar/index",
+          "query": "",
+          "scene": null
+        },
         {
           "id": -1,
           "name": "Divider",

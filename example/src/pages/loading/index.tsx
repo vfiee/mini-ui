@@ -91,10 +91,6 @@ export default class LoadingExample extends Component {
   render() {
     return (
       <View className="loading">
-        <Loading>
-          测试测试测试测试 测试测试测试测试
-          <View className="test">asdasdasdasda</View>
-        </Loading>
         {LOADING_PROPS.map((item) => {
           const { title, props } = item;
           return (

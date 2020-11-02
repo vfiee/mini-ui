@@ -7,6 +7,7 @@ const isLibMode = process.env.EXAMPLE_ENV === "dist";
 const commonAlias = {
   "@": getPath("src"),
   "@Images": getPath("src/assets/images"),
+  "@Components": getPath("src/components"),
 };
 let allModeAlias = {
   packages: {
@@ -48,7 +49,13 @@ const config = {
       limit: 0,
     },
     compile: {
-      include: [getPath("../packages")],
+      include: [
+        getPath("../packages"),
+        (modulePath) => {
+          console.log(`modulePath:`, modulePath);
+          return modulePath.include(".tsx");
+        },
+      ],
       exclude: [getPath("../lib"), getPath("../dist"), getPath("node_modules")],
     },
     postcss: {

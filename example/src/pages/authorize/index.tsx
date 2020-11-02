@@ -45,6 +45,7 @@ export default class AuthorizeExample extends Component {
     const { scope, openType } = this.state;
     return (
       <View>
+        {/* <Button>12312</Button> */}
         <View className="item" onClick={() => this.showAction(SCOPE_LIST)}>
           选择Scope授权类型
         </View>

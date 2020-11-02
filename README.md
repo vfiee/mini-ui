@@ -81,7 +81,7 @@ class Home extends React.Component {
 | <input type="checkbox" checked disabled /> |   Empty    |       空白       |
 | <input type="checkbox" checked disabled /> |    Icon    |     iconfont     |
 | <input type="checkbox" checked disabled /> |   Image    |       图片       |
-|     <input type="checkbox" disabled />     |  Loading   |       加载       |
+| <input type="checkbox" checked disabled /> |  Loading   |       加载       |
 |     <input type="checkbox" disabled />     |  Overlay   |       遮罩       |
 |     <input type="checkbox" disabled />     | Transition |     过渡动画     |
 |     <input type="checkbox" disabled />     |    Cell    |      单元格      |

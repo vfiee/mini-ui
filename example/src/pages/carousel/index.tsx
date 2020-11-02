@@ -69,6 +69,9 @@ export default class CarouselExample extends Component {
     } = this.state;
     return (
       <Block>
+        {/* <Swiper style={{ height: "0" }}>
+          <SwiperItem>123123</SwiperItem>
+        </Swiper> */}
         <Carousel
           srcKey="url"
           className="carousel"
@@ -81,7 +84,7 @@ export default class CarouselExample extends Component {
             showLoading: true,
             loading: <Loading type="spinner" />,
             showError: true,
-            errorIcon: "error-img",
+            error: "error-img",
           }}
           swiper={{
             circular: circular,

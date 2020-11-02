@@ -31,6 +31,10 @@
       "@/*": [
         "./src/*"
       ],
+      "@Components/*": [
+        "./src/components/index.tsx",
+        "./src/components/*"
+      ],
       "@Images/*": [
         "./src/assets/images/*"
       ],
@@ -41,6 +45,32 @@
       "@vyron/mini-ui/*": [
         "../lib/*",
         "../packages/*",
+      ],
+      "components": [
+        "../packages/index.ts",
+      ],
+      "components/*": [
+        "../packages/components/*"
+      ],
+      "utils": [
+        "../packages/utils/index.ts",
+      ],
+      "utils/*": [
+        "../packages/utils/index.ts",
+        "../packages/utils/*",
+      ],
+      "hooks": [
+        "../packages/hooks/index.ts",
+      ],
+      "hooks/*": [
+        "../packages/hooks/index.ts",
+        "../packages/hooks/*",
+      ],
+      "types": [
+        "../packages/types/index.d.ts",
+      ],
+      "types/*": [
+        "../packages/types/*.d.ts",
       ]
     }
   },

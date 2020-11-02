@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Taro from "@tarojs/taro";
-import { View } from "@tarojs/components";
+import { View, Block } from "@tarojs/components";
 import { AppBar } from "@vyron/mini-ui";
-import backIcon from "@/assets/images/appbar/back-white-icon.png";
-import homeWhiteIcon from "@/assets/images/appbar/home-white-icon.png";
+import backIcon from "@Images/appbar/back-white-icon.png";
+import homeWhiteIcon from "@Images/appbar/home-white-icon.png";
 import "./index.less";
 
 const APPBAR_KEYS = ["ALL", "BACK", "HOME"];
@@ -16,14 +16,14 @@ export default class AppBarExample extends Component {
     key !== this.state.appbarKey && this.setState({ appbarKey: key });
   };
   render() {
-    console.log("appbar:", AppBar);
     console.log("appbarKey:", this.state.appbarKey);
 
     const { appbarKey } = this.state;
     return (
-      <View className="index">
+      <Block>
         {appbarKey === "ALL" && (
           <AppBar
+            isCoverView
             type="white"
             title="首页"
             left={{
@@ -55,7 +55,7 @@ export default class AppBarExample extends Component {
             type="white"
             title="首页"
             left={{
-              isCover: true,
+              // isCover: true,
               localImage: true,
               style: {
                 width: "10px",
@@ -74,7 +74,7 @@ export default class AppBarExample extends Component {
             type="white"
             title="首页"
             left={{
-              isCover: true,
+              // isCover: true,
               localImage: true,
               style: {
                 width: "34rpx",
@@ -88,6 +88,15 @@ export default class AppBarExample extends Component {
             backgroundColor="#00ab84"
           />
         )}
+        {/* <CoverView style={{ backgroundColor: "#f2f2f2" }}>
+          <CoverImage
+            style={{
+              width: "18rpx",
+              height: "30rpx",
+            }}
+            src={backIcon}
+          />
+        </CoverView> */}
         <View className="wrap">
           {APPBAR_KEYS.map((key) => (
             <View
@@ -99,7 +108,7 @@ export default class AppBarExample extends Component {
             </View>
           ))}
         </View>
-      </View>
+      </Block>
     );
   }
 }
