@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { View } from "@tarojs/components";
 import { useMenuButton } from "hooks";
 import { mergeStyle } from "utils";
@@ -11,7 +11,6 @@ const defaultOverlayProps: OverlayProps = {
   zIndex: 1,
   opacity: 0.6,
   duration: 0.3,
-  className: "",
   preventScroll: true,
   customAppbar: false,
 };
@@ -21,40 +20,45 @@ const Overlay = (props: OverlayProps) => {
     show,
     style,
     zIndex,
-    onClick,
     opacity,
     duration,
     className,
     preventScroll,
     customAppbar,
+    ...restProps
   } = {
     ...defaultOverlayProps,
     ...props,
   };
   const { wrapStyle } = useMenuButton();
-  let _mergeStyle = mergeStyle(
-    {
-      zIndex: zIndex as number,
-      transitionDuration:
-        typeof duration === "string" ? duration : duration + "s",
-      backgroundColor: `rgba(0,0,0,${opacity})`,
-    },
-    style
-  );
-  if (customAppbar) {
-    _mergeStyle += ` top:${wrapStyle?.height ?? 0};`;
-  }
+  const mergedStyle = useMemo(() => {
+    let _style = mergeStyle(
+      {
+        zIndex: zIndex as number,
+        transitionDuration: duration + "s",
+        backgroundColor: `rgba(0,0,0,${opacity})`,
+      },
+      style
+    );
+    if (!customAppbar) {
+      return _style;
+    }
+    _style += ` top:${wrapStyle?.height ?? 0};`;
+    return _style;
+  }, [customAppbar, duration, opacity, style, wrapStyle, zIndex]);
+
   return (
-    <Transition show={show} name="fade">
+    <Transition show={!!show} name="fade">
       <View
-        onClick={onClick}
-        style={_mergeStyle}
-        className={`__overlay__ ${className}`}
-        onTouchMove={(eve) => {
-          preventScroll && eve.stopPropagation();
+        {...restProps}
+        style={mergedStyle}
+        className={`__overlay__ ${className ?? ""}`}
+        onClick={(eve) => {
+          eve.stopPropagation();
+          props?.onClick?.(eve);
         }}
       >
-        {props.children}
+        {props?.children}
       </View>
     </Transition>
   );
