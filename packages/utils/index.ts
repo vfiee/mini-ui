@@ -118,14 +118,14 @@ export const mapToObject = (map: BaseMap, initObj?: BaseObject): BaseObject => {
 
 /**
  * 下一次页面渲染前执行的方法
- * @param {Function} fn 执行的方法
+ * @param {(...args: any[]) => any} fn 执行的方法
  *
  */
-export const nextTick = (fn: Function) => {
+export const nextTick = (fn: (...args: any[]) => any) => {
   if (_nextTick) {
-    _nextTick(() => fn());
+    _nextTick(fn);
   }
-  setTimeout(() => {
+  return setTimeout(() => {
     fn();
   }, 1000 / 30);
 };
@@ -135,7 +135,7 @@ export const nextTick = (fn: Function) => {
  * @param {Function} cb 回调函数
  *
  */
-export function requestAnimationFrame(cb: Function) {
+export function requestAnimationFrame(cb: (...args: any[]) => any) {
   const _systemInfo = getSystemInfoSync();
   if (_systemInfo.platform === "devtools") {
     return nextTick(cb);
