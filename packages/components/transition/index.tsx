@@ -5,7 +5,17 @@ import { mergeStyle } from "utils";
 import { TransitionProps } from "types";
 
 const Transition = (props: TransitionProps) => {
-  const { name, show = false, duration = 300 } = props;
+  const {
+    name,
+    show = false,
+    duration = 300,
+    beforeEnter,
+    onEnter,
+    afterEnter,
+    beforeLeave,
+    onLeave,
+    afterLeave,
+  } = props;
   const {
     inited,
     display,
@@ -16,8 +26,15 @@ const Transition = (props: TransitionProps) => {
     show,
     name,
     transitionDuration: duration,
+    beforeEnter,
+    onEnter,
+    afterEnter,
+    beforeLeave,
+    onLeave,
+    afterLeave,
   });
-  const { type, key, props: _props, ...otherProps } = props.children;
+  // @ts-ignore
+  const { type, key, _owner, props: _props, ...restProps } = props.children;
   const mergedStyle = useMemo(
     () =>
       mergeStyle(
@@ -29,15 +46,17 @@ const Transition = (props: TransitionProps) => {
       ),
     [_props.style, display, transitionDuration]
   );
-  if (!inited) return null;
-  return React.createElement(type, {
-    ...otherProps,
-    ..._props,
-    key,
-    onTransitionEnd,
-    style: mergedStyle,
-    className: `__transition__ ${className} ${_props?.className ?? ""}`,
-  });
+  return (
+    !!inited &&
+    React.createElement(type, {
+      ...restProps,
+      ..._props,
+      key,
+      onTransitionEnd,
+      style: mergedStyle,
+      className: `__transition__ ${className} ${_props?.className ?? ""}`,
+    })
+  );
 };
 
 export default Transition;
