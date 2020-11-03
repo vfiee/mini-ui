@@ -17,6 +17,12 @@ export declare interface TransitionProps {
   duration?: number; //ms
   name: TransitionType;
   children: React.ReactElement;
+  beforeEnter?: Function;
+  onEnter?: Function;
+  afterEnter?: Function;
+  beforeLeave?: Function;
+  onLeave?: Function;
+  afterLeave?: Function;
 }
 
 declare const Transition: (
