@@ -50,6 +50,20 @@
         },
         {
           "id": -1,
+          "name": "Authorize",
+          "pathName": "pages/authorize/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "Carousel",
+          "pathName": "pages/carousel/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
           "name": "Divider",
           "pathName": "pages/divider/index",
           "query": "",
@@ -80,6 +94,18 @@
           "id": -1,
           "name": "Loading",
           "pathName": "pages/loading/index",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "Overlay",
+          "pathName": "pages/overlay/index",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "Transition",
+          "pathName": "pages/transition/index",
           "scene": null
         }
       ]
