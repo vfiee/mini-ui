@@ -30,11 +30,12 @@
     "lint": "eslint packages",
     "lint:style": "stylelint packages --fix",
     "prettier": "prettier packages --write",
+    "lint:all": "yarn lint && yarn lint:style",
     "changelog": "conventional-changelog -i CHANGELOG.md -s -r 0 && prettier CHANGELOG.md --write"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged && git add .",
+      "pre-commit": "lint-staged",
       "commit-msg": "node script/verifyCommit.js"
     }
   },
