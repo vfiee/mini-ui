@@ -25,6 +25,7 @@ const Overlay = (props: OverlayProps) => {
     className,
     preventScroll,
     customAppbar,
+    withoutTransition,
     ...restProps
   } = {
     ...defaultOverlayProps,
@@ -46,20 +47,24 @@ const Overlay = (props: OverlayProps) => {
     _style += ` top:${wrapStyle?.height ?? 0};`;
     return _style;
   }, [customAppbar, duration, opacity, style, wrapStyle, zIndex]);
-
-  return (
+  const overlayElement = (
+    <View
+      {...restProps}
+      style={mergedStyle}
+      className={`__overlay__ ${className ?? ""}`}
+      onClick={(eve) => {
+        eve.stopPropagation();
+        props?.onClick?.(eve);
+      }}
+    >
+      {props?.children}
+    </View>
+  );
+  return withoutTransition ? (
+    overlayElement
+  ) : (
     <Transition show={!!show} name="fade">
-      <View
-        {...restProps}
-        style={mergedStyle}
-        className={`__overlay__ ${className ?? ""}`}
-        onClick={(eve) => {
-          eve.stopPropagation();
-          props?.onClick?.(eve);
-        }}
-      >
-        {props?.children}
-      </View>
+      {overlayElement}
     </Transition>
   );
 };
