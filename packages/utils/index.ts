@@ -1,10 +1,10 @@
 import get from "lodash.get";
 import kebabcase from "lodash.kebabcase";
-import { createSelectorQuery, nextTick as _nextTick } from "@tarojs/taro";
+import { createSelectorQuery } from "@tarojs/taro";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { BaseObject, BaseMap } from "types";
 import { getSystemInfoSync } from "./system";
-import { isObject, isFunction } from "./base";
+import { isObject } from "./base";
 
 export * from "./base";
 
@@ -122,9 +122,6 @@ export const mapToObject = (map: BaseMap, initObj?: BaseObject): BaseObject => {
  *
  */
 export const nextTick = (fn: (...args: any[]) => any) => {
-  if (_nextTick) {
-    _nextTick(fn);
-  }
   return setTimeout(() => {
     fn();
   }, 1000 / 30);
