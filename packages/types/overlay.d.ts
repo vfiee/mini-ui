@@ -5,6 +5,7 @@ import { CustomElement } from "./index";
 
 export declare interface OverlayProps extends ViewProps {
   show?: boolean;
+  withoutTransition?: boolean;
   customAppbar?: boolean;
   preventScroll?: boolean;
   opacity?: number | string;

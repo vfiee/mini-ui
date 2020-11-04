@@ -11,7 +11,6 @@ function authorizeScope(eve: any) {
         this.onAuthorize && this.onAuthorize({ authorized: true }, eve);
       })
       .catch((err) => {
-        // console.log(`未授权:${this.authScope}`, err);
         this.onAuthorize &&
           this.onAuthorize({ authorized: false, error: err }, eve);
       });

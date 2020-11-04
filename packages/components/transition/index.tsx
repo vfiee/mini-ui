@@ -16,16 +16,10 @@ const Transition = (props: TransitionProps) => {
     onLeave,
     afterLeave,
   } = props;
-  const {
-    inited,
-    display,
-    className,
-    onTransitionEnd,
-    transitionDuration,
-  } = useTransition({
+  const { inited, display, onTransitionEnd, className } = useTransition({
     show,
     name,
-    transitionDuration: duration,
+    duration,
     beforeEnter,
     onEnter,
     afterEnter,
@@ -39,24 +33,22 @@ const Transition = (props: TransitionProps) => {
     () =>
       mergeStyle(
         {
-          transitionDuration: transitionDuration + "ms",
           display: display ? "" : "none",
+          transitionDuration: duration + "ms",
         },
         _props.style
       ),
-    [_props.style, display, transitionDuration]
+    [_props.style, display, duration]
   );
-  return (
-    !!inited &&
-    React.createElement(type, {
-      ...restProps,
-      ..._props,
-      key,
-      onTransitionEnd,
-      style: mergedStyle,
-      className: `__transition__ ${className} ${_props?.className ?? ""}`,
-    })
-  );
+  if (!inited) return null;
+  return React.createElement(type, {
+    ...restProps,
+    ..._props,
+    key,
+    onTransitionEnd,
+    style: mergedStyle,
+    className: `__transition__ ${className} ${_props?.className ?? ""}`,
+  });
 };
 
 export default Transition;

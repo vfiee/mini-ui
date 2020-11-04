@@ -11,10 +11,11 @@ const getClassNames = (name: TransitionType) => ({
   leaveTo: `__${name}__leave__to__ __${name}__leave__active__ ${name}-leave-active`,
 });
 
+// 借鉴 Vant
 export declare interface useTransitionProps {
   show: boolean;
   name: TransitionType;
-  transitionDuration: number; //ms
+  duration: number; //ms
   beforeEnter?: Function;
   onEnter?: Function;
   afterEnter?: Function;
@@ -41,7 +42,7 @@ const useTransition = (props: useTransitionProps) => {
     beforeLeave,
     onLeave,
     afterLeave,
-    transitionDuration,
+    duration,
   } = props;
   const previouseShow = usePrevious(show);
   const statusRef = useRef<transitionRefStatus>({
@@ -55,7 +56,6 @@ const useTransition = (props: useTransitionProps) => {
 
   const checkStatus = (status: TransitionStatus) => {
     if (statusRef.current.progress !== status) {
-      debugger;
       throw Error(
         `current status(${statusRef.current.progress}) is not checkStatus(${status})`
       );
@@ -148,8 +148,8 @@ const useTransition = (props: useTransitionProps) => {
   }, [enter, leave, previouseShow, show]);
 
   return {
+    duration,
     onTransitionEnd,
-    transitionDuration,
     status: statusRef.current.progress,
     inited: statusRef.current.inited,
     display: statusRef.current.display,

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { View } from "@tarojs/components";
-import { Transition } from "@vyron/mini-ui";
+import { Block, View } from "@tarojs/components";
+import { Transition, Overlay } from "@vyron/mini-ui";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { TransitionType } from "@vyron/mini-ui/types";
 import "./index.less";
@@ -45,7 +45,35 @@ export default class TransitionExample extends Component {
   }
   render() {
     return (
-      <View className="transition">
+      <Block>
+        <Transition
+          {...this.state.props}
+          className="transition-wrap"
+          beforeEnter={this.beforeEnter}
+          onEnter={this.onEnter}
+          afterEnter={this.afterEnter}
+          beforeLeave={this.beforeLeave}
+          onLeave={this.onLeave}
+          afterLeave={this.afterLeave}
+        >
+          {/* <Overlay show={this.state.props.show} withoutTransition> */}
+          <View
+            className="transition-child"
+            onClick={(eve) => {
+              eve.stopPropagation();
+              this.setState({
+                props: {
+                  ...this.state.props,
+                  show: false,
+                },
+              });
+            }}
+          >
+            Mini-ui: {this.state.props.name}
+          </View>
+          {/* </Overlay> */}
+        </Transition>
+        <Overlay show={this.state.props.show}></Overlay>
         {TRANSITION_TYPES.map((type) => (
           <View
             key={type}
@@ -63,31 +91,7 @@ export default class TransitionExample extends Component {
             {type}
           </View>
         ))}
-        <Transition
-          {...this.state.props}
-          beforeEnter={this.beforeEnter}
-          onEnter={this.onEnter}
-          afterEnter={this.afterEnter}
-          beforeLeave={this.beforeLeave}
-          onLeave={this.onLeave}
-          afterLeave={this.afterLeave}
-        >
-          <View
-            className="transition-child"
-            onClick={(eve) => {
-              eve.stopPropagation();
-              this.setState({
-                props: {
-                  ...this.state.props,
-                  show: false,
-                },
-              });
-            }}
-          >
-            {this.state.props.name}
-          </View>
-        </Transition>
-      </View>
+      </Block>
     );
   }
 }

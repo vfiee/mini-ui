@@ -1,5 +1,4 @@
 /// <reference types="react" />
-import { CustomElement } from "./index";
 
 export declare type TransitionType =
   | "fade"
@@ -13,7 +12,7 @@ export declare type TransitionType =
   | "slideRight";
 
 export declare interface TransitionProps {
-  show: boolean;
+  show?: boolean;
   duration?: number; //ms
   name: TransitionType;
   children: React.ReactElement;
@@ -25,18 +24,8 @@ export declare interface TransitionProps {
   afterLeave?: Function;
 }
 
-declare const Transition: (
-  props: TransitionProps
-) => React.ReactElement<
-  any,
-  | string
-  | ((
-      props: any
-    ) => React.ReactElement<
-      any,
-      string | any | (new (props: any) => React.Component<any, any, any>)
-    > | null)
-  | (new (props: any) => React.Component<any, any, any>)
-> | null;
+declare const Transition: {
+  (props: TransitionProps): JSX.Element | null;
+};
 
 export default Transition;

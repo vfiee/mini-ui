@@ -159,7 +159,6 @@ const List = (props: ListProps) => {
   const _onRefresherRestore = useCallback(
     (eve) => {
       if (refresherRef.current !== PullingStatus.static) {
-        debugger;
         setRefresherStatus(PullingStatus.static);
       }
       isFunction(onRefreshCancel) && (onRefreshCancel as Function)();
