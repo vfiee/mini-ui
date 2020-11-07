@@ -20,7 +20,7 @@
 
 ## SwiperProps
 
-支持微信小程序 swiper 组件的其余参数[文档](https://developers.weixin.qq.com/miniprogram/dev/component/swiper.html)
+支持微信小程序 swiper 组件的其余参数 [查看文档](https://developers.weixin.qq.com/miniprogram/dev/component/swiper.html)
 | 参数 | 必填 | 说明 | 类型 | 默认值 |
 | :--------------------- | :--- | :------------------------------------------------------- | :-------------------------- | :------- |
 | `customIndicator` | 否 | 是否自定义指示面板 | `boolean` | `false` |
@@ -33,7 +33,7 @@
 
 ## SwiperItemProps
 
-支持微信小程序 swiper-item 组件的其余参数[文档](https://developers.weixin.qq.com/miniprogram/dev/component/swiper-item.html)
+支持微信小程序 swiper-item 组件的其余参数 [查看文档](https://developers.weixin.qq.com/miniprogram/dev/component/swiper-item.html)
 | 参数 | 必填 | 说明 | 类型 | 默认值 |
 | :------ | :--- | :-------------------- | :----------------------------------------- | :----- |
 | `extra` | 否 | SwiperItem 的额外元素 | `(data: BaseObject) => React.ReactElement` | - |
@@ -41,7 +41,7 @@
 ## ImageProps
 
 参考 Image 组件
-支持微信小程序 image 组件的其余参数(除 src 外)[文档](https://developers.weixin.qq.com/miniprogram/dev/component/image.html)
+支持微信小程序 image 组件的其余参数(除 src 外) [查看文档](https://developers.weixin.qq.com/miniprogram/dev/component/image.html)
 
 ## 按需加载样式
 

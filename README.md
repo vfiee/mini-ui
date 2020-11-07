@@ -1,6 +1,6 @@
 # mini-ui
 
-Taro V3 小程序 UI 库
+基于 Taro V3 版本打造的微信小程序 UI 库
 
 ## 安装
 
@@ -27,6 +27,8 @@ npm install @vyron/mini-ui
 ```tsx
 import React from "react;
 import { Appbar } from "@vyron/mini-ui";
+import backIcon from "@Images/appbar/back-white-icon.png";
+import homeWhiteIcon from "@Images/appbar/home-white-icon.png";
 // 局部样式 tsx文件引入
 import "../node_modules/@vyron/mini-ui/style/appbar.css";
 import "./index.less"
@@ -66,33 +68,33 @@ class Home extends React.Component {
 ```
 
 ```less
-// less文件引入  index.less
+// 按需引入文件  index.less
 @import "../node_modules/@vyron/mini-ui/style/appbar.css";
 ```
 
 ## 计划
 
-|                    完成                    |    组件    |       说明       |
-| :----------------------------------------: | :--------: | :--------------: |
-| <input type="checkbox" checked disabled /> |   AppBar   | 自定义顶部导航栏 |
-| <input type="checkbox" checked disabled /> | Authorize  |     获取授权     |
-| <input type="checkbox" checked disabled /> |  Carousel  |      轮播图      |
-| <input type="checkbox" checked disabled /> |  Divider   |      分隔符      |
-| <input type="checkbox" checked disabled /> |   Empty    |       空白       |
-| <input type="checkbox" checked disabled /> |    Icon    |     iconfont     |
-| <input type="checkbox" checked disabled /> |   Image    |       图片       |
-| <input type="checkbox" checked disabled /> |  Loading   |       加载       |
-|     <input type="checkbox" disabled />     |  Overlay   |       遮罩       |
-|     <input type="checkbox" disabled />     | Transition |     过渡动画     |
-|     <input type="checkbox" disabled />     |    Cell    |      单元格      |
-|     <input type="checkbox" disabled />     |   Field    |      输入框      |
-|     <input type="checkbox" disabled />     |    Form    |    Form 表单     |
-|     <input type="checkbox" disabled />     |    List    |       列表       |
-|     <input type="checkbox" disabled />     |  SafeArea  |     安全区域     |
-|     <input type="checkbox" disabled />     |   Layout   |       布局       |
-|     <input type="checkbox" disabled />     |   Button   |       按钮       |
-|     <input type="checkbox" disabled />     |  Message   |       提示       |
-|     <input type="checkbox" disabled />     |   Modal    |      对话框      |
+|    组件    |       说明       | 状态 |
+| :--------: | :--------------: | :--: |
+|   AppBar   | 自定义顶部导航栏 |  ✅  |
+| Authorize  |     获取授权     |  ✅  |
+|  Carousel  |      轮播图      |  ✅  |
+|  Divider   |      分隔符      |  ✅  |
+|   Empty    |       空白       |  ✅  |
+|    Icon    |     iconfont     |  ✅  |
+|   Image    |       图片       |  ✅  |
+|  Loading   |       加载       |  ✅  |
+|    Grid    |     栅格布局     |  ✅  |
+|  Overlay   |       遮罩       |  ✅  |
+| Transition |     过渡动画     |  ✅  |
+|    Cell    |      单元格      | ⬜️  |
+|   Field    |      输入框      |  ⬜  |
+|    Form    |    Form 表单     | ⬜️  |
+|    List    |       列表       | ⬜️  |
+|  SafeArea  |     安全区域     | ⬜️  |
+|   Button   |       按钮       | ⬜️  |
+|  Message   |       提示       | ⬜️  |
+|   Modal    |      对话框      | ⬜️  |
 
 ## 预览
 

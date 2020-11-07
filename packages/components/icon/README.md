@@ -2,7 +2,7 @@
 
 ## 参数
 
-支持微信小程序 View 组件的其余参数[文档](https://developers.weixin.qq.com/miniprogram/dev/component/view.html)
+支持微信小程序 View 组件的其余参数 [查看文档](https://developers.weixin.qq.com/miniprogram/dev/component/view.html)
 | 参数 | 必填 | 说明 | 类型 | 默认值 |
 | :------------ | :----------------------- | :--- | :--- | :----- |
 |`isCover`|否| 设置为`true`,容器元素为`CoverView`,图片元素为`CoverImage` |`boolean`|-|

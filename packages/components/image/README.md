@@ -4,7 +4,7 @@
 
 ## 参数
 
-支持微信小程序 Image 组件的其余参数[文档](https://developers.weixin.qq.com/miniprogram/dev/component/image.html)
+支持微信小程序 Image 组件的其余参数 [查看文档](https://developers.weixin.qq.com/miniprogram/dev/component/image.html)
 | 参数 | 必填 | 说明 | 类型 | 默认值 |
 | :------------ | :----------------------- | :--- | :--- | :----- |
 |`showLoading`|否| 是否展示图片加载中 |`boolean`|`false`|
