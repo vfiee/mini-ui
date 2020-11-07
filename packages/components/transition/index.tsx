@@ -15,6 +15,7 @@ const Transition = (props: TransitionProps) => {
     beforeLeave,
     onLeave,
     afterLeave,
+    children,
   } = props;
   const { inited, display, onTransitionEnd, className } = useTransition({
     show,
@@ -28,26 +29,19 @@ const Transition = (props: TransitionProps) => {
     afterLeave,
   });
   // @ts-ignore
-  const { type, key, _owner, props: _props, ...restProps } = props.children;
-  const mergedStyle = useMemo(
-    () =>
-      mergeStyle(
-        {
-          display: display ? "" : "none",
-          transitionDuration: duration + "ms",
-        },
-        _props.style
-      ),
-    [_props.style, display, duration]
-  );
   if (!inited) return null;
-  return React.createElement(type, {
-    ...restProps,
-    ..._props,
-    key,
+  return React.cloneElement(children, {
     onTransitionEnd,
-    style: mergedStyle,
-    className: `__transition__ ${className} ${_props?.className ?? ""}`,
+    className: `__transition__ ${className} ${
+      children?.props?.className ?? ""
+    }`,
+    style: mergeStyle(
+      {
+        display: display ? "" : "none",
+        transitionDuration: duration + "ms",
+      },
+      children.props.style
+    ),
   });
 };
 
