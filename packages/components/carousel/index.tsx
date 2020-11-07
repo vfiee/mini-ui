@@ -237,4 +237,12 @@ const Carousel = (props: CarouselProps) => {
   );
 };
 
+Carousel.displayName = "Carousel";
+
+Carousel.displayName = "Carousel";
+
+Carousel.options = {
+  addGlobalClass: true,
+};
+
 export default Carousel;

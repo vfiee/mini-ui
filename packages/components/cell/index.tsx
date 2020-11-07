@@ -5,15 +5,6 @@ import { isFunction, isNull, isUndefined, navigateTo, redirectTo } from "utils";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { IconProps, CellProps, CellGroupProps } from "types";
 
-const defaultCellProps = {
-  colon: false,
-  replace: false,
-  center: false,
-  arrow: false,
-  border: true,
-  arrowDirection: "right",
-};
-
 const Cell = (props: CellProps) => {
   const {
     title,
@@ -38,10 +29,7 @@ const Cell = (props: CellProps) => {
     onClick,
     border,
     ...restProps
-  } = {
-    ...defaultCellProps,
-    ...props,
-  };
+  } = props;
 
   const _label = useMemo(() => {
     if (isUndefined(label)) return null;
@@ -144,14 +132,30 @@ const Cell = (props: CellProps) => {
   );
 };
 
-const defaultCellGroupProps: CellGroupProps = {
-  border: true,
+Cell.displayName = "Col";
+
+Cell.options = {
+  addGlobalClass: true,
 };
+
+Cell.defaultProps = {
+  colon: false,
+  replace: false,
+  center: false,
+  arrow: false,
+  border: true,
+  arrowDirection: "right",
+};
+
 const CellGroup = (props: CellGroupProps) => {
-  const { title, titleClass, titleStyle, border, className, ...restProps } = {
-    ...defaultCellGroupProps,
-    ...props,
-  };
+  const {
+    title,
+    titleClass,
+    titleStyle,
+    border,
+    className,
+    ...restProps
+  } = props;
 
   const cellGroup = useMemo(
     () => (
@@ -189,6 +193,16 @@ const CellGroup = (props: CellGroupProps) => {
   ) : (
     cellGroup
   );
+};
+
+CellGroup.displayName = "CellGroup";
+
+CellGroup.options = {
+  addGlobalClass: true,
+};
+
+CellGroup.defaultProps = {
+  border: true,
 };
 
 export { Cell as default, CellGroup };

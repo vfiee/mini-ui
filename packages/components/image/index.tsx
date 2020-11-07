@@ -1,18 +1,11 @@
 import React, { useState, isValidElement, useMemo } from "react";
-import { View, Image } from "@tarojs/components";
+import { View, Image as TaroImage } from "@tarojs/components";
 import Icon from "components/icon";
 import { mergeStyle, delayExecution } from "utils";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { ImageProps } from "types";
 
-const defaultImageProps = {
-  showError: false,
-  showLoading: false,
-  loading: "icon-default-img",
-  error: "icon-error-img",
-};
-
-const Component = (props: ImageProps) => {
+const Image = (props: ImageProps) => {
   const {
     showLoading,
     loading,
@@ -28,10 +21,7 @@ const Component = (props: ImageProps) => {
     className,
     style,
     ...restProps
-  } = {
-    ...defaultImageProps,
-    ...props,
-  };
+  } = props;
   const [status, setStatus] = useState({
     error: !props?.src,
     loading: !!props?.src,
@@ -67,7 +57,7 @@ const Component = (props: ImageProps) => {
       style={memoStyle}
     >
       {!status.error && (
-        <Image
+        <TaroImage
           {...restProps}
           onLoad={_onLoad}
           onError={_onError}
@@ -99,8 +89,17 @@ const Component = (props: ImageProps) => {
   );
 };
 
-Component.options = {
+Image.displayName = "Image";
+
+Image.options = {
   addGlobalClass: true,
 };
 
-export default Component;
+Image.defaultProps = {
+  showError: false,
+  showLoading: false,
+  error: "icon-error-img",
+  loading: "icon-default-img",
+};
+
+export default Image;

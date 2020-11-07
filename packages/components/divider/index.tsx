@@ -3,16 +3,8 @@ import { View } from "@tarojs/components";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { DividerProps } from "types";
 
-const defaultProps: DividerProps = {
-  hairLine: true,
-  position: "center",
-};
-
 const Divider = (props: DividerProps) => {
-  const { hairLine, position, text, className, ...restProps } = {
-    ...defaultProps,
-    ...props,
-  };
+  const { hairLine, position, text, className, ...restProps } = props;
 
   const positionCls = useMemo(() => {
     return !!(text || props.children)
@@ -33,8 +25,15 @@ const Divider = (props: DividerProps) => {
   );
 };
 
+Divider.displayName = "Divider";
+
 Divider.options = {
   addGlobalClass: true,
+};
+
+Divider.defaultProps = {
+  hairLine: true,
+  position: "center",
 };
 
 export default Divider;

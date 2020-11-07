@@ -6,13 +6,6 @@ import { mergeStyle } from "utils";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { NavigationBarProps } from "types";
 
-const defaultNavigationBarProps: NavigationBarProps = {
-  title: "",
-  type: "white",
-  isCoverView: false,
-  backgroundColor: "#fff",
-};
-
 const AppBar = (props: NavigationBarProps) => {
   const {
     type,
@@ -28,10 +21,7 @@ const AppBar = (props: NavigationBarProps) => {
     // viewprops
     style,
     className,
-  } = {
-    ...defaultNavigationBarProps,
-    ...props,
-  };
+  } = props;
   const { rect, wrapStyle, menuStyle, delimiterStyle } = useMenuButton({
     type,
   });
@@ -105,8 +95,17 @@ const AppBar = (props: NavigationBarProps) => {
   );
 };
 
+AppBar.displayName = "AppBar";
+
 AppBar.options = {
   addGlobalClass: true,
+};
+
+AppBar.defaultProps = {
+  title: "",
+  type: "white",
+  isCoverView: false,
+  backgroundColor: "#fff",
 };
 
 export default AppBar;

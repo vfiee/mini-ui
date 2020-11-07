@@ -4,13 +4,6 @@ import { mergeStyle, MiniConsole } from "utils";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { RowProps } from "types/row";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import "./index.less";
-
-// const getHalfGutter = (gutter?: string | number): number => {
-//   const intGutter =
-//     typeof gutter === "string" ? Number.parseInt(gutter) : gutter || 0;
-//   return !Number.isNaN(intGutter) ? intGutter / 2 : 0;
-// };
 
 export const Row = (props: RowProps) => {
   const {

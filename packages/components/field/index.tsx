@@ -8,22 +8,6 @@ import { useUpdate } from "hooks";
 import { IconProps, CellProps, InputProps, FieldProps } from "types";
 import Input from "./baseInput";
 
-const defaultFieldProps = {
-  type: "text",
-  fixed: false,
-  autoHeight: true,
-  maxlength: 200,
-  showConfirmBar: false,
-  disableDefaultPadding: true,
-  clear: false,
-  clearTrigger: "focus",
-  showWordLimit: false,
-  inputAlign: "left",
-  showError: true,
-  formatTriggleType: "onChange",
-  placeholderClass: "input-placeholder",
-};
-
 const getIconProps = (
   props: string | IconProps | undefined,
   fn: any
@@ -198,7 +182,6 @@ const Field = (props: FieldProps) => {
     return valueRef.current;
   };
   const _props = {
-    ...defaultFieldProps,
     ...props,
     onFocus,
     onBlur,
@@ -260,6 +243,28 @@ const Field = (props: FieldProps) => {
       {props?.children}
     </Cell>
   );
+};
+
+Field.displayName = "Field";
+
+Field.options = {
+  addGlobalClass: true,
+};
+
+Field.defaultProps = {
+  type: "text",
+  fixed: false,
+  autoHeight: true,
+  maxlength: 200,
+  showConfirmBar: false,
+  disableDefaultPadding: true,
+  clear: false,
+  clearTrigger: "focus",
+  showWordLimit: false,
+  inputAlign: "left",
+  showError: true,
+  formatTriggleType: "onChange",
+  placeholderClass: "input-placeholder",
 };
 
 export default Field;

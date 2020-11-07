@@ -7,8 +7,8 @@ import { IconProps, DefaultIconProps, EmptyProps } from "types";
 const defaultIcons: DefaultIconProps = {
   empty: {
     size: "160rpx",
-    type: `icon-empty-filled`,
     color: "#999",
+    type: `icon-empty-filled`,
   },
   error: {
     size: "160rpx",
@@ -22,22 +22,15 @@ const defaultIcons: DefaultIconProps = {
   },
 };
 
-const defaultEmptyProps = {
-  image: "empty",
-};
-
 const defaultIconTypes = ["empty", "network", "error"];
 
 const Empty = (props: EmptyProps) => {
-  let { image, className, description, ...restProps } = {
-    ...defaultEmptyProps,
-    ...props,
-  };
+  let { image, className, description, ...restProps } = props;
   if (typeof image === "string") {
     image = defaultIconTypes.includes(image) ? image : "empty";
   }
   const iconProps: IconProps =
-    typeof image === "string" ? defaultIcons[image] : image;
+    typeof image === "string" ? defaultIcons[image] : (image as IconProps);
   return (
     <View {...restProps} className={`__empty__ ${className ?? ""}`}>
       <Icon {...iconProps} />
@@ -49,8 +42,14 @@ const Empty = (props: EmptyProps) => {
   );
 };
 
+Empty.displayName = "Empty";
+
 Empty.options = {
   addGlobalClass: true,
+};
+
+Empty.defaultProps = {
+  image: "empty",
 };
 
 export default Empty;

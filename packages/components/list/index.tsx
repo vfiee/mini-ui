@@ -30,20 +30,6 @@ const pullStatusText = [
   "加载失败",
 ];
 
-const defaultProps = {
-  scrollY: true,
-  hasMore: true,
-  firstTriggered: false,
-  refresherEnabled: true,
-  lowerThreshold: 80,
-  loadingText: "加载中...",
-  errorText: "请求失败,点击重新加载",
-  refresherDefaultStyle: "none",
-  refresherThreshold: 50,
-  refresherBackground: "#00ab84",
-  refresherStayTime: 700,
-};
-
 const List = (props: ListProps) => {
   const {
     data,
@@ -71,10 +57,7 @@ const List = (props: ListProps) => {
     refresherClassName,
     refresherStyle,
     ...restProps
-  } = {
-    ...defaultProps,
-    ...props,
-  };
+  } = props;
   const update = useUpdate();
   const refresherRef = useRef<PullingStatus>(PullingStatus.static);
   const setRefresherStatus = useCallback(
@@ -102,6 +85,7 @@ const List = (props: ListProps) => {
       if (refresherRef.current < PullingStatus.loading) {
         const { dy } = eve.detail;
         setRefresherStatus(
+          // @ts-ignore
           dy >= refresherThreshold
             ? PullingStatus.overPulling
             : PullingStatus.pulling
@@ -281,8 +265,24 @@ const List = (props: ListProps) => {
   );
 };
 
+List.displayName = "List";
+
 List.options = {
   addGlobalClass: true,
+};
+
+List.defaultProps = {
+  scrollY: true,
+  hasMore: true,
+  firstTriggered: false,
+  refresherEnabled: true,
+  lowerThreshold: 80,
+  loadingText: "加载中...",
+  errorText: "请求失败,点击重新加载",
+  refresherDefaultStyle: "none",
+  refresherThreshold: 50,
+  refresherBackground: "#00ab84",
+  refresherStayTime: 700,
 };
 
 export default List;

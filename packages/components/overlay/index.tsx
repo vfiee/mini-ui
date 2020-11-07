@@ -6,15 +6,6 @@ import Transition from "components/transition";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { OverlayProps } from "types";
 
-const defaultOverlayProps: OverlayProps = {
-  show: false,
-  zIndex: 1,
-  opacity: 0.6,
-  duration: 0.3,
-  preventScroll: true,
-  customAppbar: false,
-};
-
 const Overlay = (props: OverlayProps) => {
   const {
     show,
@@ -27,10 +18,7 @@ const Overlay = (props: OverlayProps) => {
     customAppbar,
     withoutTransition,
     ...restProps
-  } = {
-    ...defaultOverlayProps,
-    ...props,
-  };
+  } = props;
   const { wrapStyle } = useMenuButton();
   const mergedStyle = useMemo(() => {
     let _style = mergeStyle(
@@ -67,6 +55,21 @@ const Overlay = (props: OverlayProps) => {
       {overlayElement}
     </Transition>
   );
+};
+
+Overlay.displayName = "Overlay";
+
+Overlay.options = {
+  addGlobalClass: true,
+};
+
+Overlay.defaultProps = {
+  show: false,
+  zIndex: 1,
+  opacity: 0.6,
+  duration: 0.3,
+  preventScroll: true,
+  customAppbar: false,
 };
 
 export default Overlay;

@@ -2,7 +2,6 @@ import React, { useMemo } from "react";
 import { View } from "@tarojs/components";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { ColProps } from "types/col";
-import "./index.less";
 
 const Col = (props: ColProps) => {
   const { offset, span, order, pull, push, className, ...restProps } = props;
@@ -24,6 +23,8 @@ const Col = (props: ColProps) => {
     </View>
   );
 };
+
+Col.displayName = "Col";
 
 Col.defaultProps = {
   isCol: true,

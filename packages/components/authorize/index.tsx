@@ -74,6 +74,8 @@ const Authorize = (props: AuthorizeProps) => {
   );
 };
 
+Authorize.displayName = "Authorize";
+
 Authorize.options = {
   addGlobalClass: true,
 };

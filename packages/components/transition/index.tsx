@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { useTransition } from "hooks";
 import { mergeStyle } from "utils";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -44,5 +44,7 @@ const Transition = (props: TransitionProps) => {
     ),
   });
 };
+
+Transition.displayName = "Transition";
 
 export default Transition;

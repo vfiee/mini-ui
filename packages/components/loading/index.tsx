@@ -3,13 +3,6 @@ import { View } from "@tarojs/components";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { LoadingProps } from "types";
 
-const defaultLoadingPorps = {
-  color: "#999",
-  type: "circular",
-  size: "40rpx",
-  vertical: false,
-  block: false,
-};
 const Loading = (props: LoadingProps) => {
   const {
     color,
@@ -21,10 +14,7 @@ const Loading = (props: LoadingProps) => {
     className,
     textProps,
     ...restProps
-  } = {
-    ...defaultLoadingPorps,
-    ...props,
-  };
+  } = props;
   const dots = useRef(Array.from({ length: 12 }));
 
   return (
@@ -56,8 +46,18 @@ const Loading = (props: LoadingProps) => {
     </View>
   );
 };
+
+Loading.displayName = "Loading";
+
 Loading.options = {
   addGlobalClass: true,
+};
+Loading.defaultProps = {
+  color: "#999",
+  type: "circular",
+  size: "40rpx",
+  vertical: false,
+  block: false,
 };
 
 export default Loading;

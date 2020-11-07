@@ -4,11 +4,6 @@ import { mergeStyle, isImage } from "utils";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { IconProps } from "types";
 
-const defaultIconProps = {
-  isCover: false,
-  fontFamily: "iconfont",
-};
-
 const Icon = (props: IconProps) => {
   const {
     type,
@@ -20,10 +15,7 @@ const Icon = (props: IconProps) => {
     fontFamily,
     isCover,
     ...restProps
-  } = {
-    ...defaultIconProps,
-    ...props,
-  };
+  } = props;
   const isImageType =
     localImage || (/^https?:\/\//.test(type) && isImage(type));
   const mergedStyle = useMemo(
@@ -66,7 +58,16 @@ const Icon = (props: IconProps) => {
     </CView>
   );
 };
+
+Icon.displayName = "Icon";
+
 Icon.options = {
   addGlobalClass: true,
 };
+
+Icon.defaultProps = {
+  isCover: false,
+  fontFamily: "iconfont",
+};
+
 export default Icon;
