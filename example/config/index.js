@@ -2,8 +2,6 @@
 const path = require("path");
 const _ = require("lodash");
 
-const isLibMode = process.env.EXAMPLE_ENV === "dist";
-
 const commonAlias = {
   "@": getPath("src"),
   "@Images": getPath("src/assets/images"),
@@ -11,11 +9,11 @@ const commonAlias = {
 };
 let allModeAlias = {
   packages: {
-    "@vyron/mini-ui": getPath("../../mini-components/packages/index.ts"),
     utils: getPath("../packages/utils"),
     hooks: getPath("../packages/hooks"),
     types: getPath("../packages/types"),
     components: getPath("../packages/components"),
+    "@vyron/mini-ui": getPath("../packages/index.ts"),
   },
   dist: {
     "@vyron/mini-ui": getPath("../dist/index.es.js"),
@@ -41,7 +39,7 @@ const config = {
   },
   alias: _.assign(
     commonAlias,
-    _.get(allModeAlias, process.env.EXAMPLE_ENV, {})
+    _.get(allModeAlias, process.env.EXAMPLE_ENV, allModeAlias["packages"])
   ),
   framework: "react",
   mini: {

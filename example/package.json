@@ -1,56 +1,57 @@
 {
-	"name": "example",
-	"version": "1.0.0",
-	"private": true,
-	"description": "",
-	"templateInfo": {
-		"name": "default-youshu",
-		"typescript": true,
-		"css": "less"
-	},
-	"scripts": {
-		"dev": "yarn build --watch",
-		"build": "taro build --type $npm_package_taro_platform",
-		"platform": "node scripts/changePlatform.js",
-		"update:taro": "taro update self && taro update project && yarn",
-		"reinstall": "rm -rf yarn.lock node_modules && yarn",
-		"pages": "node scripts/page"
-	},
-	"browserslist": [
-		"last 3 versions",
-		"Android >= 4.1",
-		"ios >= 8"
-	],
-	"author": "",
-	"dependencies": {
-		"@babel/runtime": "^7.7.7",
-		"@tarojs/components": "3.0.15",
-		"@tarojs/react": "3.0.15",
-		"@tarojs/runtime": "3.0.15",
-		"@tarojs/taro": "3.0.15",
-		"lodash": "^4.17.20",
-		"react": "^16.10.0",
-		"react-dom": "^16.10.0"
-	},
-	"devDependencies": {
-		"@babel/core": "^7.8.0",
-		"@tarojs/cli": "3.0.15",
-		"@tarojs/mini-runner": "3.0.15",
-		"@tarojs/webpack-runner": "3.0.15",
-		"@types/prettier": "^2.1.5",
-		"@types/react": "^16.0.0",
-		"@types/webpack-env": "^1.13.6",
-		"@typescript-eslint/eslint-plugin": "^2.x",
-		"@typescript-eslint/parser": "^2.x",
-		"babel-preset-taro": "3.0.15",
-		"eslint": "^6.8.0",
-		"eslint-config-taro": "3.0.15",
-		"eslint-plugin-import": "^2.12.0",
-		"eslint-plugin-react": "^7.8.2",
-		"eslint-plugin-react-hooks": "^1.6.1",
-		"prettier": "^2.1.2",
-		"stylelint": "9.3.0",
-		"typescript": "^3.7.0"
-	},
-	"taro_platform": "weapp"
+  "name": "example",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "templateInfo": {
+    "name": "default-youshu",
+    "typescript": true,
+    "css": "less"
+  },
+  "scripts": {
+    "dev": "yarn build --watch",
+    "build": "taro build --type $npm_package_taro_platform",
+    "platform": "node scripts/changePlatform.js",
+    "update:taro": "taro update self && taro update project && yarn",
+    "reinstall": "rm -rf yarn.lock node_modules && yarn",
+    "pages": "node scripts/page"
+  },
+  "browserslist": [
+    "last 3 versions",
+    "Android >= 4.1",
+    "ios >= 8"
+  ],
+  "author": "",
+  "dependencies": {
+    "@babel/runtime": "^7.7.7",
+    "@tarojs/components": "3.0.15",
+    "@tarojs/react": "3.0.15",
+    "@tarojs/runtime": "3.0.15",
+    "@tarojs/taro": "3.0.15",
+    "lodash": "^4.17.20",
+    "react": "^16.10.0",
+    "react-dom": "^16.10.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.0",
+    "@tarojs/cli": "3.0.15",
+    "@tarojs/mini-runner": "3.0.15",
+    "@tarojs/webpack-runner": "3.0.15",
+    "@types/prettier": "^2.1.5",
+    "@types/react": "^16.0.0",
+    "@types/webpack-env": "^1.13.6",
+    "@typescript-eslint/eslint-plugin": "^2.x",
+    "@typescript-eslint/parser": "^2.x",
+    "babel-preset-taro": "3.0.15",
+    "cross-env": "^7.0.2",
+    "eslint": "^6.8.0",
+    "eslint-config-taro": "3.0.15",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-react": "^7.8.2",
+    "eslint-plugin-react-hooks": "^1.6.1",
+    "prettier": "^2.1.2",
+    "stylelint": "9.3.0",
+    "typescript": "^3.7.0"
+  },
+  "taro_platform": "weapp"
 }

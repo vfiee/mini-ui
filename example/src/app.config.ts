@@ -11,6 +11,7 @@ export default {
     "pages/loading/index",
     "pages/overlay/index",
     "pages/transition/index",
+    "pages/grid/index",
   ],
   window: {
     navigationBarTitleText: "WeChat",

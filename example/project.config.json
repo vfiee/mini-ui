@@ -107,6 +107,12 @@
           "name": "Transition",
           "pathName": "pages/transition/index",
           "scene": null
+        },
+        {
+          "id": -1,
+          "name": "Grid",
+          "pathName": "pages/grid/index",
+          "scene": null
         }
       ]
     }

@@ -4,7 +4,7 @@ import { View } from "@tarojs/components";
 import "./index.less";
 
 export default class Index extends React.Component {
-  navigator = (dir) => {
+  navigator = (dir: string) => {
     Taro.navigateTo({ url: `/pages/${dir}/index` });
   };
   render() {
@@ -28,6 +28,10 @@ export default class Index extends React.Component {
 
         <View className="item" onClick={() => this.navigator("empty")}>
           Empty
+        </View>
+
+        <View className="item" onClick={() => this.navigator("grid")}>
+          Grid
         </View>
 
         <View className="item" onClick={() => this.navigator("icon")}>
