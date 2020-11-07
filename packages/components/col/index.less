@@ -1,0 +1,33 @@
+.__col__ {
+  display: block;
+  position: relative;
+  min-height: 1px;
+  max-width: 100%;
+  &hidden__ {
+    display: none;
+  }
+}
+
+@grid-columns: 24;
+.loop-grid-cols(@index) when (@index > 0) {
+  .__col__@{index}__ {
+    box-sizing: border-box;
+    flex-basis: percentage((@index / @grid-columns));
+    max-width: percentage((@index / @grid-columns));
+  }
+  .__col__push__@{index}__ {
+    left: percentage((@index / @grid-columns));
+  }
+  .__col__pull__@{index}__ {
+    right: percentage((@index / @grid-columns));
+  }
+  .__col__offset__@{index}__ {
+    margin-left: percentage((@index / @grid-columns));
+  }
+  .__col__order__@{index}__ {
+    order: @index;
+  }
+  .loop-grid-cols((@index - 1));
+}
+
+.loop-grid-cols(@grid-columns);

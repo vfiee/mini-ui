@@ -12,6 +12,8 @@ export * from "./system";
 
 export * from "./style";
 
+export { default as MiniConsole } from "./log";
+
 export { get, kebabcase };
 /**
  * 判断src是否为图片类型

@@ -23,3 +23,7 @@ export { default as Transition } from "./components/transition";
 export { default as Cell, CellGroup } from "./components/cell";
 
 export { default as Field } from "./components/field";
+
+export { default as Row } from "./components/row";
+
+export { default as Col } from "./components/col";
