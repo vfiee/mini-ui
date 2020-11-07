@@ -37,7 +37,12 @@ const preId =
   "alpha";
 
 // 打印进度
-const progress = (s) => console.log(chalk.green(s));
+let progressCount = 0;
+const progress = (s) => {
+  progressCount++;
+  console.log(chalk.green(`progress[${progressCount}]: ${s}\n`));
+  return {};
+};
 
 // 执行命令
 const run = (bin, args, opts = {}) =>
@@ -56,7 +61,7 @@ const getPkg = (key) => {
 
 // 更新版本
 const updateVersion = (version) => {
-  progress("\nUpdating package version");
+  progress("Updating package version");
   const pkg = getPkg();
   pkg.version = version;
   fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + "\n");
@@ -65,11 +70,11 @@ const updateVersion = (version) => {
 // 选择版本
 const chooseVersion = async () => {
   let targetVersion = args._[0];
-  progress("\nChoosing release version...");
+  progress("Choosing release version...");
   if (!targetVersion) {
     const { type } = await prompt({
-      type: "select",
       name: "type",
+      type: "select",
       message: "select release type please!",
       choices: releaseTypes
         .map((type) => `${type} (${incVersion(type)})`)
@@ -105,7 +110,7 @@ const chooseVersion = async () => {
 
 // 生成changelog
 const generateChanlog = () => {
-  progress("\nGenerating changelog...");
+  progress("Generating changelog...");
   return run("yarn", ["changelog"]);
 };
 
@@ -116,17 +121,17 @@ const commitChanges = async () => {
   });
   const version = getPkg("version");
   if (stdout) {
-    progress("\nCommitting changes...");
+    progress("Committing changes...");
     await run("git", ["add", "-A"]);
     await run("git", ["commit", "-m", `release: v${version}`]);
   } else {
-    console.log("No changes to commit.");
+    console.log(chalk.yellow(`No changes to commit. \n`));
   }
 };
 
 // 发布包
 const publishPackage = async () => {
-  progress("\nPublishing packages...");
+  progress("Publishing packages...");
   const { name, version } = getPkg();
   try {
     await run(
@@ -136,7 +141,7 @@ const publishPackage = async () => {
         stdio: "pipe",
       }
     );
-    progress(`\nSuccessfully published ${name}@${version}`);
+    progress(`Successfully published ${name}@${version}`);
   } catch (e) {
     throw e;
   }
@@ -144,24 +149,26 @@ const publishPackage = async () => {
 
 // 发布到github
 const publishToGithub = async () => {
-  progress("\nPushing to GitHub...");
+  progress("Pushing to GitHub...");
   const { stdout: remote } = await run("git", ["remote"], {
     stdio: "pipe",
   });
-  if (!remote) {
+  if (!remote && !isTest) {
     throw new Error("Pushing remote is empty!");
   }
   const { stdout: branch } = await run("git", ["branch", "--show-current"], {
     stdio: "pipe",
   });
-  if (branch !== "main") {
-    throw new Error("Releasing Push branch must be main!");
+  if (branch !== "main" && !isTest) {
+    throw new Error(
+      "Release branch must be main, please checkout main branch and try it again!"
+    );
   }
   const version = getPkg("version");
   await run("git", ["tag", `v${version}`]);
   await run("git", ["push", "origin", `refs/tags/v${version}`]);
   await run("git", ["push"]);
-  progress("\n🎉🎉🎉Pushing to GitHub success");
+  progress("🎉🎉🎉Pushing to GitHub success!");
 };
 
 const release = () =>

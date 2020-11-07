@@ -12,7 +12,7 @@ import cssnanoPreset from "cssnano-preset-default";
 import pkg from "./package.json";
 
 const isProd = process.env.BUILD === "production";
-const isBuildAll = process.env.BUILD_ALL === "false";
+const isBuildAll = process.env.BUILD_ALL === "true";
 
 function getPath(src) {
   return path.resolve(process.cwd(), src);
