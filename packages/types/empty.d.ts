@@ -14,10 +14,6 @@ export declare type DefaultIconProps = {
   [key: string]: IconProps;
 };
 
-declare const Empty: {
-  (props: EmptyProps): JSX.Element;
-  options: {
-    addGlobalClass: boolean;
-  };
-};
+declare const Empty: React.ComponentType<Empty>;
+
 export default Empty;

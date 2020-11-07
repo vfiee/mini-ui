@@ -13,6 +13,6 @@ export declare interface InputProps extends _InputProps {
   onLineChange?: CommonEventFunction<TextareaProps.onLineChangeEventDetail>;
 }
 
-declare const BaseInput: (props: InputProps) => JSX.Element;
+declare const BaseInput: React.ComponentType<InputProps>;
 
 export default BaseInput;

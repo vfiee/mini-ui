@@ -35,8 +35,8 @@ export declare interface CellProps extends ViewProps {
   children?: CustomElement;
 }
 
-declare const Cell: (props: CellProps) => JSX.Element;
+declare const Cell: React.ComponentType<CellProps>;
 
-declare const CellGroup: (props: CellGroupProps) => JSX.Element;
+declare const CellGroup: React.ComponentType<CellGroupProps>;
 
 export { Cell as default, CellGroup };

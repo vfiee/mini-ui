@@ -14,10 +14,6 @@ export declare interface LoadingProps extends ViewProps {
   textProps?: ViewProps;
 }
 
-declare const Loading: {
-  (props: LoadingProps): JSX.Element;
-  options: {
-    addGlobalClass: boolean;
-  };
-};
+declare const Loading: React.ComponentType<LoadingProps>;
+
 export default Loading;

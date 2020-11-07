@@ -12,11 +12,6 @@ export declare interface IconProps extends ViewProps {
   children?: CustomElement;
 }
 
-declare const Icon: {
-  (props: IconProps): JSX.Element;
-  options: {
-    addGlobalClass: boolean;
-  };
-};
+declare const Icon: React.ComponentType<IconProps>;
 
 export default Icon;

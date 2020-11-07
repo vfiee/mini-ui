@@ -15,11 +15,6 @@ export declare interface NavigationBarProps extends ViewProps {
   onRightClick?: Function;
 }
 
-declare const AppBar: {
-  (props: NavigationBarProps): JSX.Element;
-  options: {
-    addGlobalClass: boolean;
-  };
-};
+declare const AppBar: React.ComponentType<NavigationBarProps>;
 
 export default AppBar;

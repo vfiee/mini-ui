@@ -24,8 +24,6 @@ export declare interface TransitionProps {
   afterLeave?: Function;
 }
 
-declare const Transition: {
-  (props: TransitionProps): JSX.Element | null;
-};
+declare const Transition: React.ComponentType<TransitionProps>;
 
 export default Transition;

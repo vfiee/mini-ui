@@ -44,10 +44,6 @@ export declare enum PullingStatus {
   error,
 }
 
-declare const List: {
-  (props: ListProps): JSX.Element;
-  options: {
-    addGlobalClass: boolean;
-  };
-};
+declare const List: React.ComponentType<ListProps>;
+
 export default List;

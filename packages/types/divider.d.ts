@@ -11,11 +11,6 @@ export declare interface DividerProps extends ViewProps {
   children?: CustomElement;
 }
 
-declare const Divider: {
-  (props: DividerProps): JSX.Element;
-  options: {
-    addGlobalClass: boolean;
-  };
-};
+declare const Divider: React.ComponentType<DividerProps>;
 
 export default Divider;

@@ -15,6 +15,6 @@ export declare interface OverlayProps extends ViewProps {
   onClick?: (event: ITouchEvent) => void;
 }
 
-declare const Overlay: (props: OverlayProps) => JSX.Element;
+declare const Overlay: React.ComponentType<OverlayProps>;
 
 export default Overlay;

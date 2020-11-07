@@ -72,6 +72,6 @@ export declare interface FieldProps
   onRightIconClick?: Function;
 }
 
-declare const Field: (props: FieldProps) => JSX.Element;
+declare const Field: React.ComponentType<FieldProps>;
 
 export default Field;

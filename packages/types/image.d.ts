@@ -15,11 +15,6 @@ export declare interface ImageProps extends _ImageProps {
   children?: CustomElement;
 }
 
-declare const Component: {
-  (props: ImageProps): JSX.Element;
-  options: {
-    addGlobalClass: boolean;
-  };
-};
+declare const Image: React.ComponentType<ImageProps>;
 
-export default Component;
+export default Image;

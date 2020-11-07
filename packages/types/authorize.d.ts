@@ -24,10 +24,6 @@ export declare interface AuthorizeProps extends StandardProps {
   children?: React.ReactNode;
 }
 
-declare const Authorize: {
-  (props: AuthorizeProps): JSX.Element;
-  options: {
-    addGlobalClass: boolean;
-  };
-};
+declare const Authorize: React.ComponentType<AuthorizeProps>;
+
 export default Authorize;

@@ -69,6 +69,6 @@ export declare interface SwiperItemPropsWithData extends SwiperItemProps {
   image?: Omit<ImageProps, "src">;
 }
 
-declare const Carousel: (props: CarouselProps) => JSX.Element;
+declare const Carousel: React.ComponentType<CarouselProps>;
 
 export default Carousel;
