@@ -1,5 +1,3 @@
-import { Console } from "console";
-
 const isProd = process.env.NODE_ENV === "production";
 
 const MiniConsole = {

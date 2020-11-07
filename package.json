@@ -27,7 +27,7 @@
     "cp:assets": "cp-cli packages/assets lib/assets && cp-cli packages/types lib/types",
     "reinstall": "rimraf node_modules yarn.lock yarn-error.log && yarn install",
     "release": "yarn build && node script/release",
-    "lint": "eslint packages",
+    "lint": "eslint packages --max-warnings 0",
     "lint:style": "stylelint packages --fix",
     "prettier": "prettier packages --write",
     "lint:all": "yarn lint && yarn lint:style",
