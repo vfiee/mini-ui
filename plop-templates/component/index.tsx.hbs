@@ -1,0 +1,24 @@
+import React, { useMemo } from "react";
+import { View } from "@tarojs/components";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { {{properCase name}}Props } from "types";
+
+const {{properCase name}} = (props: {{properCase name}}Props) => {
+  const { _,...restProps } = props;
+  return (
+    <View {...restProps}>
+      {props?.children}
+    </View>
+  );
+};
+
+{{properCase name}}.displayName = "{{properCase name}}";
+
+{{properCase name}}.options = {
+  addGlobalClass: true,
+};
+
+{{properCase name}}.defaultProps = {
+};
+
+export default {{properCase name}};

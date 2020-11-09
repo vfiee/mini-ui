@@ -19,6 +19,7 @@
     "CHANGELOG.md"
   ],
   "scripts": {
+    "new": "plop",
     "clean": "rimraf lib dist",
     "update-taro:all": "yarn update:taro && cd example && yarn update:taro",
     "update:taro": "yarn add @tarojs/cli@latest -D && yarn add @tarojs/components@latest @tarojs/taro@latest -P",
