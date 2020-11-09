@@ -2,14 +2,13 @@
 import { ScrollViewProps } from "@tarojs/components/types/ScrollView";
 import { BaseObject, CustomStyle } from "./index";
 
-export declare type OmitScrollViewProps =
+declare type OmitScrollViewProps =
   | "scrollX"
   | "scrollY"
   | "refresherEnabled"
   | "refreshTriggered";
 
-export declare interface ListProps
-  extends Omit<ScrollViewProps, OmitScrollViewProps> {
+declare interface ListProps extends Omit<ScrollViewProps, OmitScrollViewProps> {
   // list
   hasMore?: boolean; // 是否还可以继续上拉加载
   data?: BaseObject[]; // 组件展示时的数据
@@ -35,15 +34,6 @@ export declare interface ListProps
   errorStyle?: CustomStyle; // 自定义样式
 }
 
-export declare enum PullingStatus {
-  static,
-  pulling,
-  overPulling,
-  loading,
-  success,
-  error,
-}
-
 declare const List: React.ComponentType<ListProps>;
 
-export default List;
+export { List, ListProps };

@@ -3,7 +3,7 @@ import { ViewProps } from "@tarojs/components/types/View";
 import Col from "types/col";
 import { CustomElement } from "./index";
 
-export declare type Justify =
+declare type Justify =
   | "normal"
   | "flex-start"
   | "center"
@@ -13,16 +13,16 @@ export declare type Justify =
   | "space-around"
   | "space-evenly";
 
-export declare type Align =
+declare type Align =
   | "normal"
   | "stretch"
   | "flex-start"
   | "flex-end"
   | "center";
 
-export declare type Gutter = [number, number];
+declare type Gutter = [number, number];
 
-export declare interface RowProps extends ViewProps {
+declare interface RowProps extends ViewProps {
   justify?: Justify;
   align?: Align;
   gutter?: number | Gutter;
@@ -32,4 +32,4 @@ export declare interface RowProps extends ViewProps {
 
 declare const Row: React.ComponentType<RowProps>;
 
-export default Row;
+export { Row, RowProps, Justify, Align, Gutter };

@@ -3,7 +3,7 @@ import { ViewProps } from "@tarojs/components/types/View";
 import { ITouchEvent } from "@tarojs/components/types/common";
 import { CustomElement } from "./index";
 
-export declare interface OverlayProps extends ViewProps {
+declare interface OverlayProps extends ViewProps {
   show?: boolean;
   withoutTransition?: boolean;
   customAppbar?: boolean;
@@ -17,4 +17,4 @@ export declare interface OverlayProps extends ViewProps {
 
 declare const Overlay: React.ComponentType<OverlayProps>;
 
-export default Overlay;
+export { Overlay, OverlayProps };

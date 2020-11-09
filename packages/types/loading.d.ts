@@ -2,9 +2,9 @@
 import { ViewProps } from "@tarojs/components/types/View";
 import { CustomStyle, CustomElement } from "./index";
 
-export declare type LoadingType = "circular" | "spinner";
+declare type LoadingType = "circular" | "spinner";
 
-export declare interface LoadingProps extends ViewProps {
+declare interface LoadingProps extends ViewProps {
   color?: string;
   size?: string;
   type?: LoadingType;
@@ -16,4 +16,4 @@ export declare interface LoadingProps extends ViewProps {
 
 declare const Loading: React.ComponentType<LoadingProps>;
 
-export default Loading;
+export { Loading, LoadingType, LoadingProps };

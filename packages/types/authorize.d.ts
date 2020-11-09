@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import { StandardProps } from "@tarojs/components";
 
-export declare type AuthScope =
+declare type AuthScope =
   | "werun"
   | "record"
   | "camera"
@@ -9,14 +9,14 @@ export declare type AuthScope =
   | "writePhotosAlbum"
   | "userLocationBackground";
 
-export declare type OpenType =
+declare type OpenType =
   | "contact"
   | "getPhoneNumber"
   | "getUserInfo"
   | "launchApp"
   | "scope";
 
-export declare interface AuthorizeProps extends StandardProps {
+declare interface AuthorizeProps extends StandardProps {
   authorize?: boolean;
   openType?: OpenType;
   authScope?: AuthScope;
@@ -26,4 +26,4 @@ export declare interface AuthorizeProps extends StandardProps {
 
 declare const Authorize: React.ComponentType<AuthorizeProps>;
 
-export default Authorize;
+export { Authorize, AuthorizeProps, OpenType, AuthScope };

@@ -40,4 +40,4 @@ export declare interface ColProps extends ViewProps {
 
 declare const Col: React.ComponentType<ColProps>;
 
-export default Col;
+export { Col, ColProps, GridRange };

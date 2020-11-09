@@ -2,7 +2,7 @@
 import { ViewProps } from "@tarojs/components/types/View";
 import { CustomElement, CustomStyle, IconProps } from "./index";
 
-export declare interface CellGroupProps extends ViewProps {
+declare interface CellGroupProps extends ViewProps {
   title?: CustomElement;
   titleClass?: string;
   titleStyle?: CustomStyle;
@@ -10,9 +10,9 @@ export declare interface CellGroupProps extends ViewProps {
   children?: CustomElement;
 }
 
-export declare type ArrowDirection = "left" | "right" | "up" | "down";
+declare type ArrowDirection = "left" | "right" | "up" | "down";
 
-export declare interface CellProps extends ViewProps {
+declare interface CellProps extends ViewProps {
   title?: CustomElement;
   colon?: boolean;
   titleClass?: string;
@@ -39,4 +39,4 @@ declare const Cell: React.ComponentType<CellProps>;
 
 declare const CellGroup: React.ComponentType<CellGroupProps>;
 
-export { Cell as default, CellGroup };
+export { Cell, CellProps, CellGroup, CellGroupProps };

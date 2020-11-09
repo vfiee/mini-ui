@@ -62,5 +62,3 @@ export declare type TransitionStatus =
   | "enterTo"
   | "leave"
   | "leaveTo";
-
-export * from "./mini-ui";

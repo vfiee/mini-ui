@@ -22,7 +22,7 @@ declare type TriggleType = "onChange" | "onBlur";
 
 declare type Formatter = (value: any) => any;
 
-// export declare interface Rule {
+// declare interface Rule {
 //   required?: boolean;
 //   message?: string | ((value: any, rule: Rule) => string);
 //   validator?: (value: any, rule: Rule) => boolean | Promise<any>;
@@ -30,7 +30,7 @@ declare type Formatter = (value: any) => any;
 //   formatter?: (value: any, rule: Rule) => any;
 // }
 
-export declare interface FieldProps
+declare interface FieldProps
   extends Omit<InputProps, "type" | "placeholderStyle"> {
   // Input
   name?: string;
@@ -74,4 +74,4 @@ export declare interface FieldProps
 
 declare const Field: React.ComponentType<FieldProps>;
 
-export default Field;
+export { Field, FieldType, TriggleType, Formatter, FieldProps };

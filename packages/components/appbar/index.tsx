@@ -4,9 +4,9 @@ import Icon from "components/icon";
 import { useMenuButton } from "hooks";
 import { mergeStyle } from "utils";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { NavigationBarProps } from "types";
+import { AppBarProps } from "types";
 
-const AppBar = (props: NavigationBarProps) => {
+const AppBar = (props: AppBarProps) => {
   const {
     type,
     title,

@@ -2,7 +2,7 @@
 import { ImageProps as _ImageProps } from "@tarojs/components/types/Image";
 import { CustomElement } from "types";
 
-export declare interface ImageProps extends _ImageProps {
+declare interface ImageProps extends _ImageProps {
   showLoading?: boolean;
   loading?: string | React.ReactElement;
   showError?: boolean;
@@ -17,4 +17,4 @@ export declare interface ImageProps extends _ImageProps {
 
 declare const Image: React.ComponentType<ImageProps>;
 
-export default Image;
+export { Image, ImageProps };

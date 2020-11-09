@@ -27,7 +27,7 @@
     "cp:assets": "cp-cli packages/assets lib/assets && cp-cli packages/types lib/types",
     "reinstall": "rimraf node_modules yarn.lock yarn-error.log && yarn install",
     "release": "node script/release",
-    "lint": "eslint packages --max-warnings 0",
+    "lint": "eslint packages --max-warnings 0 --quiet",
     "lint:style": "stylelint packages --fix",
     "prettier": "prettier packages --write",
     "lint:all": "yarn lint && yarn lint:style",
@@ -41,12 +41,12 @@
   },
   "lint-staged": {
     "*.{ts,tsx}": [
-      "yarn prettier",
-      "yarn lint"
+      "yarn lint",
+      "yarn prettier"
     ],
     "*.{less}": [
-      "yarn prettier",
-      "yarn lint:style"
+      "yarn lint:style",
+      "yarn prettier"
     ],
     "*.{md}": "yarn prettier"
   },

@@ -91,7 +91,6 @@ class Home extends React.Component {
 |   Field    |      输入框      |  ⬜  |
 |    Form    |    Form 表单     | ⬜️  |
 |    List    |       列表       | ⬜️  |
-|  SafeArea  |     安全区域     | ⬜️  |
 |   Button   |       按钮       | ⬜️  |
 |  Message   |       提示       | ⬜️  |
 |   Modal    |      对话框      | ⬜️  |

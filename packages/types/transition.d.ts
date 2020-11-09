@@ -1,6 +1,6 @@
 /// <reference types="react" />
 
-export declare type TransitionType =
+declare type TransitionType =
   | "fade"
   | "fadeUp"
   | "fadeDown"
@@ -11,7 +11,7 @@ export declare type TransitionType =
   | "slideLeft"
   | "slideRight";
 
-export declare interface TransitionProps {
+declare interface TransitionProps {
   show?: boolean;
   duration?: number; //ms
   name: TransitionType;
@@ -26,4 +26,4 @@ export declare interface TransitionProps {
 
 declare const Transition: React.ComponentType<TransitionProps>;
 
-export default Transition;
+export { Transition, TransitionType, TransitionProps };

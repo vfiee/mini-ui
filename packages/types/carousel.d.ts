@@ -4,7 +4,7 @@ import { SwiperProps as _SwiperProps } from "@tarojs/components/types/Swiper";
 import { SwiperItemProps as _SwiperItemProps } from "@tarojs/components/types/SwiperItem";
 import { BaseObject, CustomElement, CustomStyle, ImageProps } from "./index";
 
-export declare interface CustomIndicatorProps {
+declare interface CustomIndicatorProps {
   customIndicator?: boolean;
   dotActiveLine?: boolean;
   indicatorType?: IndicatorType;
@@ -12,16 +12,14 @@ export declare interface CustomIndicatorProps {
   wrapperClassName?: string;
 }
 
-export declare interface SwiperProps
-  extends CustomIndicatorProps,
-    _SwiperProps {}
+declare interface SwiperProps extends CustomIndicatorProps, _SwiperProps {}
 
-export declare interface SwiperItemProps extends _SwiperItemProps {
+declare interface SwiperItemProps extends _SwiperItemProps {
   extra?: ({ data: BaseObject, current: number }) => CustomElement;
 }
-export declare type CarouselData = BaseObject[];
+declare type CarouselData = BaseObject[];
 
-export declare interface CarouselProps {
+declare interface CarouselProps {
   data: CarouselData;
   srcKey?: string;
   style?: CustomStyle;
@@ -35,9 +33,9 @@ export declare interface CarouselProps {
   showMenu?: boolean;
 }
 
-export declare type IndicatorType = "dots" | "numbers";
+declare type IndicatorType = "dots" | "numbers";
 
-export declare type IndicatorPosition =
+declare type IndicatorPosition =
   | "topLeft"
   | "topCenter"
   | "topRight"
@@ -51,7 +49,7 @@ export declare type IndicatorPosition =
   | "bottomRight"
   | "bottomCenter";
 
-export declare interface IndicatorProps extends StandardProps {
+declare interface IndicatorProps extends StandardProps {
   current: number;
   data: BaseObject[];
   dotActiveLine?: boolean;
@@ -62,7 +60,7 @@ export declare interface IndicatorProps extends StandardProps {
   indicatorPosition?: IndicatorPosition;
 }
 
-export declare interface SwiperItemPropsWithData extends SwiperItemProps {
+declare interface SwiperItemPropsWithData extends SwiperItemProps {
   data: BaseObject;
   current: number;
   srcKey?: string;
@@ -71,4 +69,14 @@ export declare interface SwiperItemPropsWithData extends SwiperItemProps {
 
 declare const Carousel: React.ComponentType<CarouselProps>;
 
-export default Carousel;
+export {
+  Carousel,
+  CarouselProps,
+  CarouselData,
+  SwiperItemPropsWithData,
+  IndicatorProps,
+  IndicatorPosition,
+  IndicatorType,
+  CustomIndicatorProps,
+  SwiperProps,
+};

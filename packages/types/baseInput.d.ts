@@ -3,7 +3,7 @@ import { InputProps as _InputProps } from "@tarojs/components/types/input";
 import { CommonEventFunction } from "@tarojs/components/types";
 import { TextareaProps } from "@tarojs/components/types/Textarea";
 
-export declare interface InputProps extends _InputProps {
+declare interface InputProps extends _InputProps {
   isTextarea?: boolean;
   // Textarea
   fixed?: boolean;
@@ -15,4 +15,4 @@ export declare interface InputProps extends _InputProps {
 
 declare const BaseInput: React.ComponentType<InputProps>;
 
-export default BaseInput;
+export { BaseInput, InputProps };

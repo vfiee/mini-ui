@@ -2,7 +2,7 @@
 import { ViewProps } from "@tarojs/components/types/View";
 import { IconProps, navigationBarTextStyle } from "./index";
 
-export declare interface NavigationBarProps extends ViewProps {
+declare interface AppBarProps extends ViewProps {
   isCoverView?: boolean;
   title?: string | React.ReactElement;
   backgroundColor?: string;
@@ -15,6 +15,6 @@ export declare interface NavigationBarProps extends ViewProps {
   onRightClick?: Function;
 }
 
-declare const AppBar: React.ComponentType<NavigationBarProps>;
+declare const AppBar: React.ComponentType<AppBarProps>;
 
-export default AppBar;
+export { AppBar, AppBarProps };

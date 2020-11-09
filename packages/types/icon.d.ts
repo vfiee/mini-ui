@@ -2,7 +2,7 @@
 import { ViewProps } from "@tarojs/components/types/View";
 import { CustomElement } from "./index";
 
-export declare interface IconProps extends ViewProps {
+declare interface IconProps extends ViewProps {
   isCover?: boolean;
   type: string;
   size?: string;
@@ -14,4 +14,4 @@ export declare interface IconProps extends ViewProps {
 
 declare const Icon: React.ComponentType<IconProps>;
 
-export default Icon;
+export { Icon, IconProps };
