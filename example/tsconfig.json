@@ -14,16 +14,11 @@
     "strictNullChecks": true,
     "sourceMap": true,
     "baseUrl": ".",
-    "rootDirs": [
-      ".",
-      "../packages"
-    ],
     "jsx": "react",
     "jsxFactory": "React.createElement",
     "allowJs": true,
     "resolveJsonModule": true,
     "typeRoots": [
-      "../packages/types",
       "node_modules/@types",
       "global.d.ts"
     ],
@@ -39,38 +34,34 @@
         "./src/assets/images/*"
       ],
       "@vyron/mini-ui": [
-        "../../mini-components",
-        "../packages",
+        "./src/packages/index.ts",
       ],
       "@vyron/mini-ui/*": [
-        "../lib/*",
-        "../packages/*",
+        "./src/packages/*",
       ],
       "components": [
-        "../packages/index.ts",
+        "./src/packages/index.ts",
       ],
       "components/*": [
-        "../packages/components/*"
+        "./srcpackages/components/*"
       ],
       "utils": [
-        "../packages/utils/index.ts",
+        "./srcpackages/utils/index.ts",
       ],
       "utils/*": [
-        "../packages/utils/index.ts",
-        "../packages/utils/*",
+        "./src/packages/utils/*",
       ],
       "hooks": [
-        "../packages/hooks/index.ts",
+        "./src/packages/hooks/index.ts",
       ],
       "hooks/*": [
-        "../packages/hooks/index.ts",
-        "../packages/hooks/*",
+        "./src/packages/hooks/*",
       ],
       "types": [
-        "../packages/types/index.d.ts",
+        "./src/packages/types/index.d.ts",
       ],
       "types/*": [
-        "../packages/types/*.d.ts",
+        "./src/packages/types/*.d.ts",
       ]
     }
   },

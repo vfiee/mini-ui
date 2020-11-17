@@ -1,0 +1,86 @@
+.__loading__ {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  &circular__,
+  &spinner__ {
+    position: relative;
+    box-sizing: border-box;
+    width: 50px;
+    height: 50px;
+    max-width: 100%;
+    max-height: 100%;
+    animation: rotate 0.8s linear infinite;
+  }
+
+  &circular__ {
+    border: 1px solid transparent;
+    border-top-color: currentColor;
+    border-radius: 100%;
+  }
+
+  &text__ {
+    font-size: 28px;
+    color: #999;
+    margin-left: 20px;
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  &vertical__ {
+    flex-direction: column;
+
+    .__loading__text__ {
+      margin-left: 0;
+      margin-top: 10px;
+    }
+  }
+
+  &spinner__ {
+    animation-timing-function: steps(12);
+
+    &dot__ {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+
+      &::before {
+        display: block;
+        width: 2px;
+        height: 25%;
+        margin: 0 auto;
+        background-color: currentColor;
+        border-radius: 40%;
+        content: " ";
+      }
+    }
+  }
+
+  &block__ {
+    display: flex;
+  }
+}
+
+.loop(@n, @i: 1) when (@i =< @n) {
+  .__loading__spinner__dot__:nth-of-type(@{i}) {
+    transform: rotate(@i * 30deg);
+    opacity: 1 - (0.75 / 12) * (@i - 1);
+  }
+  .loop(@n, (@i + 1));
+}
+.loop(12);
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

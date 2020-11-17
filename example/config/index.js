@@ -2,6 +2,8 @@
 const path = require("path");
 const _ = require("lodash");
 
+const isPro = process.env.NODE_ENV !== "development";
+
 const commonAlias = {
   "@": getPath("src"),
   "@Images": getPath("src/assets/images"),
@@ -9,11 +11,11 @@ const commonAlias = {
 };
 let allModeAlias = {
   packages: {
-    utils: getPath("../packages/utils"),
-    hooks: getPath("../packages/hooks"),
-    types: getPath("../packages/types"),
-    components: getPath("../packages/components"),
-    "@vyron/mini-ui": getPath("../packages/index.ts"),
+    utils: getPath("src/packages/utils"),
+    hooks: getPath("src/packages/hooks"),
+    types: getPath("src/packages/types"),
+    components: getPath("src/packages/components"),
+    "@vyron/mini-ui": getPath("src/packages/index.ts"),
   },
   dist: {
     "@vyron/mini-ui": getPath("../dist/index.es.js"),
@@ -39,23 +41,15 @@ const config = {
   },
   alias: _.assign(
     commonAlias,
-    _.get(allModeAlias, process.env.EXAMPLE_ENV, allModeAlias["packages"])
+    _.get(allModeAlias, "packages", allModeAlias["packages"])
   ),
   framework: "react",
   mini: {
     imageUrlLoaderOption: {
       limit: 0,
     },
-    compile: {
-      // include: [
-      //   getPath("../packages"),
-      //   (modulePath) => {
-      //     console.log(`modulePath:`, modulePath);
-      //     return modulePath.include(".tsx");
-      //   },
-      // ],
-      // exclude: [getPath("../lib"), getPath("../dist"), getPath("node_modules")],
-    },
+    debugReact: !isPro,
+    compile: {},
     postcss: {
       pxtransform: {
         enable: true,

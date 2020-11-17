@@ -1,0 +1,106 @@
+@import "./var.less";
+@import "./mixins/haireline.less";
+
+.border,
+.border-all,
+.border-top,
+.border-right,
+.border-bottom,
+.border-left,
+.border-top-bottom,
+.border-left-right {
+  position: relative;
+
+  &::after {
+    .hairline();
+  }
+}
+
+.border {
+  &-top::after {
+    border-top-width: 1px;
+  }
+
+  &-right::after {
+    border-right-width: 1px;
+  }
+
+  &-bottom::after {
+    border-bottom-width: 1px;
+  }
+
+  &-left::after {
+    border-left-width: 1px;
+  }
+
+  &-top-bottom::after {
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+  }
+
+  &-left-right::after {
+    border-left-width: 1px;
+    border-right-width: 1px;
+  }
+
+  &-all::after {
+    border-width: 1px;
+  }
+}
+
+.border(@style: solid) {
+  content: "";
+  position: absolute;
+  box-sizing: border-box;
+  border-width: 0;
+  border-color: @border-color;
+  border-style: @style;
+}
+
+.borderTop(@left: 0; @right: 0; @width: 1px) {
+  &::after {
+    .border();
+
+    left: @left;
+    right: @right;
+    top: 0;
+    border-top-width: @width;
+    transform: scaleY(0.5);
+  }
+}
+
+.borderBottom(@left:0; @right:0; @width:1px) {
+  &::after {
+    .border();
+
+    left: @left;
+    right: @right;
+    bottom: 0;
+    border-bottom-width: @width;
+    transform: scaleY(0.5);
+  }
+}
+
+.borderLeft(@top: 0; @bototm: 0; @width: 1px) {
+  &::after {
+    .border();
+
+    border-left-width: @width;
+    top: @top;
+    bottom: @bototm;
+    left: 0;
+    transform: scaleX(0.5);
+  }
+}
+
+.borderRight(@top: 0; @bototm: 0; @width: 1px) {
+  &::after {
+    .border();
+
+    top: @top;
+    bottom: @bototm;
+    left: 0;
+    border-left-width: @width;
+    transform: scaleX(0.5);
+  }
+}

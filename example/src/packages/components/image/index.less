@@ -1,0 +1,39 @@
+@import "../../style/var.less";
+
+.__image__ {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+
+  &round__ {
+    border-radius: 50%;
+  }
+
+  &origin__ {
+    width: 100%;
+    height: 100%;
+  }
+
+  &loading__,
+  &error__ {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    z-index: 1;
+  }
+
+  &loading__ {
+    background-color: @image-loading-background-color;
+  }
+
+  &error__ {
+    background-color: @image-error-background-color;
+  }
+}

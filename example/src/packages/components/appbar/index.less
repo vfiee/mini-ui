@@ -1,0 +1,58 @@
+.__appbar__ {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .__right__menu__ {
+    visibility: hidden;
+    opacity: 0;
+
+    &hidden__ {
+      display: none;
+    }
+  }
+
+  &title__ {
+    flex: 1;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 500;
+    color: #333;
+    line-height: 40px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0 10px;
+
+    &white {
+      color: #fff;
+    }
+  }
+
+  .__left__menu__ {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &hidden__ {
+      display: none;
+    }
+
+    .__delimiter__ {
+      transform: scaleX(0.5);
+    }
+
+    .__menu__item__wrap__ {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+  }
+
+  .__left__menu__full__ {
+    .__menu__item__wrap__ {
+      flex: 1;
+    }
+  }
+}

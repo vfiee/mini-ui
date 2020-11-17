@@ -25,9 +25,10 @@
     "update:taro": "yarn add @tarojs/cli@latest -D && yarn add @tarojs/components@latest @tarojs/taro@latest -P",
     "example": "cd example && cross-env EXAMPLE_ENV=packages yarn dev",
     "example:dist": "cd example && cross-env EXAMPLE_ENV=dist yarn dev",
-    "dev": "yarn clean && yarn cp:assets && rollup -c --watch",
+    "dev": "yarn clean && yarn cp:components && rollup -c --watch",
     "build": "yarn clean && yarn cp:assets && rollup -c --environment BUILD:production,BUILD_ALL:true",
     "cp:assets": "cp-cli packages/assets lib/assets && cp-cli packages/types lib/types",
+    "cp:components": "cp-cli packages example/src/packages",
     "reinstall": "rimraf node_modules yarn.lock yarn-error.log && yarn install",
     "release": "node script/release",
     "lint": "eslint packages --max-warnings 0 --quiet",
@@ -102,10 +103,10 @@
     "lodash.kebabcase": "^4.1.1"
   },
   "peerDependencies": {
-    "@tarojs/components": "^3.0.14",
-    "@tarojs/react": "^3.0.14",
-    "@tarojs/runtime": "^3.0.14",
-    "@tarojs/taro": "^3.0.14",
+    "@tarojs/components": "^3.0.16",
+    "@tarojs/react": "^3.0.16",
+    "@tarojs/runtime": "^3.0.16",
+    "@tarojs/taro": "^3.0.16",
     "react": "^16.10.0",
     "react-dom": "^16.10.0"
   },
