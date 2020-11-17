@@ -47,14 +47,14 @@ const config = {
       limit: 0,
     },
     compile: {
-      include: [
-        getPath("../packages"),
-        (modulePath) => {
-          console.log(`modulePath:`, modulePath);
-          return modulePath.include(".tsx");
-        },
-      ],
-      exclude: [getPath("../lib"), getPath("../dist"), getPath("node_modules")],
+      // include: [
+      //   getPath("../packages"),
+      //   (modulePath) => {
+      //     console.log(`modulePath:`, modulePath);
+      //     return modulePath.include(".tsx");
+      //   },
+      // ],
+      // exclude: [getPath("../lib"), getPath("../dist"), getPath("node_modules")],
     },
     postcss: {
       pxtransform: {
