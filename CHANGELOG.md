@@ -1,6 +1,5 @@
-## 1.0.0-alpha.1 (2020-11-17)
+## 1.0.0-alpha.3 (2020-11-20)
 
-- release: v1.0.0-alpha.0 ([ec0fec5](https://github.com/VFiee/mini-ui/commit/ec0fec5))
 - docs: 新增轮播图示例首页入口 ([2816a73](https://github.com/VFiee/mini-ui/commit/2816a73))
 - docs: 修复 Taro 编译项目外组件问题 ([c136729](https://github.com/VFiee/mini-ui/commit/c136729))
 - docs: 移除多余 debug 和 log ([1c3c6fb](https://github.com/VFiee/mini-ui/commit/1c3c6fb))

@@ -29,8 +29,11 @@ const releaseTypes = [
 ];
 // env
 const isTest = !!args.test;
+
 // pkg跟路径
 const pkgPath = path.resolve(__dirname, "../package.json");
+const examplePkgPath = path.resolve(__dirname, "../example/package.json");
+
 // 版本
 const preId =
   (semver.prerelease(currentVersion) && semver.prerelease(currentVersion)[0]) ||
@@ -54,17 +57,22 @@ const run = (bin, args, opts = {}) =>
 const incVersion = (t) => semver.inc(currentVersion, t, preId);
 
 // 获取最新版本
-const getPkg = (key) => {
-  const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf-8"));
+const getPkg = (key, jsonPath = pkgPath) => {
+  const pkg = JSON.parse(fs.readFileSync(jsonPath, "utf-8"));
   return key ? pkg[key] : pkg;
 };
 
-// 更新版本
+// 更新版本号
 const updateVersion = (version) => {
   progress("Updating package version");
+  // 更新项目版本号
   const pkg = getPkg();
   pkg.version = version;
   fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + "\n");
+  // 更新示例版本号
+  const examplePkg = getPkg(null, examplePkgPath);
+  examplePkg.version = version;
+  fs.writeFileSync(examplePkgPath, JSON.stringify(examplePkg, null, 2) + "\n");
 };
 
 // 选择版本
@@ -147,6 +155,18 @@ const publishPackage = async () => {
   }
 };
 
+// 检测当前分支
+const checkCurrentBranch = async () => {
+  const { stdout: branch } = await run("git", ["branch", "--show-current"], {
+    stdio: "pipe",
+  });
+  if (branch !== "main" && !isTest) {
+    throw new Error(
+      "Release branch must be main, please checkout main branch and try it again!"
+    );
+  }
+};
+
 // 发布到github
 const publishToGithub = async () => {
   progress("Pushing to GitHub...");
@@ -156,14 +176,7 @@ const publishToGithub = async () => {
   if (!remote && !isTest) {
     throw new Error("Pushing remote is empty!");
   }
-  const { stdout: branch } = await run("git", ["branch", "--show-current"], {
-    stdio: "pipe",
-  });
-  if (branch !== "main" && !isTest) {
-    throw new Error(
-      "Release branch must be main, please checkout main branch and try it again!"
-    );
-  }
+
   const version = getPkg("version");
   await run("git", ["tag", `v${version}`]);
   await run("git", ["push", "origin", `refs/tags/v${version}`]);
@@ -171,12 +184,21 @@ const publishToGithub = async () => {
   progress("🎉🎉🎉Pushing to GitHub success!");
 };
 
+const publishMiniProgram = async () => {
+  const execCwd = path.resolve(__dirname, "../example");
+  const version = getPkg("version");
+  await run("yarn", ["build"], { cwd: execCwd });
+  await run("yarn", ["pub", "-d", `release ${version}`], { cwd: execCwd });
+};
+
 const release = () =>
-  chooseVersion()
-    .then(updateVersion)
-    .then(generateChanlog)
-    .then(commitChanges)
-    .then(publishPackage)
-    .then(publishToGithub);
+  checkCurrentBranch()
+    // .then(chooseVersion)
+    // .then(updateVersion)
+    // .then(generateChanlog)
+    // .then(commitChanges)
+    // .then(publishPackage)
+    .then(publishToGithub)
+    .then(publishMiniProgram);
 
 release().catch((err) => console.log("\n" + chalk.red(err)));

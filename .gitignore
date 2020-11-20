@@ -10,3 +10,6 @@ lib
 yarn-error.log
 script/build.js
 rollup.config.v1.js
+private.key
+mini-ci.json
+sourcemap.zip
