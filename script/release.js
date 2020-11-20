@@ -193,11 +193,11 @@ const publishMiniProgram = async () => {
 
 const release = () =>
   checkCurrentBranch()
-    // .then(chooseVersion)
-    // .then(updateVersion)
-    // .then(generateChanlog)
-    // .then(commitChanges)
-    // .then(publishPackage)
+    .then(chooseVersion)
+    .then(updateVersion)
+    .then(generateChanlog)
+    .then(commitChanges)
+    .then(publishPackage)
     .then(publishToGithub)
     .then(publishMiniProgram);
 
