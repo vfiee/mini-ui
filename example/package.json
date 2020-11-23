@@ -43,7 +43,7 @@
     "@types/webpack-env": "^1.13.6",
     "@typescript-eslint/eslint-plugin": "^2.x",
     "@typescript-eslint/parser": "^2.x",
-    "@vyron/mini-ui": "^1.0.0-alpha.1",
+    "@vyron/mini-ci": "^1.0.3",
     "babel-preset-taro": "3.0.16",
     "cross-env": "^7.0.2",
     "eslint": "^6.8.0",
@@ -54,6 +54,11 @@
     "prettier": "^2.1.2",
     "stylelint": "9.3.0",
     "typescript": "^3.7.0"
+  },
+  "mini-ci": {
+    "projectPath": "dist/weapp",
+    "privateKeyPath": "private.key",
+    "sourceMapSavePath": "sourcemap.zip"
   },
   "taro_platform": "weapp"
 }
