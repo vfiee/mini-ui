@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Block, View } from "@tarojs/components";
-import { Divider } from "@vyron/mini-ui";
+import { Divider } from "mini-ui";
 import "./index.less";
 
 export default class DividerExample extends Component {

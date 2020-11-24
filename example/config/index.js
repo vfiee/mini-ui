@@ -4,24 +4,6 @@ const _ = require("lodash");
 
 const isPro = process.env.NODE_ENV !== "development";
 
-const commonAlias = {
-  "@": getPath("src"),
-  "@Images": getPath("src/assets/images"),
-  "@Components": getPath("src/components"),
-};
-let allModeAlias = {
-  packages: {
-    utils: getPath("src/packages/utils"),
-    hooks: getPath("src/packages/hooks"),
-    types: getPath("src/packages/types"),
-    components: getPath("src/packages/components"),
-    "@vyron/mini-ui": getPath("src/packages/index.ts"),
-  },
-  dist: {
-    "@vyron/mini-ui": getPath("../dist/index.es.js"),
-  },
-};
-
 const config = {
   projectName: "example",
   date: "2020-10-17",
@@ -39,10 +21,16 @@ const config = {
     patterns: [],
     options: {},
   },
-  alias: _.assign(
-    commonAlias,
-    _.get(allModeAlias, "packages", allModeAlias["packages"])
-  ),
+  alias: {
+    "@": getPath("src"),
+    "@Images": getPath("src/assets/images"),
+    "@Components": getPath("src/components"),
+    utils: getPath("src/packages/utils"),
+    hooks: getPath("src/packages/hooks"),
+    types: getPath("src/packages/types"),
+    components: getPath("src/packages/components"),
+    "mini-ui": getPath("lib/dist/index.js"),
+  },
   framework: "react",
   mini: {
     imageUrlLoaderOption: {

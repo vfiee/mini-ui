@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View } from "@tarojs/components";
-import { Image, Loading, Icon } from "@vyron/mini-ui";
+import { Image, Loading, Icon } from "mini-ui";
 import demoImage from "@Images/image/i-1.jpg";
 import "./index.less";
 

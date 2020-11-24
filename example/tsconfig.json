@@ -20,7 +20,8 @@
     "resolveJsonModule": true,
     "typeRoots": [
       "node_modules/@types",
-      "global.d.ts"
+      "global.d.ts",
+      "./lib/types/index.d.ts"
     ],
     "paths": {
       "@/*": [
@@ -33,11 +34,11 @@
       "@Images/*": [
         "./src/assets/images/*"
       ],
-      "@vyron/mini-ui": [
-        "./src/packages/index.ts",
+      "mini-ui": [
+        "./lib/dist/index.js",
       ],
-      "@vyron/mini-ui/*": [
-        "./src/packages/*",
+      "mini-ui/*": [
+        "./lib/*",
       ],
       "components": [
         "./src/packages/index.ts",

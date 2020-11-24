@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View } from "@tarojs/components";
-import { Loading } from "@vyron/mini-ui";
+import { Loading } from "mini-ui";
 import "./index.less";
 
 const LOADING_PROPS = [

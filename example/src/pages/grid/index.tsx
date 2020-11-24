@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Block, View, Text } from "@tarojs/components";
-import { Row, Col } from "@vyron/mini-ui";
+import { Row, Col } from "mini-ui";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { RowProps } from "@vyron/mini-ui/types/row";
+import { RowProps } from "mini-ui/types/row";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { ColProps } from "@vyron/mini-ui/types/col";
+import { ColProps } from "mini-ui/types/col";
 import "./index.less";
 
 type GridOptions = Array<{

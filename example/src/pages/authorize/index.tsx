@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { View } from "@tarojs/components";
 import Taro from "@tarojs/taro";
-import { Authorize } from "@vyron/mini-ui";
+import { Authorize } from "mini-ui";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { AuthScope, OpenType } from "@vyron/mini-ui/types/authorize.d.ts";
+import { AuthScope, OpenType } from "mini-ui/types/authorize.d.ts";
 import "./index.less";
 
 const SCOPE_LIST: AuthScope[] = [

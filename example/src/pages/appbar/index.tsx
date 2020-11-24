@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Taro from "@tarojs/taro";
 import { View, Block } from "@tarojs/components";
-import { AppBar } from "@vyron/mini-ui";
+import { AppBar } from "mini-ui";
 import backIcon from "@Images/appbar/back-white-icon.png";
 import homeWhiteIcon from "@Images/appbar/home-white-icon.png";
 import "./index.less";

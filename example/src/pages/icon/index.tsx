@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { setClipboardData } from "@tarojs/taro";
 import { View, Text } from "@tarojs/components";
-import { Icon } from "@vyron/mini-ui";
+import { Icon } from "mini-ui";
 import "./index.less";
 
 // 内置icons

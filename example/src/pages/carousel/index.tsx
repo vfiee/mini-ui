@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { showActionSheet } from "@tarojs/taro";
-import { Block, View, PickerView, PickerViewColumn } from "@tarojs/components";
-import { Carousel, Loading } from "@vyron/mini-ui";
+import { Block, View, Switch, Picker } from "@tarojs/components";
+import { Carousel, Loading } from "mini-ui";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { IndicatorType, IndicatorPosition } from "@vyron/mini-ui/types";
+import { IndicatorType, IndicatorPosition } from "mini-ui/types";
 import "./index.less";
 
 const CAROUSEL_DATA = [
@@ -18,6 +17,9 @@ const CAROUSEL_DATA = [
   {
     url:
       "https://publicdomainarchive.com/wp-content/uploads/2015/03/public-domain-images-free-stock-photos-bicycle-bike-black-and-white-1000x667.jpeg",
+  },
+  {
+    url: `https://file.zhen22.com/weapp/preview.png`,
   },
 ];
 
@@ -36,29 +38,82 @@ const INDICATOR_POSITION: IndicatorPosition[] = [
   "bottomRight",
   "bottomCenter",
 ];
-
-const showActionSheets = (itemList, key, instance) => {
-  showActionSheet({
-    itemList,
-  }).then((res) => {
-    if (itemList[res.tapIndex] !== instance.state[key]) {
-      instance.setState({ [key]: itemList[res.tapIndex] });
-    }
-  });
-};
+const CAROUSEL_OPTIONS = [
+  {
+    type: "select",
+    label: "指示器类型",
+    key: "indicatorType",
+    options: INDICATOR_TYPES,
+  },
+  {
+    type: "select",
+    label: "指示器位置",
+    key: "indicatorPosition",
+    options: INDICATOR_POSITION,
+  },
+  {
+    key: "customIndicator",
+    label: "是否自定义指示器",
+    type: "switch",
+  },
+  {
+    key: "circular",
+    label: "是否循环",
+    type: "switch",
+  },
+  {
+    key: "showMenu",
+    label: "长按图片展示菜单",
+    type: "switch",
+  },
+  {
+    key: "preview",
+    label: "是否预览图片",
+    type: "switch",
+  },
+];
 
 export default class CarouselExample extends Component {
   state = {
-    circular: false,
-    showMenu: false,
+    circular: true,
+    showMenu: true,
     preview: true,
-    customIndicator: true,
+    customIndicator: false,
     indicatorType: INDICATOR_TYPES[0],
-    indicatorPosition: INDICATOR_POSITION[0],
+    indicatorPosition: INDICATOR_POSITION[11],
   };
+  getContent(option) {
+    const { type, key, options } = option;
+    switch (type) {
+      case "switch": {
+        return (
+          <Switch
+            checked={this.state[key]}
+            onChange={(eve) => {
+              this.setState({ [key]: eve.detail.value });
+            }}
+          />
+        );
+      }
+      case "select": {
+        return (
+          <Picker
+            mode="selector"
+            range={options}
+            value={this.state[key]}
+            onChange={(eve) => {
+              this.setState({ [key]: options[eve.detail.value] });
+            }}
+          >
+            <View>{this.state[key]}</View>
+          </Picker>
+        );
+      }
+      default:
+        return null;
+    }
+  }
   render() {
-    console.log(Carousel);
-
     const {
       circular,
       showMenu,
@@ -69,9 +124,6 @@ export default class CarouselExample extends Component {
     } = this.state;
     return (
       <Block>
-        {/* <Swiper style={{ height: "0" }}>
-          <SwiperItem>123123</SwiperItem>
-        </Swiper> */}
         <Carousel
           srcKey="url"
           className="carousel"
@@ -96,65 +148,22 @@ export default class CarouselExample extends Component {
           }}
           swiperItem={{
             extra: (params) => {
-              console.log(`params:`, params);
-
-              return <View className="item-extra">{params.current}</View>;
+              return (
+                <View className="item-extra">extra: {params.current}</View>
+              );
             },
           }}
           extra={<View className="global-extra">global extra</View>}
         />
-        <View
-          className="item"
-          onClick={showActionSheets.bind(
-            null,
-            INDICATOR_TYPES,
-            "indicatorType",
-            this
-          )}
-        >
-          请选择indicatorType:{indicatorType}
-        </View>
-        <PickerView
-          className="picker"
-          onChange={(eve) => {
-            const { value } = eve.detail;
-            this.setState({ indicatorPosition: INDICATOR_POSITION[value[0]] });
-          }}
-        >
-          <PickerViewColumn>
-            {INDICATOR_POSITION.map((pos) => {
-              return (
-                <View key={pos} className="column">
-                  {pos}
-                </View>
-              );
-            })}
-          </PickerViewColumn>
-        </PickerView>
-        <View
-          className="item"
-          onClick={() => {
-            this.setState({ customIndicator: !customIndicator });
-          }}
-        >
-          是否自定义indicator:{String(customIndicator)}
-        </View>
-        <View
-          className="item"
-          onClick={() => {
-            this.setState({ circular: !circular });
-          }}
-        >
-          是否循环:{String(circular)}
-        </View>
-        <View
-          className="item"
-          onClick={() => {
-            this.setState({ showMenu: !showMenu });
-          }}
-        >
-          预览长按展示菜单:{String(showMenu)}
-        </View>
+        {CAROUSEL_OPTIONS.map((option) => {
+          const { key, label } = option;
+          return (
+            <View className="row" key={key}>
+              <View className="label">{label}:</View>
+              <View className="content">{this.getContent(option)}</View>
+            </View>
+          );
+        })}
       </Block>
     );
   }

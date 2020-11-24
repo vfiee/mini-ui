@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Block, View } from "@tarojs/components";
-import { Transition, Overlay } from "@vyron/mini-ui";
+import { Transition, Overlay } from "mini-ui";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { TransitionType } from "@vyron/mini-ui/types";
+import { TransitionType } from "mini-ui/types";
 import "./index.less";
 
 const TRANSITION_TYPES: TransitionType[] = [
@@ -69,11 +69,12 @@ export default class TransitionExample extends Component {
               });
             }}
           >
-            Mini-ui: {this.state.props.name}
+            <View>Mini-ui: {this.state.props.name}</View>
+            <View className="info">点我关闭</View>
           </View>
           {/* </Overlay> */}
         </Transition>
-        <Overlay show={this.state.props.show}></Overlay>
+        <Overlay show={this.state.props.show} />
         {TRANSITION_TYPES.map((type) => (
           <View
             key={type}

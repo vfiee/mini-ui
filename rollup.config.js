@@ -9,10 +9,12 @@ import alias from "@rollup/plugin-alias";
 import { terser } from "rollup-plugin-terser";
 import sizes from "rollup-plugin-sizes";
 import cssnanoPreset from "cssnano-preset-default";
+import copy from "rollup-plugin-copy";
 import pkg from "./package.json";
 
 const isProd = process.env.BUILD === "production";
 const isBuildAll = process.env.BUILD_ALL === "true";
+const outputDir = process.env.OUTPUT || isProd ? "lib" : "example/lib";
 
 function getPath(src) {
   return path.resolve(process.cwd(), src);
@@ -25,9 +27,9 @@ function isImage(id) {
 }
 
 const externalPaths = {
-  hooks: `${pkg.name}/lib/hooks`,
-  utils: `${pkg.name}/lib/utils`,
-  types: `${pkg.name}/lib/types`,
+  hooks: `${pkg.name}/${outputDir}/hooks`,
+  utils: `${pkg.name}/${outputDir}/utils`,
+  types: `${pkg.name}/${outputDir}/types`,
 };
 
 function external(id, parent) {
@@ -95,20 +97,30 @@ function commonPlugins() {
 }
 
 function createStyleConfig(src) {
-  const createStylePlugins = (name) => [
-    postcss({
-      minimize: cssnanoPreset,
-      extensions: [".less"],
-      extract: path.resolve(`lib/style/${name}.css`),
-    }),
-  ];
+  const createStylePlugins = (name, isCopy = false) => {
+    const plugins = [
+      postcss({
+        minimize: cssnanoPreset,
+        extensions: [".less"],
+        extract: path.resolve(`${outputDir}/style/${name}.css`),
+      }),
+    ];
+    if (isCopy) {
+      plugins.push(
+        copy({
+          targets: [{ src: "packages/assets", dest: `${outputDir}` }],
+        })
+      );
+    }
+    return plugins;
+  };
   return _.reduce(
     getDirs(src),
     (configs, dir) => {
       configs.push({
         input: path.resolve(src, `${dir}/index.less`),
         output: {
-          file: `lib/style/${dir}.css`,
+          file: `${outputDir}/style/${dir}.css`,
         },
         plugins: createStylePlugins(dir),
       });
@@ -118,9 +130,9 @@ function createStyleConfig(src) {
       {
         input: getPath("packages/style/index.less"),
         output: {
-          file: `lib/style/index.css`,
+          file: `${outputDir}/style/index.css`,
         },
-        plugins: createStylePlugins("index"),
+        plugins: createStylePlugins("index", true),
       },
     ]
   );
@@ -128,7 +140,7 @@ function createStyleConfig(src) {
 
 function createCommonConfig({
   src,
-  target = getPath("lib"),
+  target = getPath(outputDir),
   rollupConfig = {},
   defaultConfig = [],
 } = {}) {
@@ -167,12 +179,13 @@ function createCommonConfig({
 function buildCommonExternalPaths(src, type) {
   const dirs = getDirs(src).filter((dir) => !dir.includes("."));
   dirs.forEach((dir) => {
-    externalPaths[`${type}/${dir}`] = `${pkg.name}/lib/${type}/${dir}`;
+    externalPaths[`${type}/${dir}`] = `${pkg.name}/${outputDir}/${type}/${dir}`;
   });
 }
 
 function createBuildAllConfigs() {
   const input = getPath("packages/index.ts");
+  const outputPrefix = isProd ? "" : outputDir;
   return [
     {
       input,
@@ -180,7 +193,7 @@ function createBuildAllConfigs() {
       output: {
         format: "es",
         sourcemap: true,
-        file: pkg.module,
+        file: `${outputPrefix}/${pkg.module}`,
       },
       plugins: commonPlugins(),
     },
@@ -190,9 +203,19 @@ function createBuildAllConfigs() {
       output: {
         format: "cjs",
         sourcemap: true,
-        file: pkg.main,
+        file: `${outputPrefix}/${pkg.main}`,
       },
-      plugins: commonPlugins(),
+      plugins: [
+        ...commonPlugins(),
+        copy({
+          targets: [
+            {
+              dest: outputDir,
+              src: "packages/types",
+            },
+          ],
+        }),
+      ],
     },
   ];
 }
@@ -208,18 +231,18 @@ function build() {
   const libConfigs = [
     // hooks
     ...createCommonConfig({
-      target: getPath("lib/hooks"),
+      target: getPath(`${outputDir}/hooks`),
       src: getPath("packages/hooks"),
     }),
     // utils
     ...createCommonConfig({
-      target: getPath("lib/utils"),
+      target: getPath(`${outputDir}/utils`),
       src: getPath("packages/utils"),
     }),
     // components
     ...createCommonConfig({
       src: getPath("packages/components"),
-      target: getPath("lib/components"),
+      target: getPath(`${outputDir}/components`),
     }),
   ];
   const baseConfigs = [

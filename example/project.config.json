@@ -1,7 +1,7 @@
 {
   "miniprogramRoot": "dist/weapp",
   "projectname": "mini-ui",
-  "description": "",
+  "description": "基于Taro的微信小程序组件库",
   "appid": "wxa5226785668e911a",
   "setting": {
     "urlCheck": true,

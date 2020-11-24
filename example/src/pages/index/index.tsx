@@ -4,7 +4,7 @@ import { View } from "@tarojs/components";
 import "./index.less";
 
 export default class Index extends React.Component {
-  navigator = (dir: string) => {
+  navigator = (dir) => {
     Taro.navigateTo({ url: `/pages/${dir}/index` });
   };
   render() {

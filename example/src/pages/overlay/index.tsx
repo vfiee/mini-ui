@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Block, View, Switch, Input } from "@tarojs/components";
-import { Overlay } from "@vyron/mini-ui";
+import { Overlay } from "mini-ui";
 import "./index.less";
 
 const CONFIG_ROWS = [
@@ -65,9 +65,10 @@ export default class OverlayExample extends Component {
   getContent({ key, type, isProps = true }) {
     switch (type) {
       case "switch": {
+        const isChecked = isProps ? this.state.props[key] : this.state[key];
         return (
           <Switch
-            checked={this.state.props[key]}
+            checked={isChecked}
             onChange={(eve) => {
               console.log(`switch:`, eve);
               if (!isProps) {
