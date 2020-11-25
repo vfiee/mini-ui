@@ -1,7 +1,7 @@
 import React, { useMemo, isValidElement } from "react";
 import { View, Text } from "@tarojs/components";
 import Icon from "components/icon";
-import { isFunction, isNull, isUndefined, navigateTo, redirectTo } from "utils";
+import { isNull, isUndefined, navigateTo, redirectTo } from "utils";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { IconProps, CellProps, CellGroupProps } from "types";
 
@@ -30,6 +30,8 @@ const Cell = (props: CellProps) => {
     border,
     ...restProps
   } = props;
+
+  const isValidUrl = typeof url === "string" && url != "";
 
   const cellLabel = useMemo(() => {
     if (isUndefined(label)) return null;
@@ -61,11 +63,11 @@ const Cell = (props: CellProps) => {
   }, [icon]);
 
   const suffixIcon = useMemo(() => {
-    if (isUndefined(rightIcon) && !arrow) return null;
+    if (isUndefined(rightIcon) && !arrow && !isValidUrl) return null;
     let _iconProps = (typeof rightIcon === "string"
       ? { type: rightIcon }
       : rightIcon) as IconProps;
-    if (arrow) {
+    if (arrow || isValidUrl) {
       _iconProps = {
         type: "icon-back",
         className: `__cell__icon__arrow__ ${arrowDirection ?? ""}`,
@@ -79,7 +81,7 @@ const Cell = (props: CellProps) => {
         className={`__cell__right__icon__ ${_iconProps?.className ?? ""}`}
       />
     );
-  }, [arrow, arrowDirection, rightIcon]);
+  }, [arrow, arrowDirection, isValidUrl, rightIcon]);
 
   const cellTitle = useMemo(() => {
     if (isUndefined(title)) return null;
@@ -131,20 +133,17 @@ const Cell = (props: CellProps) => {
     <View
       {...restProps}
       onClick={(eve) => {
-        const isUrl = typeof url === "string";
-        if (isFunction(onClick)) {
+        if (isValidUrl) {
           // @ts-ignore
-          isUrl ? onClick({ replace, url }, eve) : onClick(eve);
+          replace ? redirectTo(url) : navigateTo({ url });
         }
-        if (!isUrl) return;
-        // @ts-ignore
-        replace ? redirectTo(url) : navigateTo({ url });
+        onClick?.(eve);
       }}
       className={`__cell__ ${cellCls}`}
     >
       {prefixIcon}
       {cellTitle}
-      {cellContent}
+      {!isValidUrl && cellContent}
       {suffixIcon}
       {props?.children}
     </View>

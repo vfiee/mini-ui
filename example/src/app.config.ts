@@ -1,4 +1,5 @@
 export default {
+  entryPagePath: "pages/index/index",
   pages: [
     "pages/index/index",
     "pages/appbar/index",
@@ -12,11 +13,17 @@ export default {
     "pages/overlay/index",
     "pages/transition/index",
     "pages/grid/index",
+    "pages/cell/index",
   ],
   window: {
-    navigationBarTitleText: "WeChat",
+    navigationBarTitleText: "Mini UI",
     navigationBarTextStyle: "black",
     navigationBarBackgroundColor: "#fff",
+    backgroundColor: "#fff",
+    backgroundTextStyle: "light",
+    backgroundColorTop: "#fff",
+    backgroundColorBottom: "#fff",
+    onReachBottomDistance: 100,
   },
   permission: {
     "scope.userLocation": {

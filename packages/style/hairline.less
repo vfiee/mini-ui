@@ -48,18 +48,19 @@
   }
 }
 
-.border(@style: solid) {
+.baseBorder(@style: solid) {
   content: "";
   position: absolute;
   box-sizing: border-box;
   border-width: 0;
   border-color: @border-color;
   border-style: @style;
+  z-index: 2;
 }
 
 .borderTop(@left: 0; @right: 0; @width: 1px) {
   &::after {
-    .border();
+    .baseBorder();
 
     left: @left;
     right: @right;
@@ -69,9 +70,9 @@
   }
 }
 
-.borderBottom(@left:0; @right:0; @width:1px) {
+.borderBottom(@left:0; @right:0; @width: 1px) {
   &::after {
-    .border();
+    .baseBorder();
 
     left: @left;
     right: @right;
@@ -83,7 +84,7 @@
 
 .borderLeft(@top: 0; @bototm: 0; @width: 1px) {
   &::after {
-    .border();
+    .baseBorder();
 
     border-left-width: @width;
     top: @top;
@@ -95,7 +96,7 @@
 
 .borderRight(@top: 0; @bototm: 0; @width: 1px) {
   &::after {
-    .border();
+    .baseBorder();
 
     top: @top;
     bottom: @bototm;
