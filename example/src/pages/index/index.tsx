@@ -22,6 +22,10 @@ export default class Index extends React.Component {
           Carousel
         </View>
 
+        <View className="item" onClick={() => this.navigator("cell")}>
+          Cell
+        </View>
+
         <View className="item" onClick={() => this.navigator("divider")}>
           Divider
         </View>
