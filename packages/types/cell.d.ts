@@ -14,7 +14,7 @@ declare type ArrowDirection = "left" | "right" | "up" | "down";
 
 declare interface CellProps extends ViewProps {
   title?: CustomElement;
-  colon?: boolean;
+  colon?: boolean | string;
   titleClass?: string;
   titleStyle?: CustomStyle;
   value: CustomElement;

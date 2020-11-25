@@ -23,7 +23,6 @@
 .__cell__ {
   display: flex;
   font-size: 28px;
-  line-height: 48px;
   color: #333;
   width: 100%;
   box-sizing: border-box;
@@ -59,6 +58,7 @@
 
   &label__ {
     color: #999;
+    margin-top: 8px;
   }
 
   &title__ {
@@ -66,11 +66,15 @@
     word-wrap: break-word;
     word-break: break-all;
     overflow: hidden;
+    line-height: 1.3;
+  }
+  &colon__ {
+    margin: 0 4px;
   }
 
   &value__ {
     flex: 1;
-    text-align: left;
+    text-align: right;
     color: #999;
 
     &only__ {
@@ -82,7 +86,6 @@
   &right__icon__,
   &left__icon__ {
     padding: 0 8px;
-    line-height: 42px;
   }
 
   &icon__arrow__ {

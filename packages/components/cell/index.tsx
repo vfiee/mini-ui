@@ -1,5 +1,5 @@
 import React, { useMemo, isValidElement } from "react";
-import { View } from "@tarojs/components";
+import { View, Text } from "@tarojs/components";
 import Icon from "components/icon";
 import { isFunction, isNull, isUndefined, navigateTo, redirectTo } from "utils";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -31,9 +31,11 @@ const Cell = (props: CellProps) => {
     ...restProps
   } = props;
 
-  const _label = useMemo(() => {
+  const cellLabel = useMemo(() => {
     if (isUndefined(label)) return null;
-    return (
+    return isValidElement(label) ? (
+      label
+    ) : (
       <View
         className={`__cell__label__ ${labelClass ?? ""}`}
         style={labelStyle ?? ""}
@@ -43,7 +45,7 @@ const Cell = (props: CellProps) => {
     );
   }, [label, labelClass, labelStyle]);
 
-  const _icon = useMemo(() => {
+  const prefixIcon = useMemo(() => {
     if (isUndefined(icon)) return null;
     let _iconProps = (typeof icon === "string"
       ? { type: icon }
@@ -58,14 +60,14 @@ const Cell = (props: CellProps) => {
     );
   }, [icon]);
 
-  const _rightIcon = useMemo(() => {
+  const suffixIcon = useMemo(() => {
     if (isUndefined(rightIcon) && !arrow) return null;
     let _iconProps = (typeof rightIcon === "string"
       ? { type: rightIcon }
       : rightIcon) as IconProps;
     if (arrow) {
       _iconProps = {
-        type: "back",
+        type: "icon-back",
         className: `__cell__icon__arrow__ ${arrowDirection ?? ""}`,
       };
     }
@@ -79,7 +81,7 @@ const Cell = (props: CellProps) => {
     );
   }, [arrow, arrowDirection, rightIcon]);
 
-  const _title = useMemo(() => {
+  const cellTitle = useMemo(() => {
     if (isUndefined(title)) return null;
     return (
       <View
@@ -87,24 +89,43 @@ const Cell = (props: CellProps) => {
         className={`__cell__title__ ${titleClass ?? ""}`}
       >
         {title}
-        {colon ? ":" : ""}
-        {_label}
+        {!!colon && (
+          <Text className="__cell__colon__">
+            {typeof colon === "string" ? colon : ":"}
+          </Text>
+        )}
+        {cellLabel}
       </View>
     );
-  }, [_label, colon, title, titleClass, titleStyle]);
+  }, [cellLabel, colon, title, titleClass, titleStyle]);
 
-  const _value = useMemo(() => {
+  const cellContent = useMemo(() => {
     return (
       <View
         className={`__cell__value__ ${
-          isNull(_title) ? "__cell__value__only__" : ""
+          isNull(cellTitle) ? "__cell__value__only__" : ""
         } ${valueClass ?? ""}`}
         style={valueStyle ?? ""}
       >
         {value}
       </View>
     );
-  }, [_title, value, valueClass, valueStyle]);
+  }, [cellTitle, value, valueClass, valueStyle]);
+
+  const cellCls = useMemo(() => {
+    const clsArr = [
+      { value: border, suffix: "border" },
+      { value: required, suffix: "required" },
+      { value: center, suffix: "center" },
+    ];
+    let finnalCls = clsArr.map((cls) => {
+      if (cls.value) {
+        return `__cell__${cls.suffix}__`;
+      }
+    });
+    className && finnalCls.push(className);
+    return finnalCls.join(" ");
+  }, [required, border, center, className]);
 
   return (
     <View
@@ -119,14 +140,12 @@ const Cell = (props: CellProps) => {
         // @ts-ignore
         replace ? redirectTo(url) : navigateTo({ url });
       }}
-      className={`__cell__  ${required ? "__cell__required__" : ""} ${
-        border ? "__cell__border__" : ""
-      } ${center ? "__cell__center__" : ""} ${className ?? ""}`}
+      className={`__cell__ ${cellCls}`}
     >
-      {_icon}
-      {_title}
-      {_value}
-      {_rightIcon}
+      {prefixIcon}
+      {cellTitle}
+      {cellContent}
+      {suffixIcon}
       {props?.children}
     </View>
   );
