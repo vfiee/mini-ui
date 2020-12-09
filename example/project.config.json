@@ -113,6 +113,12 @@
           "name": "Grid",
           "pathName": "pages/grid/index",
           "scene": null
+        },
+        {
+          "id": -1,
+          "name": "Field",
+          "pathName": "pages/field/index",
+          "scene": null
         }
       ]
     }

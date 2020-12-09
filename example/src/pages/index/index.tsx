@@ -34,6 +34,10 @@ export default class Index extends React.Component {
           Empty
         </View>
 
+        <View className="item" onClick={() => this.navigator("field")}>
+          Field
+        </View>
+
         <View className="item" onClick={() => this.navigator("grid")}>
           Grid
         </View>

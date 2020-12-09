@@ -24,6 +24,7 @@ const getIconProps = (
 
 const getCellProps = (props: FieldProps): CellProps => {
   const {
+    style,
     colon,
     leftIcon,
     rightIcon,
@@ -42,6 +43,7 @@ const getCellProps = (props: FieldProps): CellProps => {
       colon,
       required,
       center,
+      style,
       title: label,
       titleStyle: labelStyle,
       titleClass: `__field__label__ ${
@@ -98,7 +100,7 @@ const getInputProps = (props: FieldProps): InputProps => {
     disabled: disabled || readonly,
     isTextarea: type === "textarea",
     password: type === "password",
-    type: type === "tel" ? "number" : type,
+    type: ["tel", "digit"].includes(type as string) ? "number" : type,
     maxlength: type === "tel" ? 11 : maxlength,
     className: `__field__control__ ${
       type === "textarea" ? "__field__textarea__" : ""
@@ -234,6 +236,7 @@ const Field = (props: FieldProps) => {
   );
   return (
     <Cell
+      // {...restProps}
       {...cellProps}
       className={`__field__ ${_props?.disabled ? `__field__disabled__` : ""} ${
         _props?.readonly ? `__field__readonly__` : ""

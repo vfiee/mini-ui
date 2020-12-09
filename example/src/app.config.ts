@@ -14,6 +14,7 @@ export default {
     "pages/transition/index",
     "pages/grid/index",
     "pages/cell/index",
+    "pages/field/index",
   ],
   window: {
     navigationBarTitleText: "Mini UI",

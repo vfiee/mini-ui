@@ -87,8 +87,8 @@ class Home extends React.Component {
 |    Grid    |     栅格布局     |  ✅  |
 |  Overlay   |       遮罩       |  ✅  |
 | Transition |     过渡动画     |  ✅  |
-|    Cell    |      单元格      | ⬜️  |
-|   Field    |      输入框      |  ⬜  |
+|    Cell    |      单元格      | ✅  |
+|   Field    |      输入框      |  ✅  |
 |    Form    |    Form 表单     | ⬜️  |
 |    List    |       列表       | ⬜️  |
 |   Button   |       按钮       | ⬜️  |

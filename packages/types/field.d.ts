@@ -9,6 +9,7 @@ import { InputProps } from "./baseInput";
 
 declare type FieldType =
   | "text"
+  | "digit"
   | "number"
   | "idcard"
   | "digit"
