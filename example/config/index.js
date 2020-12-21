@@ -11,7 +11,7 @@ const config = {
   deviceRatio: {
     640: 2.34 / 2,
     750: 1,
-    828: 1.81 / 2,
+    828: 1.81 / 2
   },
   sourceRoot: "src",
   outputRoot: `dist/${process.env.TARO_ENV}`,
@@ -19,7 +19,7 @@ const config = {
   defineConstants: {},
   copy: {
     patterns: [],
-    options: {},
+    options: {}
   },
   alias: {
     "@": getPath("src"),
@@ -29,34 +29,36 @@ const config = {
     hooks: getPath("src/packages/hooks"),
     types: getPath("src/packages/types"),
     components: getPath("src/packages/components"),
-    "mini-ui": getPath("lib/dist/index.js"),
+    "mini-ui/hooks": getPath("lib/hooks"),
+    "mini-ui/utils": getPath("lib/utils"),
+    "mini-ui": getPath("lib/dist/index.js")
   },
   framework: "react",
   mini: {
     imageUrlLoaderOption: {
-      limit: 0,
+      limit: 0
     },
     debugReact: !isPro,
     compile: {},
     postcss: {
       pxtransform: {
         enable: true,
-        config: {},
+        config: {}
       },
       url: {
         enable: true,
         config: {
-          limit: 1024, // 设定转换尺寸上限
-        },
+          limit: 1024 // 设定转换尺寸上限
+        }
       },
       cssModules: {
         enable: false, // 默认为 false，如需使用 css modules 功能，则设为 true
         config: {
           namingPattern: "module", // 转换模式，取值为 global/module
-          generateScopedName: "[name]__[local]___[hash:base64:5]",
-        },
-      },
-    },
+          generateScopedName: "[name]__[local]___[hash:base64:5]"
+        }
+      }
+    }
   },
   h5: {
     publicPath: "/",
@@ -64,17 +66,17 @@ const config = {
     postcss: {
       autoprefixer: {
         enable: true,
-        config: {},
+        config: {}
       },
       cssModules: {
         enable: false, // 默认为 false，如需使用 css modules 功能，则设为 true
         config: {
           namingPattern: "module", // 转换模式，取值为 global/module
-          generateScopedName: "[name]__[local]___[hash:base64:5]",
-        },
-      },
-    },
-  },
+          generateScopedName: "[name]__[local]___[hash:base64:5]"
+        }
+      }
+    }
+  }
 };
 
 function getPath(src = "") {

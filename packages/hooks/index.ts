@@ -12,8 +12,6 @@ export { default as useWhyUpdate } from "hooks/useWhyUpdate";
 
 export { default as useMenuButton } from "hooks/useMenuButton";
 
-export { default as useSystemInfo } from "hooks/useSystemInfo";
-
 export { default as usePrevious } from "hooks/usePrevious";
 
 export { default as useTransition } from "hooks/useTransition";

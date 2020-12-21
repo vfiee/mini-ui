@@ -15,7 +15,7 @@ declare interface CustomIndicatorProps {
 declare interface SwiperProps extends CustomIndicatorProps, _SwiperProps {}
 
 declare interface SwiperItemProps extends _SwiperItemProps {
-  extra?: ({ data: BaseObject, current: number }) => CustomElement;
+  extra?: ({ data, current }) => CustomElement;
 }
 declare type CarouselData = BaseObject[];
 

@@ -34,12 +34,6 @@
       "@Images/*": [
         "./src/assets/images/*"
       ],
-      "mini-ui": [
-        "./lib/dist/index.js",
-      ],
-      "mini-ui/*": [
-        "./lib/*",
-      ],
       "components": [
         "./src/packages/index.ts",
       ],
@@ -63,6 +57,13 @@
       ],
       "types/*": [
         "./src/packages/types/*.d.ts",
+      ],
+      // mini-ui config
+      "mini-ui": [
+        "./lib/dist/index.js",
+      ],
+      "mini-ui/*": [
+        "./lib/*",
       ]
     }
   },

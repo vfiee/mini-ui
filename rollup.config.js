@@ -14,14 +14,18 @@ import pkg from "./package.json";
 
 const isProd = process.env.BUILD === "production";
 const isBuildAll = process.env.BUILD_ALL === "true";
-const outputDir = process.env.OUTPUT || isProd ? "lib" : "example/lib";
+const outputDir = process.env.OUTPUT
+  ? process.env.OUTPUT
+  : isProd
+  ? "lib"
+  : "example/lib";
 
 function getPath(src) {
   return path.resolve(process.cwd(), src);
 }
 
 function isImage(id) {
-  return [".jpg", ".jpeg", ".png", ".gif", ".svg"].some((img) =>
+  return [".jpg", ".jpeg", ".png", ".gif", ".svg"].some(img =>
     id.includes(img)
   );
 }
@@ -29,13 +33,13 @@ function isImage(id) {
 const externalPaths = {
   hooks: `${pkg.name}/${outputDir}/hooks`,
   utils: `${pkg.name}/${outputDir}/utils`,
-  types: `${pkg.name}/${outputDir}/types`,
+  types: `${pkg.name}/${outputDir}/types`
 };
 
 function external(id, parent) {
   const isPkgDep = Object.keys({
     ...pkg.dependencies,
-    ...pkg.peerDependencies,
+    ...pkg.peerDependencies
   }).includes(id);
   const isInternalDep =
     (/^components/i.test(id) && !!parent) ||
@@ -47,14 +51,14 @@ function external(id, parent) {
 }
 
 function getDirs(src) {
-  return fs.readdirSync(src).filter((dir) => dir !== ".DS_Store");
+  return fs.readdirSync(src).filter(dir => dir !== ".DS_Store");
 }
 
 function dirToFile(
   dir,
   options = {
     isTsx: false,
-    isInput: true,
+    isInput: true
   }
 ) {
   const { isInput, isTsx } = options;
@@ -74,25 +78,25 @@ function commonPlugins() {
   return [
     resolve(),
     commonjs({
-      exclude: [getPath("packages/**")],
+      exclude: [getPath("packages/**")]
     }),
     alias({
       components: getPath("packages/components"),
       hooks: getPath("packages/hooks"),
-      utils: getPath("packages/utils"),
+      utils: getPath("packages/utils")
     }),
     typescript({
       clean: true,
       // useTsconfigDeclarationDir: true,
       tsconfigOverride: {
         compilerOptions: {
-          declaration: false,
+          declaration: false
           // declarationDir: "lib/types",
-        },
-      },
+        }
+      }
     }),
     isProd && terser(),
-    sizes(),
+    sizes()
   ];
 }
 
@@ -102,13 +106,13 @@ function createStyleConfig(src) {
       postcss({
         minimize: cssnanoPreset,
         extensions: [".less"],
-        extract: path.resolve(`${outputDir}/style/${name}.css`),
-      }),
+        extract: path.resolve(`${outputDir}/style/${name}.css`)
+      })
     ];
     if (isCopy) {
       plugins.push(
         copy({
-          targets: [{ src: "packages/assets", dest: `${outputDir}` }],
+          targets: [{ src: "packages/assets", dest: `${outputDir}` }]
         })
       );
     }
@@ -120,9 +124,9 @@ function createStyleConfig(src) {
       configs.push({
         input: path.resolve(src, `${dir}/index.less`),
         output: {
-          file: `${outputDir}/style/${dir}.css`,
+          file: `${outputDir}/style/${dir}.css`
         },
-        plugins: createStylePlugins(dir),
+        plugins: createStylePlugins(dir)
       });
       return configs;
     },
@@ -130,10 +134,10 @@ function createStyleConfig(src) {
       {
         input: getPath("packages/style/index.less"),
         output: {
-          file: `${outputDir}/style/index.css`,
+          file: `${outputDir}/style/index.css`
         },
-        plugins: createStylePlugins("index", true),
-      },
+        plugins: createStylePlugins("index", true)
+      }
     ]
   );
 }
@@ -142,7 +146,7 @@ function createCommonConfig({
   src,
   target = getPath(outputDir),
   rollupConfig = {},
-  defaultConfig = [],
+  defaultConfig = []
 } = {}) {
   return _.reduce(
     getDirs(src),
@@ -154,22 +158,22 @@ function createCommonConfig({
             src,
             dirToFile(dir, {
               isInput: true,
-              isTsx: src.includes("packages/components"),
+              isTsx: src.includes("packages/components")
             })
           ),
           output: {
             format: `es`,
             sourcemap: true,
             paths: externalPaths,
-            file: path.resolve(target, dirToFile(dir, { isInput: false })),
+            file: path.resolve(target, dirToFile(dir, { isInput: false }))
           },
           external,
           plugins: commonPlugins(),
           watch: {
-            include: ["packages/**", "packages/types/**"],
+            include: ["packages/**", "packages/types/**"]
           },
-          ...rollupConfig,
-        },
+          ...rollupConfig
+        }
       ];
     },
     defaultConfig
@@ -177,8 +181,8 @@ function createCommonConfig({
 }
 
 function buildCommonExternalPaths(src, type) {
-  const dirs = getDirs(src).filter((dir) => !dir.includes("."));
-  dirs.forEach((dir) => {
+  const dirs = getDirs(src).filter(dir => !dir.includes("."));
+  dirs.forEach(dir => {
     externalPaths[`${type}/${dir}`] = `${pkg.name}/${outputDir}/${type}/${dir}`;
   });
 }
@@ -193,9 +197,9 @@ function createBuildAllConfigs() {
       output: {
         format: "es",
         sourcemap: true,
-        file: `${outputPrefix}/${pkg.module}`,
+        file: `${outputPrefix}/${pkg.module}`
       },
-      plugins: commonPlugins(),
+      plugins: commonPlugins()
     },
     {
       input,
@@ -203,7 +207,7 @@ function createBuildAllConfigs() {
       output: {
         format: "cjs",
         sourcemap: true,
-        file: `${outputPrefix}/${pkg.main}`,
+        file: `${outputPrefix}/${pkg.main}`
       },
       plugins: [
         ...commonPlugins(),
@@ -211,12 +215,12 @@ function createBuildAllConfigs() {
           targets: [
             {
               dest: outputDir,
-              src: "packages/types",
-            },
-          ],
-        }),
-      ],
-    },
+              src: "packages/types"
+            }
+          ]
+        })
+      ]
+    }
   ];
 }
 
@@ -229,27 +233,27 @@ function build() {
     // console.log(`externalPaths:`, externalPaths);
   }
   const libConfigs = [
-    // hooks
-    ...createCommonConfig({
-      target: getPath(`${outputDir}/hooks`),
-      src: getPath("packages/hooks"),
-    }),
-    // utils
-    ...createCommonConfig({
-      target: getPath(`${outputDir}/utils`),
-      src: getPath("packages/utils"),
-    }),
     // components
     ...createCommonConfig({
       src: getPath("packages/components"),
-      target: getPath(`${outputDir}/components`),
-    }),
+      target: getPath(`${outputDir}/components`)
+    })
   ];
   const baseConfigs = [
     // style
     ...createStyleConfig(getPath("packages/components")),
+    // hooks
+    ...createCommonConfig({
+      target: getPath(`${outputDir}/hooks`),
+      src: getPath("packages/hooks")
+    }),
+    // utils
+    ...createCommonConfig({
+      target: getPath(`${outputDir}/utils`),
+      src: getPath("packages/utils")
+    }),
     // es cjs
-    ...createBuildAllConfigs(),
+    ...createBuildAllConfigs()
   ];
   return isBuildAll ? [...baseConfigs, ...libConfigs] : baseConfigs;
 }

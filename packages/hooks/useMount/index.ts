@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
 
-export declare type fn = (...args: any) => void;
+export declare type Fn = (...args: any) => void;
 
-const useMount = (fns: fn | fn[]) => {
+const useMount = (fns: Fn | Fn[]) => {
   const fnsRef = useRef(fns);
   useEffect(() => {
     const current = fnsRef.current;
