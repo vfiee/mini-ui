@@ -9,7 +9,7 @@ const MiniConsole = {
   },
   warn(...args: any[]) {
     !isProd && console.warn(`[Mini ui]: `, ...args);
-  },
+  }
 };
 
 export default MiniConsole;

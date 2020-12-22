@@ -17,7 +17,7 @@ const SCOPE_MESSAGE = {
   werun: "微信运动步数",
   record: "录音功能",
   writePhotosAlbum: "保存到相册",
-  camera: "摄像头",
+  camera: "摄像头"
 };
 
 export const ensureAuthScope = async (
@@ -29,7 +29,7 @@ export const ensureAuthScope = async (
     return authSetting;
   } else if (authSetting[`scope.${scope}`] === void 0) {
     return await authorize({
-      scope: `scope.${scope}`,
+      scope: `scope.${scope}`
     });
   }
   return await showModal({
@@ -37,16 +37,16 @@ export const ensureAuthScope = async (
     content:
       message ||
       `检测到小程序已关闭${SCOPE_MESSAGE[scope] || "相关"}权限,是否前往打开?`,
-    confirmText: "打开",
+    confirmText: "打开"
   })
-    .then((res) => {
+    .then(res => {
       if (res.confirm) {
         return openSetting();
       } else {
         throw new Error("未授权,用户已取消!");
       }
     })
-    .then((res) => {
+    .then(res => {
       const { authSetting: _auth } = res;
       if (_auth && _auth[`scope.${scope}`]) {
         return _auth;

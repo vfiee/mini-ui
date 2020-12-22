@@ -23,7 +23,7 @@ const Icon = (props: IconProps) => {
       mergeStyle(
         {
           color: color ?? "",
-          fontSize: size ?? "",
+          fontSize: size ?? ""
         },
         style
       ),
@@ -37,7 +37,7 @@ const Icon = (props: IconProps) => {
   const imageProps = useMemo(() => {
     let _props = {
       src: type,
-      className: "__icon__origin__image__",
+      className: "__icon__origin__image__"
     };
     if (!isCover) {
       _props["mode"] = "aspectFill";
@@ -62,12 +62,12 @@ const Icon = (props: IconProps) => {
 Icon.displayName = "Icon";
 
 Icon.options = {
-  addGlobalClass: true,
+  addGlobalClass: true
 };
 
 Icon.defaultProps = {
   isCover: false,
-  fontFamily: "iconfont",
+  fontFamily: "iconfont"
 };
 
 export default Icon;

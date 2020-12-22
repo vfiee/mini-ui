@@ -10,7 +10,7 @@ const useMount = (fns: Fn | Fn[]) => {
     if (typeof current === "function") {
       current();
     } else if (Array.isArray(current)) {
-      current.forEach((fn) => {
+      current.forEach(fn => {
         fn && typeof fn === "function" && fn();
       });
     }

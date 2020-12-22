@@ -27,7 +27,7 @@ const Col = (props: ColProps) => {
 Col.displayName = "Col";
 
 Col.defaultProps = {
-  isCol: true,
+  isCol: true
 };
 Col.displayName = "Col";
 

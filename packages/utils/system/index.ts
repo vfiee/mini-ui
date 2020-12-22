@@ -1,6 +1,6 @@
 import {
   getSystemInfoSync as _getSystemInfoSync,
-  getMenuButtonBoundingClientRect as _getMenuRect,
+  getMenuButtonBoundingClientRect as _getMenuRect
 } from "@tarojs/taro";
 
 export * from "./route";

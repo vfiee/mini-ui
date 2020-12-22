@@ -6,11 +6,11 @@ import {
   navigateTo as _navigateTo,
   redirectTo as _redirectTo,
   navigateBack as _navigateBack,
-  reLaunch as _reLaunch,
+  reLaunch as _reLaunch
 } from "@tarojs/taro";
 
 const AppConfig = {
-  pages: [],
+  pages: []
 };
 
 const promiseify = (fn: Function): any => (args = {}): Promise<any> =>
@@ -18,7 +18,7 @@ const promiseify = (fn: Function): any => (args = {}): Promise<any> =>
     fn({
       ...args,
       fail: reject,
-      success: resolve,
+      success: resolve
     });
   });
 
@@ -49,7 +49,7 @@ export const getCurrPages = (): CurrentPage => {
     current,
     isTabBar: isTabBar(current),
     isFirst: pages.length === 1,
-    isRootPage: isRootPage(current),
+    isRootPage: isRootPage(current)
   };
 };
 
@@ -63,7 +63,7 @@ export const getCurrPages = (): CurrentPage => {
 export const isTabBar = (page: Page): boolean => {
   // @ts-ignore
   const tabbarPages = AppConfig?.tabbar?.list ?? [];
-  return tabbarPages.some((_page) => _page?.pagePath === page.route);
+  return tabbarPages.some(_page => _page?.pagePath === page.route);
 };
 
 /**

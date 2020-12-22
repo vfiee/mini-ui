@@ -70,7 +70,7 @@ const Cell = (props: CellProps) => {
     if (arrow || isValidUrl) {
       _iconProps = {
         type: "icon-back",
-        className: `__cell__icon__arrow__ ${arrowDirection ?? ""}`,
+        className: `__cell__icon__arrow__ ${arrowDirection ?? ""}`
       };
     }
     return isValidElement(rightIcon) ? (
@@ -118,9 +118,9 @@ const Cell = (props: CellProps) => {
     const clsArr = [
       { value: border, suffix: "border" },
       { value: required, suffix: "required" },
-      { value: center, suffix: "center" },
+      { value: center, suffix: "center" }
     ];
-    let finnalCls = clsArr.map((cls) => {
+    let finnalCls = clsArr.map(cls => {
       if (cls.value) {
         return `__cell__${cls.suffix}__`;
       }
@@ -132,7 +132,7 @@ const Cell = (props: CellProps) => {
   return (
     <View
       {...restProps}
-      onClick={(eve) => {
+      onClick={eve => {
         if (isValidUrl) {
           // @ts-ignore
           replace ? redirectTo(url) : navigateTo({ url });
@@ -153,7 +153,7 @@ const Cell = (props: CellProps) => {
 Cell.displayName = "Col";
 
 Cell.options = {
-  addGlobalClass: true,
+  addGlobalClass: true
 };
 
 Cell.defaultProps = {
@@ -162,7 +162,7 @@ Cell.defaultProps = {
   center: false,
   arrow: false,
   border: true,
-  arrowDirection: "right",
+  arrowDirection: "right"
 };
 
 const CellGroup = (props: CellGroupProps) => {
@@ -216,11 +216,11 @@ const CellGroup = (props: CellGroupProps) => {
 CellGroup.displayName = "CellGroup";
 
 CellGroup.options = {
-  addGlobalClass: true,
+  addGlobalClass: true
 };
 
 CellGroup.defaultProps = {
-  border: true,
+  border: true
 };
 
 export { Cell as default, CellGroup };

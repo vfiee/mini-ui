@@ -24,7 +24,7 @@ const Overlay = (props: OverlayProps) => {
       {
         zIndex: zIndex as number,
         transitionDuration: duration + "s",
-        backgroundColor: `rgba(0,0,0,${opacity})`,
+        backgroundColor: `rgba(0,0,0,${opacity})`
       },
       style
     );
@@ -41,7 +41,7 @@ const Overlay = (props: OverlayProps) => {
       {...restProps}
       style={mergedStyle}
       className={`__overlay__ ${className ?? ""}`}
-      onClick={(eve) => {
+      onClick={eve => {
         eve.stopPropagation();
         props?.onClick?.(eve);
       }}
@@ -61,7 +61,7 @@ const Overlay = (props: OverlayProps) => {
 Overlay.displayName = "Overlay";
 
 Overlay.options = {
-  addGlobalClass: true,
+  addGlobalClass: true
 };
 
 Overlay.defaultProps = {
@@ -70,7 +70,7 @@ Overlay.defaultProps = {
   opacity: 0.6,
   duration: 0.3,
   preventScroll: true,
-  customAppbar: false,
+  customAppbar: false
 };
 
 export default Overlay;

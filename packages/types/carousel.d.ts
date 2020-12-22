@@ -78,5 +78,5 @@ export {
   IndicatorPosition,
   IndicatorType,
   CustomIndicatorProps,
-  SwiperProps,
+  SwiperProps
 };

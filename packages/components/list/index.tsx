@@ -3,7 +3,7 @@ import React, {
   useMemo,
   useState,
   useCallback,
-  useRef,
+  useRef
 } from "react";
 import { ScrollView, View, Slot } from "@tarojs/components";
 import Loading from "components/loading";
@@ -18,7 +18,7 @@ declare enum PullingStatus {
   overPulling,
   loading,
   success,
-  error,
+  error
 }
 
 const pullStatusText = [
@@ -27,7 +27,7 @@ const pullStatusText = [
   "松开手刷新",
   "正在加载...",
   "加载成功",
-  "加载失败",
+  "加载失败"
 ];
 
 const List = (props: ListProps) => {
@@ -69,7 +69,7 @@ const List = (props: ListProps) => {
   );
   const [bottomState, setBottomState] = useState({
     loading: false,
-    error: false,
+    error: false
   });
   useMount(() => {
     if (firstTriggered) {
@@ -81,7 +81,7 @@ const List = (props: ListProps) => {
 
   // 下拉动作
   const _onRefresherPulling = useCallback(
-    (eve) => {
+    eve => {
       if (refresherRef.current < PullingStatus.loading) {
         const { dy } = eve.detail;
         setRefresherStatus(
@@ -97,7 +97,7 @@ const List = (props: ListProps) => {
 
   // 触发下拉刷新
   const _onRefresherRefresh = useCallback(
-    (eve) => {
+    eve => {
       if (refresherRef.current !== PullingStatus.loading) {
         setRefresherStatus(PullingStatus.loading);
       }
@@ -121,7 +121,7 @@ const List = (props: ListProps) => {
               setRefresherStatus(PullingStatus.error);
             }
             resetStatus();
-          },
+          }
         ]);
       isFunction(onRefresherRefresh) && (onRefresherRefresh as Function)(eve);
     },
@@ -130,7 +130,7 @@ const List = (props: ListProps) => {
 
   // 下拉刷新被终止
   const _onRefresherAbort = useCallback(
-    (eve) => {
+    eve => {
       if (refresherRef.current !== PullingStatus.static) {
         setRefresherStatus(PullingStatus.static);
       }
@@ -141,7 +141,7 @@ const List = (props: ListProps) => {
 
   // 下拉刷新复位
   const _onRefresherRestore = useCallback(
-    (eve) => {
+    eve => {
       if (refresherRef.current !== PullingStatus.static) {
         setRefresherStatus(PullingStatus.static);
       }
@@ -159,7 +159,7 @@ const List = (props: ListProps) => {
       }
       setBottomState({
         loading: true,
-        error: false,
+        error: false
       });
       isFunction(onReachBottom) &&
         (onReachBottom as Function)(
@@ -167,15 +167,15 @@ const List = (props: ListProps) => {
             function stopLoading() {
               setBottomState({
                 loading: false,
-                error: false,
+                error: false
               });
             },
             function onError() {
               setBottomState({
                 loading: false,
-                error: true,
+                error: true
               });
-            },
+            }
           ],
           eve
         );
@@ -200,16 +200,16 @@ const List = (props: ListProps) => {
     } else if (bottomState.error) {
       return isValidElement(error) ? (
         React.cloneElement(error, {
-          onClick: (eve) => {
+          onClick: eve => {
             error?.props?.onClick?.(eve);
             onScrollToBottom({ force: true }, eve);
-          },
+          }
         })
       ) : (
         <View
           style={errorStyle}
           className={`__list__error__ ${errorClass ?? ""}`}
-          onClick={(eve) => onScrollToBottom({ force: true }, eve)}
+          onClick={eve => onScrollToBottom({ force: true }, eve)}
         >
           {errorText}
         </View>
@@ -227,7 +227,7 @@ const List = (props: ListProps) => {
     errorStyle,
     errorClass,
     errorText,
-    onScrollToBottom,
+    onScrollToBottom
   ]);
 
   return (
@@ -239,7 +239,7 @@ const List = (props: ListProps) => {
       onRefresherAbort={_onRefresherAbort}
       onRefresherRestore={_onRefresherRestore}
       refresherDefaultStyle={refresherDefaultStyle}
-      onScrollToLower={(eve) => onScrollToBottom(undefined, eve)}
+      onScrollToLower={eve => onScrollToBottom(undefined, eve)}
       refresherTriggered={refresherRef.current !== PullingStatus.static}
       className={`__list__ ${className ?? ""}`}
     >
@@ -268,7 +268,7 @@ const List = (props: ListProps) => {
 List.displayName = "List";
 
 List.options = {
-  addGlobalClass: true,
+  addGlobalClass: true
 };
 
 List.defaultProps = {
@@ -282,7 +282,7 @@ List.defaultProps = {
   refresherDefaultStyle: "none",
   refresherThreshold: 50,
   refresherBackground: "#00ab84",
-  refresherStayTime: 700,
+  refresherStayTime: 700
 };
 
 export default List;

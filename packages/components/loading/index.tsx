@@ -50,14 +50,14 @@ const Loading = (props: LoadingProps) => {
 Loading.displayName = "Loading";
 
 Loading.options = {
-  addGlobalClass: true,
+  addGlobalClass: true
 };
 Loading.defaultProps = {
   color: "#999",
   type: "circular",
   size: "40rpx",
   vertical: false,
-  block: false,
+  block: false
 };
 
 export default Loading;

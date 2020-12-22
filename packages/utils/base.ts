@@ -300,7 +300,7 @@ export function pick(object: BaseObject, props: string | string[] | predicate) {
       ? { [props]: object[props] }
       : res;
   } else if (isArray(props) && props.length > 0) {
-    forEach(props, (value) => {
+    forEach(props, value => {
       if (hasOwnProperty.call(object, value)) {
         res[value] = object[value];
       }

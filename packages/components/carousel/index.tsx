@@ -11,7 +11,7 @@ import {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   CarouselData,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  SwiperItemPropsWithData,
+  SwiperItemPropsWithData
 } from "types";
 
 const IndicatorDots = (props: IndicatorProps) => {
@@ -31,7 +31,7 @@ const IndicatorDots = (props: IndicatorProps) => {
       {data.map((__, index) => {
         const isCurrent: boolean = index === current;
         const _style = mergeStyle(style, {
-          backgroundColor: isCurrent ? indicatorActiveColor : indicatorColor,
+          backgroundColor: isCurrent ? indicatorActiveColor : indicatorColor
         });
         return (
           <View
@@ -55,7 +55,7 @@ const IndicatorNumber = (props: IndicatorProps) => {
   const { data, current, className, wrapperClassName, ...restProps } = props;
   const extraText = useMemo(() => get(data, `[${current}]._text`, ""), [
     current,
-    data,
+    data
   ]);
   return (
     <View className={wrapperClassName}>
@@ -74,7 +74,7 @@ const defaultIndicator = {
   indicatorType: "dots",
   indicatorPosition: "bottomCenter",
   indicatorColor: "rgba(0, 0, 0, .3)",
-  indicatorActiveColor: "#000000",
+  indicatorActiveColor: "#000000"
 };
 const Indicator = (props: IndicatorProps) => {
   const {
@@ -84,12 +84,12 @@ const Indicator = (props: IndicatorProps) => {
     ...restProps
   } = {
     ...defaultIndicator,
-    ...compact(props, (v) => typeof v === "undefined"),
+    ...compact(props, v => typeof v === "undefined")
   };
   const IndicatorComponent = get(
     {
       dots: IndicatorDots,
-      numbers: IndicatorNumber,
+      numbers: IndicatorNumber
     },
     indicatorType,
     IndicatorDots
@@ -115,7 +115,7 @@ const CarouselItem = (props: SwiperItemPropsWithData) => {
 
   const src = useMemo(() => (srcKey ? data[srcKey] : data["src"]), [
     data,
-    srcKey,
+    srcKey
   ]);
   const { className: imageCls, ...restImageProps } = image ?? {};
   return (
@@ -145,7 +145,7 @@ const Carousel = (props: CarouselProps) => {
     image,
     srcKey,
     preview,
-    showMenu,
+    showMenu
   } = props;
   const {
     onClick,
@@ -163,7 +163,7 @@ const Carousel = (props: CarouselProps) => {
   );
   const [current, setCurrent] = useState(swiper?.current ?? 0);
   const onSwiperChange = useCallback(
-    (eve) => {
+    eve => {
       setCurrent(eve.detail.current);
       onChange?.call(null, eve);
     },
@@ -178,16 +178,16 @@ const Carousel = (props: CarouselProps) => {
     [carouselData, customIndicator]
   );
   const onSwiperClick = useCallback(
-    (eve) => {
+    eve => {
       onClick?.(eve);
       if (preview && !isEmpty(data)) {
-        const urls: string[] = carouselData.map((_data) =>
+        const urls: string[] = carouselData.map(_data =>
           get(_data, srcKey || "src", "")
         );
         previewImage(
           {
             urls,
-            current: urls[current],
+            current: urls[current]
           },
           // @ts-ignore
           showMenu
@@ -229,7 +229,7 @@ const Carousel = (props: CarouselProps) => {
             indicatorPosition,
             data: carouselData,
             indicatorColor: swiper?.indicatorColor,
-            indicatorActiveColor: swiper?.indicatorActiveColor,
+            indicatorActiveColor: swiper?.indicatorActiveColor
           }}
         />
       )}
@@ -242,7 +242,7 @@ Carousel.displayName = "Carousel";
 Carousel.displayName = "Carousel";
 
 Carousel.options = {
-  addGlobalClass: true,
+  addGlobalClass: true
 };
 
 export default Carousel;

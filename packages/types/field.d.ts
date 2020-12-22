@@ -3,7 +3,7 @@ import {
   CustomStyle,
   CustomTextAlign,
   CustomElement,
-  IconProps,
+  IconProps
 } from "./index";
 import { InputProps } from "./baseInput";
 

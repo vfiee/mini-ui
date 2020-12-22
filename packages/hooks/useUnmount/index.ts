@@ -11,7 +11,7 @@ const useUnmount = (fns: fn | fn[]) => {
       if (typeof current === "function") {
         current();
       } else if (Array.isArray(current)) {
-        current.forEach((fnc) => {
+        current.forEach(fnc => {
           fnc && typeof fnc === "function" && fnc();
         });
       }

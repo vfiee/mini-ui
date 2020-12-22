@@ -21,7 +21,7 @@ export { get, kebabcase };
  * @returns {boolean} 返回true或false
  */
 export const isImage = (src: string) => {
-  return [".jpg", ".jpeg", ".png", ".gif", ".svg"].some((img) =>
+  return [".jpg", ".jpeg", ".png", ".gif", ".svg"].some(img =>
     src.includes(img)
   );
 };

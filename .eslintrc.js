@@ -7,5 +7,4 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": ["off"],
     "prettier/prettier": ["error", {}, { usePrettierrc: true }]
   }
-  // ignorePatterns: "*.d.ts"
-};
+}

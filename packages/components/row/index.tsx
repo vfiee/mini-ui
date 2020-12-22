@@ -24,21 +24,21 @@ export const Row = (props: RowProps) => {
       ...(gutters[0]! > 0
         ? {
             marginLeft: gutters[0]! / -2 + gutterUnit,
-            marginRight: gutters[0]! / -2 + gutterUnit,
+            marginRight: gutters[0]! / -2 + gutterUnit
           }
         : {}),
       ...(gutters[1]! > 0
         ? {
             marginTop: gutters[1]! / -2 + gutterUnit,
-            marginBottom: gutters[1]! / 2 + gutterUnit,
+            marginBottom: gutters[1]! / 2 + gutterUnit
           }
-        : {}),
+        : {})
     };
     return mergeStyle(
       {
         alignItems: align,
         justifyContent: justify,
-        ...gutterStyle,
+        ...gutterStyle
       },
       style
     );
@@ -50,15 +50,15 @@ export const Row = (props: RowProps) => {
       ...(gutters[0]! > 0
         ? {
             paddingLeft: gutters[0]! / 2 + gutterUnit,
-            paddingRight: gutters[0]! / 2 + gutterUnit,
+            paddingRight: gutters[0]! / 2 + gutterUnit
           }
         : {}),
       ...(gutters[1]! > 0
         ? {
             paddingTop: gutters[1]! / 2 + gutterUnit,
-            paddingBottom: gutters[1]! / 2 + gutterUnit,
+            paddingBottom: gutters[1]! / 2 + gutterUnit
           }
-        : {}),
+        : {})
     };
     return gutterStyle;
   }, [gutter, gutterUnit]);
@@ -68,14 +68,14 @@ export const Row = (props: RowProps) => {
       style={rowStyle}
       className={`__row__ ${className ?? ""}`}
     >
-      {React.Children.map(children, (child) => {
+      {React.Children.map(children, child => {
         // @ts-ignore
         if (child?.type?.displayName === "Col") {
           return React.cloneElement(child, {
             style: {
               ...colStyle,
-              ...(child.props.style ?? {}),
-            },
+              ...(child.props.style ?? {})
+            }
           });
         }
         MiniConsole.warn(
@@ -90,7 +90,7 @@ Row.defaultProps = {
   align: "normal",
   justify: "normal",
   gutterUsePx: false,
-  gutter: [0, 0],
+  gutter: [0, 0]
 };
 Row.displayName = "Row";
 

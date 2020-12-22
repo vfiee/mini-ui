@@ -111,7 +111,7 @@ AppBar.options = {
 };
 
 AppBar.defaultProps = {
-  title: "",
+  title: null,
   type: "white",
   isCoverView: false,
   backgroundColor: "#fff"

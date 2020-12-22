@@ -24,7 +24,7 @@ const Image = (props: ImageProps) => {
   } = props;
   const [status, setStatus] = useState({
     error: !props?.src,
-    loading: !!props?.src,
+    loading: !!props?.src
   });
   function _onLoad(eve) {
     delayExecution(() => {
@@ -43,7 +43,7 @@ const Image = (props: ImageProps) => {
       {
         width,
         height,
-        borderRadius: radius,
+        borderRadius: radius
       },
       style
     );
@@ -92,14 +92,14 @@ const Image = (props: ImageProps) => {
 Image.displayName = "Image";
 
 Image.options = {
-  addGlobalClass: true,
+  addGlobalClass: true
 };
 
 Image.defaultProps = {
   showError: false,
   showLoading: false,
   error: "icon-error-img",
-  loading: "icon-default-img",
+  loading: "icon-default-img"
 };
 
 export default Image;

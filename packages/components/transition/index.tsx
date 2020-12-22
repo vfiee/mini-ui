@@ -15,7 +15,7 @@ const Transition = (props: TransitionProps) => {
     beforeLeave,
     onLeave,
     afterLeave,
-    children,
+    children
   } = props;
   const { inited, display, onTransitionEnd, className } = useTransition({
     show,
@@ -26,7 +26,7 @@ const Transition = (props: TransitionProps) => {
     afterEnter,
     beforeLeave,
     onLeave,
-    afterLeave,
+    afterLeave
   });
   // @ts-ignore
   if (!inited) return null;
@@ -38,10 +38,10 @@ const Transition = (props: TransitionProps) => {
     style: mergeStyle(
       {
         display: display ? "" : "none",
-        transitionDuration: duration + "ms",
+        transitionDuration: duration + "ms"
       },
       children.props.style
-    ),
+    )
   });
 };
 

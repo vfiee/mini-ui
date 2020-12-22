@@ -10,11 +10,11 @@ const useWhyUpdate = (componentName: string, props: cProps) => {
     if (previousProps.current) {
       const keys = Object.keys({ ...previousProps.current, ...props });
       let changedProps: cProps = {};
-      keys.forEach((key) => {
+      keys.forEach(key => {
         if (previousProps[key] !== props[key]) {
           changedProps[key] = {
             prev: previousProps.current[key],
-            next: props[key],
+            next: props[key]
           };
         }
       });

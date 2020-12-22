@@ -1,24 +1,22 @@
-import kebabCase from "lodash.kebabcase";
-
 declare type Style = string | React.CSSProperties | undefined;
 
-function objectToString(style: Style): string {
-  if (style == null) {
-    return "";
-  } else if (typeof style === "string") {
+function styleToObject(style?: Style): React.CSSProperties {
+  if (style == null || style === "") {
+    // none
+    return {};
+  } else if (typeof style === "object" && !Array.isArray(style)) {
+    // object
     return style;
   }
-  let res: string = "";
-  for (const [key, value] of Object.entries(style)) {
-    if (value != null) {
-      res += `${kebabCase(key)}: ${value};`;
-    }
-  }
-  return res;
+  // string
+  return (style as string).split(";").reduce((res, css) => {
+    const [key, value] = css.split(";");
+    res[key] = value;
+    return res;
+  }, {});
 }
 
-export function mergeStyle(baseStyles: Style, mergeStyles?: Style): string {
-  baseStyles = objectToString(baseStyles);
-  mergeStyles = objectToString(mergeStyles);
-  return baseStyles + mergeStyles;
-}
+export const mergeStyle = (baseStyle: Style, combineStyle?: Style) => ({
+  ...styleToObject(baseStyle),
+  ...styleToObject(combineStyle)
+});

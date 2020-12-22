@@ -8,18 +8,18 @@ const defaultIcons: DefaultIconProps = {
   empty: {
     size: "160rpx",
     color: "#999",
-    type: `icon-empty-filled`,
+    type: `icon-empty-filled`
   },
   error: {
     size: "160rpx",
     color: "#999",
-    type: `icon-network-error`,
+    type: `icon-network-error`
   },
   network: {
     size: "160rpx",
     color: "#999",
-    type: `icon-500`,
-  },
+    type: `icon-500`
+  }
 };
 
 const defaultIconTypes = ["empty", "network", "error"];
@@ -45,11 +45,11 @@ const Empty = (props: EmptyProps) => {
 Empty.displayName = "Empty";
 
 Empty.options = {
-  addGlobalClass: true,
+  addGlobalClass: true
 };
 
 Empty.defaultProps = {
-  image: "empty",
+  image: "empty"
 };
 
 export default Empty;

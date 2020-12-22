@@ -28,12 +28,12 @@ const Divider = (props: DividerProps) => {
 Divider.displayName = "Divider";
 
 Divider.options = {
-  addGlobalClass: true,
+  addGlobalClass: true
 };
 
 Divider.defaultProps = {
   hairLine: true,
-  position: "center",
+  position: "center"
 };
 
 export default Divider;

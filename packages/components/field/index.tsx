@@ -16,7 +16,7 @@ const getIconProps = (
   if (typeof props === "string") {
     return {
       type: props,
-      onClick: fn,
+      onClick: fn
     };
   }
   return props?.onClick ? props : { ...(props as IconProps), onClick: fn };
@@ -36,7 +36,7 @@ const getCellProps = (props: FieldProps): CellProps => {
     labelAlign,
     inputAlign,
     onLeftIconClick,
-    onRightIconClick,
+    onRightIconClick
   } = props;
   return compact(
     {
@@ -53,7 +53,7 @@ const getCellProps = (props: FieldProps): CellProps => {
         inputAlign ? `__field__value__${inputAlign}__` : ""
       }`,
       icon: getIconProps(leftIcon, onLeftIconClick),
-      rightIcon: getIconProps(rightIcon, onRightIconClick),
+      rightIcon: getIconProps(rightIcon, onRightIconClick)
     },
     isUndefined
   ) as CellProps;
@@ -70,7 +70,7 @@ const getInputProps = (props: FieldProps): InputProps => {
     autoHeight,
     showConfirmBar,
     disableDefaultPadding,
-    onLineChange,
+    onLineChange
   } = props;
   let inputProps = pick(props, [
     // input
@@ -93,7 +93,7 @@ const getInputProps = (props: FieldProps): InputProps => {
     "onFocus",
     "onBlur",
     "onConfirm",
-    "onKeyboardHeightChange",
+    "onKeyboardHeightChange"
   ]);
   inputProps = {
     ...inputProps,
@@ -104,7 +104,7 @@ const getInputProps = (props: FieldProps): InputProps => {
     maxlength: type === "tel" ? 11 : maxlength,
     className: `__field__control__ ${
       type === "textarea" ? "__field__textarea__" : ""
-    } ${inputClass ?? ""}`,
+    } ${inputClass ?? ""}`
   };
   if (inputProps.isTextarea) {
     delete inputProps["type"];
@@ -114,7 +114,7 @@ const getInputProps = (props: FieldProps): InputProps => {
       autoHeight,
       showConfirmBar,
       disableDefaultPadding,
-      onLineChange,
+      onLineChange
     };
   }
   return compact(inputProps, isUndefined) as InputProps;
@@ -127,7 +127,7 @@ const getErrorProps = (props: FieldProps): object => {
       style: mergeStyle(errorStyle, errorMsg ? "" : `display:none;`),
       className: `__field__error__ ${errorClass ?? ""} ${
         errorAlign ? `__field__error__${errorAlign}__` : ""
-      }`,
+      }`
     },
     isUndefined
   );
@@ -138,7 +138,7 @@ const getWordLimitProps = (props: FieldProps): object => {
   return compact(
     {
       style: limitStyle,
-      className: `__field__limit__ ${limitClass ?? ""}`,
+      className: `__field__limit__ ${limitClass ?? ""}`
     },
     isUndefined
   );
@@ -153,12 +153,12 @@ const Field = (props: FieldProps) => {
   const update = useUpdate();
   let valueRef = useRef(props?.value ?? "");
   let focusRef = useRef(!!props?.focus);
-  const onFocus = (eve) => {
+  const onFocus = eve => {
     focusRef.current = true;
     props?.onFocus?.(eve);
     update();
   };
-  const onBlur = (eve) => {
+  const onBlur = eve => {
     focusRef.current = false;
     // 格式化
     if (formatTrigger === "onBlur") {
@@ -167,7 +167,7 @@ const Field = (props: FieldProps) => {
     props?.onBlur?.(eve);
     update();
   };
-  const onInput = (eve) => {
+  const onInput = eve => {
     valueRef.current = eve.detail.value;
     // 格式化
     if (formatTrigger === "onChange") {
@@ -188,7 +188,7 @@ const Field = (props: FieldProps) => {
     onFocus,
     onBlur,
     onInput,
-    value: valueRef.current,
+    value: valueRef.current
   } as FieldProps;
   const {
     showError,
@@ -197,12 +197,12 @@ const Field = (props: FieldProps) => {
     maxlength,
     clear,
     clearTrigger,
-    onClear: _onClear,
+    onClear: _onClear
   } = _props;
   const cellProps = getCellProps(_props);
   const errorProps = getErrorProps(_props);
   const wordLimitProps = getWordLimitProps(_props);
-  const onClear = (eve) => {
+  const onClear = eve => {
     valueRef.current = "";
     focusRef.current = false;
     _onClear?.(eve);
@@ -251,7 +251,7 @@ const Field = (props: FieldProps) => {
 Field.displayName = "Field";
 
 Field.options = {
-  addGlobalClass: true,
+  addGlobalClass: true
 };
 
 Field.defaultProps = {
@@ -267,7 +267,7 @@ Field.defaultProps = {
   inputAlign: "left",
   showError: true,
   formatTriggleType: "onChange",
-  placeholderClass: "input-placeholder",
+  placeholderClass: "input-placeholder"
 };
 
 export default Field;

@@ -6,23 +6,8 @@
 
 ## Row
 
-支持微信小程序 View 组件的其余参数 [查看文档](https://developers.weixin.qq.com/miniprogram/dev/component/view.html)
-| 参数 | 必填 | 说明 | 类型 | 默认值 |
-| :------------------ | :--- | :-------------------------------------------------- | :---------------- | :------ |
-| `justify` | 否 | 水平排列方式 | `normal | start | center | end | stretch | space-between | space-around | space-evenly` | `normal` |
-| `align` | 否 | 垂直排列方式 | `normal | stretch | start | end | center` | `normal` |
-| `gutter` | 否 | 栅格间隔,支持横向和纵向,使用数组形式可同时设置横向和纵向 `[水平间隔,垂直间隔]`,否则设置横向 | `number | [number,number]` | `[0,0]` |
-| `gutterUsePx` | 否 | 是否使用 px 作为间隔单位,默认 rpx | `boolean` | `false` |
-| `children` | 否 | Row 子元素,请使用 Col 作为 Row 的子元素,否则将会被忽略 | `Col`组件 | - |
+支持微信小程序 View 组件的其余参数 [查看文档](https://developers.weixin.qq.com/miniprogram/dev/component/view.html) | 参数 | 必填 | 说明 | 类型 | 默认值 | | :------------------ | :--- | :-------------------------------------------------- | :---------------- | :------ | | `justify` | 否 | 水平排列方式 | `normal | start | center | end | stretch | space-between | space-around | space-evenly` | `normal` | | `align` | 否 | 垂直排列方式 | `normal | stretch | start | end | center` | `normal` | | `gutter` | 否 | 栅格间隔,支持横向和纵向,使用数组形式可同时设置横向和纵向 `[水平间隔,垂直间隔]`,否则设置横向 | `number | [number,number]` | `[0,0]` | | `gutterUsePx` | 否 | 是否使用 px 作为间隔单位,默认 rpx | `boolean` | `false` | | `children` | 否 | Row 子元素,请使用 Col 作为 Row 的子元素,否则将会被忽略 | `Col`组件 | - |
 
 ## Col
 
-支持微信小程序 View 组件的其余参数 [查看文档](https://developers.weixin.qq.com/miniprogram/dev/component/view.html)
-| 参数 | 必填 | 说明 | 类型 | 默认值 |
-| :------------------ | :--- | :-------------------------------------------------- | :---------------- | :------ |
-| `span` | 否 | 栅格占据空间,范围:0-24,为 0 时不显示,等同于`display:'none';` | `number` | `0` |
-| `offset` | 否 | 栅格左侧偏移空间,范围:0-24,为 0 时不偏移 | `number` | `0` |
-| `pull` | 否 | 栅格向左移动空间,范围:0-24,为 0 时不移动 | `number` | `0` |
-| `push` | 否 | 栅格向右移动空间,范围:0-24,为 0 时不移动 | `number` | `0` |
-| `order` | 否 | 栅格排列顺序 | `number` |-|
-|`children`| 否 | 子元素 |`React.ReactNode` | - |
+支持微信小程序 View 组件的其余参数 [查看文档](https://developers.weixin.qq.com/miniprogram/dev/component/view.html) | 参数 | 必填 | 说明 | 类型 | 默认值 | | :------------------ | :--- | :-------------------------------------------------- | :---------------- | :------ | | `span` | 否 | 栅格占据空间,范围:0-24,为 0 时不显示,等同于`display:'none';` | `number` | `0` | | `offset` | 否 | 栅格左侧偏移空间,范围:0-24,为 0 时不偏移 | `number` | `0` | | `pull` | 否 | 栅格向左移动空间,范围:0-24,为 0 时不移动 | `number` | `0` | | `push` | 否 | 栅格向右移动空间,范围:0-24,为 0 时不移动 | `number` | `0` | | `order` | 否 | 栅格排列顺序 | `number` |-| |`children`| 否 | 子元素 |`React.ReactNode` | - |

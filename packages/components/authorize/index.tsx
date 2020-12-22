@@ -10,7 +10,7 @@ function authorizeScope(eve: any) {
       .then(() => {
         this.onAuthorize && this.onAuthorize({ authorized: true }, eve);
       })
-      .catch((err) => {
+      .catch(err => {
         this.onAuthorize &&
           this.onAuthorize({ authorized: false, error: err }, eve);
       });
@@ -24,7 +24,7 @@ const OPENTYPE_EVENTNAME = {
   contact: "onContact",
   launchApp: "onLaunchapp",
   getUserInfo: "onGetUserInfo",
-  getPhoneNumber: "onGetPhoneNumber",
+  getPhoneNumber: "onGetPhoneNumber"
 };
 
 const Authorize = (props: AuthorizeProps) => {
@@ -53,7 +53,7 @@ const Authorize = (props: AuthorizeProps) => {
       } else {
         const eventName = openType && OPENTYPE_EVENTNAME[openType];
         _props = {
-          openType,
+          openType
         };
         if (eventName) {
           _props[eventName] = fn;
@@ -77,7 +77,7 @@ const Authorize = (props: AuthorizeProps) => {
 Authorize.displayName = "Authorize";
 
 Authorize.options = {
-  addGlobalClass: true,
+  addGlobalClass: true
 };
 
 export default Authorize;

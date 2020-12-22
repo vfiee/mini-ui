@@ -8,7 +8,7 @@ const getClassNames = (name: TransitionType) => ({
   enter: `__${name}__enter__ __${name}__enter__active__ ${name}-enter-active`,
   enterTo: `__${name}__enter__to__ __${name}__enter__active__ ${name}-enter-active`,
   leave: `__${name}__leave__ __${name}__leave__active__ ${name}-leave-active`,
-  leaveTo: `__${name}__leave__to__ __${name}__leave__active__ ${name}-leave-active`,
+  leaveTo: `__${name}__leave__to__ __${name}__leave__active__ ${name}-leave-active`
 });
 
 // 借鉴 Vant
@@ -42,7 +42,7 @@ const useTransition = (props: useTransitionProps) => {
     beforeLeave,
     onLeave,
     afterLeave,
-    duration,
+    duration
   } = props;
   const previouseShow = usePrevious(show);
   const statusRef = useRef<transitionRefStatus>({
@@ -50,7 +50,7 @@ const useTransition = (props: useTransitionProps) => {
     display: !!show,
     className: "",
     progress: null,
-    transitionEnd: true,
+    transitionEnd: true
   });
   const update = useUpdate();
 
@@ -73,12 +73,12 @@ const useTransition = (props: useTransitionProps) => {
       ...statusRef.current,
       className: "",
       progress: null,
-      transitionEnd: true,
+      transitionEnd: true
     };
     if (!show && statusRef.current.display) {
       statusRef.current = {
         ...statusRef.current,
-        display: false,
+        display: false
       };
       update();
     }
@@ -96,7 +96,7 @@ const useTransition = (props: useTransitionProps) => {
         inited: true,
         display: true,
         className: classes.enter,
-        transitionEnd: false,
+        transitionEnd: false
       };
       update();
       requestAnimationFrame(() => {
@@ -104,7 +104,7 @@ const useTransition = (props: useTransitionProps) => {
         statusRef.current = {
           ...statusRef.current,
           progress: "enterTo",
-          className: classes.enterTo,
+          className: classes.enterTo
         };
         update();
       });
@@ -125,7 +125,7 @@ const useTransition = (props: useTransitionProps) => {
       statusRef.current = {
         ...statusRef.current,
         transitionEnd: false,
-        className: classes.leave,
+        className: classes.leave
       };
       update();
       requestAnimationFrame(() => {
@@ -133,7 +133,7 @@ const useTransition = (props: useTransitionProps) => {
         statusRef.current = {
           ...statusRef.current,
           progress: "leaveTo",
-          className: classes.leaveTo,
+          className: classes.leaveTo
         };
         update();
       });
@@ -153,7 +153,7 @@ const useTransition = (props: useTransitionProps) => {
     status: statusRef.current.progress,
     inited: statusRef.current.inited,
     display: statusRef.current.display,
-    className: statusRef.current.className,
+    className: statusRef.current.className
   };
 };
 
