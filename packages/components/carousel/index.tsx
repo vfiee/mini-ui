@@ -2,19 +2,18 @@ import React, { useState, useMemo, useCallback } from "react";
 import { previewImage } from "@tarojs/taro";
 import { Swiper, SwiperItem, View, Text } from "@tarojs/components";
 import Image from "components/image";
-import { mergeStyle, isEmpty, compact, get } from "utils";
+import { mergeStyle, isEmpty, compact, get, createBEM } from "utils";
 import {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   IndicatorProps,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   CarouselProps,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   CarouselData,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  SwiperItemPropsWithData
+  SwiperItemPropsWithData,
+  FunctionComponent
 } from "types";
 
-const IndicatorDots = (props: IndicatorProps) => {
+const bem = createBEM("carousel");
+
+const IndicatorDots: FunctionComponent<IndicatorProps> = props => {
   const {
     data,
     style,
@@ -38,20 +37,19 @@ const IndicatorDots = (props: IndicatorProps) => {
             {...restProps}
             key={index}
             style={_style}
-            className={`__dot__ ${
-              isCurrent
-                ? `__dot__active__ ${
-                    dotActiveLine ? "__dot__active__line__" : ""
-                  }`
-                : ""
-            } ${className ?? ""}`}
+            className={`${bem("dot", {
+              active: isCurrent,
+              line: isCurrent && dotActiveLine
+            })} ${className ?? ""}`}
           ></View>
         );
       })}
     </View>
   );
 };
-const IndicatorNumber = (props: IndicatorProps) => {
+const IndicatorNumber: FunctionComponent<IndicatorProps> = (
+  props: IndicatorProps
+) => {
   const { data, current, className, wrapperClassName, ...restProps } = props;
   const extraText = useMemo(() => get(data, `[${current}]._text`, ""), [
     current,
@@ -59,34 +57,25 @@ const IndicatorNumber = (props: IndicatorProps) => {
   ]);
   return (
     <View className={wrapperClassName}>
-      <View {...restProps} className={`__numbers__ ${className ?? ""}`}>
+      <View {...restProps} className={`${bem("numbers")} ${className ?? ""}`}>
         <Text>
           {current + 1}/{data.length}
         </Text>
         {extraText.length > 0 && (
-          <Text className="__extra__text__">{extraText}</Text>
+          <Text className={bem("extra")}>{extraText}</Text>
         )}
       </View>
     </View>
   );
 };
-const defaultIndicator = {
-  indicatorType: "dots",
-  indicatorPosition: "bottomCenter",
-  indicatorColor: "rgba(0, 0, 0, .3)",
-  indicatorActiveColor: "#000000"
-};
-const Indicator = (props: IndicatorProps) => {
+const Indicator: FunctionComponent<IndicatorProps> = props => {
   const {
     indicatorType,
     indicatorPosition,
-    wrapperClassName = "",
+    wrapperClassName,
     ...restProps
-  } = {
-    ...defaultIndicator,
-    ...compact(props, v => typeof v === "undefined")
-  };
-  const IndicatorComponent = get(
+  } = compact(props, v => typeof v === "undefined");
+  const IndicatorComponent: React.FunctionComponent<IndicatorProps> = get(
     {
       dots: IndicatorDots,
       numbers: IndicatorNumber
@@ -97,12 +86,20 @@ const Indicator = (props: IndicatorProps) => {
   return (
     <IndicatorComponent
       {...restProps}
-      wrapperClassName={`__indicator__ __indicator__${indicatorPosition} ${wrapperClassName}`}
+      wrapperClassName={`${bem("indicator", indicatorPosition)} ${
+        wrapperClassName ?? ""
+      }`}
     />
   );
 };
+Indicator.defaultProps = {
+  indicatorType: "dots",
+  indicatorPosition: "bottomCenter",
+  indicatorColor: "rgba(0, 0, 0, .3)",
+  indicatorActiveColor: "#000000"
+};
 
-const CarouselItem = (props: SwiperItemPropsWithData) => {
+const CarouselItem: FunctionComponent<SwiperItemPropsWithData> = props => {
   const {
     data,
     onClick,
@@ -112,7 +109,6 @@ const CarouselItem = (props: SwiperItemPropsWithData) => {
     srcKey,
     ...restProps
   } = props;
-
   const src = useMemo(() => (srcKey ? data[srcKey] : data["src"]), [
     data,
     srcKey
@@ -121,21 +117,20 @@ const CarouselItem = (props: SwiperItemPropsWithData) => {
   return (
     <SwiperItem
       {...restProps}
-      key={data.id}
       onClick={onClick?.bind(null, data)}
-      className={`__swiper__item__ ${className ?? ""}`}
+      className={`${bem("swiperItem")} ${className ?? ""}`}
     >
       <Image
         {...restImageProps}
         src={src}
-        className={`__carousel__img__ ${imageCls ?? ""} `}
+        className={`${bem("swiperImg")} ${imageCls ?? ""} `}
       />
-      {props?.extra?.({ data, current })}
+      {props.extra?.({ data, current })}
     </SwiperItem>
   );
 };
 
-const Carousel = (props: CarouselProps) => {
+const Carousel: FunctionComponent<CarouselProps> = props => {
   const {
     data,
     style,
@@ -197,23 +192,23 @@ const Carousel = (props: CarouselProps) => {
     [carouselData, current, data, onClick, preview, showMenu, srcKey]
   );
   return (
-    <View className={`__carousel__ ${className ?? ""}`} style={style}>
+    <View className={`${bem()} ${className ?? ""}`} style={style}>
       <Swiper
         {...restProps}
         current={current}
         onClick={onSwiperClick}
         onChange={onSwiperChange}
         indicatorDots={showOriginIndicator}
-        className={`__swiper__ ${swiper?.className ?? ""}`}
+        className={`${bem("swiper")} ${swiper?.className ?? ""}`}
       >
         {carouselData.map((item, index) => (
           <CarouselItem
             {...swiperItem}
-            current={current}
-            srcKey={srcKey}
-            image={image}
             key={index}
             data={item}
+            image={image}
+            srcKey={srcKey}
+            current={current}
           />
         ))}
       </Swiper>
@@ -236,8 +231,6 @@ const Carousel = (props: CarouselProps) => {
     </View>
   );
 };
-
-Carousel.displayName = "Carousel";
 
 Carousel.displayName = "Carousel";
 

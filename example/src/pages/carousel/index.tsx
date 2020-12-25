@@ -8,19 +8,19 @@ import "./index.less";
 const CAROUSEL_DATA = [
   {
     url:
-      "https://publicdomainarchive.com/wp-content/uploads/2017/09/free-stock-photos-public-domain-images-013-1000x667.jpg",
+      "https://publicdomainarchive.com/wp-content/uploads/2017/09/free-stock-photos-public-domain-images-013-1000x667.jpg"
   },
   {
     url:
-      "https://publicdomainarchive.com/wp-content/uploads/2017/01/public-domain-images-free-stock-photos008-1000x625.jpg",
+      "https://publicdomainarchive.com/wp-content/uploads/2017/01/public-domain-images-free-stock-photos008-1000x625.jpg"
   },
   {
     url:
-      "https://publicdomainarchive.com/wp-content/uploads/2015/03/public-domain-images-free-stock-photos-bicycle-bike-black-and-white-1000x667.jpeg",
+      "https://publicdomainarchive.com/wp-content/uploads/2015/03/public-domain-images-free-stock-photos-bicycle-bike-black-and-white-1000x667.jpeg"
   },
   {
-    url: `https://file.zhen22.com/weapp/preview.png`,
-  },
+    url: `https://file.zhen22.com/weapp/preview.png`
+  }
 ];
 
 const INDICATOR_TYPES: IndicatorType[] = ["dots", "numbers"];
@@ -36,41 +36,41 @@ const INDICATOR_POSITION: IndicatorPosition[] = [
   "rightBottom",
   "bottomLeft",
   "bottomRight",
-  "bottomCenter",
+  "bottomCenter"
 ];
 const CAROUSEL_OPTIONS = [
   {
     type: "select",
     label: "指示器类型",
     key: "indicatorType",
-    options: INDICATOR_TYPES,
+    options: INDICATOR_TYPES
   },
   {
     type: "select",
     label: "指示器位置",
     key: "indicatorPosition",
-    options: INDICATOR_POSITION,
+    options: INDICATOR_POSITION
   },
   {
     key: "customIndicator",
     label: "是否自定义指示器",
-    type: "switch",
+    type: "switch"
   },
   {
     key: "circular",
     label: "是否循环",
-    type: "switch",
+    type: "switch"
   },
   {
     key: "showMenu",
     label: "长按图片展示菜单",
-    type: "switch",
+    type: "switch"
   },
   {
     key: "preview",
     label: "是否预览图片",
-    type: "switch",
-  },
+    type: "switch"
+  }
 ];
 
 export default class CarouselExample extends Component {
@@ -80,7 +80,7 @@ export default class CarouselExample extends Component {
     preview: true,
     customIndicator: false,
     indicatorType: INDICATOR_TYPES[0],
-    indicatorPosition: INDICATOR_POSITION[11],
+    indicatorPosition: INDICATOR_POSITION[11]
   };
   getContent(option) {
     const { type, key, options } = option;
@@ -89,7 +89,7 @@ export default class CarouselExample extends Component {
         return (
           <Switch
             checked={this.state[key]}
-            onChange={(eve) => {
+            onChange={eve => {
               this.setState({ [key]: eve.detail.value });
             }}
           />
@@ -101,7 +101,7 @@ export default class CarouselExample extends Component {
             mode="selector"
             range={options}
             value={this.state[key]}
-            onChange={(eve) => {
+            onChange={eve => {
               this.setState({ [key]: options[eve.detail.value] });
             }}
           >
@@ -120,7 +120,7 @@ export default class CarouselExample extends Component {
       preview,
       customIndicator,
       indicatorType,
-      indicatorPosition,
+      indicatorPosition
     } = this.state;
     return (
       <Block>
@@ -136,7 +136,7 @@ export default class CarouselExample extends Component {
             showLoading: true,
             loading: <Loading type="spinner" />,
             showError: true,
-            error: "error-img",
+            error: "error-img"
           }}
           swiper={{
             circular: circular,
@@ -144,18 +144,18 @@ export default class CarouselExample extends Component {
             indicatorType: indicatorType,
             indicatorPosition: indicatorPosition,
             indicatorActiveColor: "#00ab84",
-            dotActiveLine: true,
+            dotActiveLine: true
           }}
           swiperItem={{
-            extra: (params) => {
+            extra: params => {
               return (
                 <View className="item-extra">extra: {params.current}</View>
               );
-            },
+            }
           }}
           extra={<View className="global-extra">global extra</View>}
         />
-        {CAROUSEL_OPTIONS.map((option) => {
+        {CAROUSEL_OPTIONS.map(option => {
           const { key, label } = option;
           return (
             <View className="row" key={key}>

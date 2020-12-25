@@ -12,9 +12,11 @@ const APPBAR_KEYS = ["ALL", "BACK", "HOME", "SEARCH"];
 
 export default function AppBarExample() {
   const [state, setState] = useState({
-    appbarKey: APPBAR_KEYS[3]
+    appbarKey: APPBAR_KEYS[0]
   });
   const navigateBack = () => Taro.navigateBack();
+  const navigateHome = () => Taro.redirectTo({ url: `/pages/index/index` });
+  const onTitleClick = () => Taro.showModal({ title: "点击了标题" });
   const setAppbarKey = key => {
     key !== state.appbarKey && setState({ appbarKey: key });
   };
@@ -47,9 +49,9 @@ export default function AppBarExample() {
             },
             type: homeWhiteIcon
           }}
-          onTitleClick={console.log}
+          onTitleClick={onTitleClick}
           onLeftClick={navigateBack}
-          onRightClick={console.log}
+          onRightClick={navigateHome}
           backgroundColor="#00ab84"
         />
       )}
@@ -66,7 +68,7 @@ export default function AppBarExample() {
             },
             type: backIcon
           }}
-          onTitleClick={console.log}
+          onTitleClick={onTitleClick}
           onLeftClick={navigateBack}
           backgroundColor="#00ab84"
         />
@@ -84,8 +86,8 @@ export default function AppBarExample() {
             },
             type: homeWhiteIcon
           }}
-          onTitleClick={console.log}
-          onLeftClick={console.log}
+          onTitleClick={onTitleClick}
+          onLeftClick={navigateHome}
           backgroundColor="#00ab84"
         />
       )}

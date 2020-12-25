@@ -1,7 +1,6 @@
-import React, { useMemo, useCallback } from "react";
+import React, { useMemo, useCallback, useRef } from "react";
 import { Button } from "@tarojs/components";
-import { isFunction, ensureAuthScope } from "utils";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { isFunction, ensureAuthScope, createBEM } from "utils";
 import { AuthorizeProps, FunctionComponent } from "types";
 
 function authorizeScope(eve: any) {
@@ -36,6 +35,7 @@ const Authorize: FunctionComponent<AuthorizeProps> = props => {
     openType,
     ...rest
   } = props;
+  const { current: bem } = useRef(createBEM("authorize"));
   const onClick = useCallback(
     (eve: any) => {
       if (props.openType === "scope") {
@@ -67,7 +67,11 @@ const Authorize: FunctionComponent<AuthorizeProps> = props => {
   );
 
   return (
-    <Button {...rest} {...buttonProps} className={`__authorize__ ${className}`}>
+    <Button
+      {...rest}
+      {...buttonProps}
+      className={`${bem("authorize")} ${className}`}
+    >
       {props.children}
     </Button>
   );

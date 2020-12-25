@@ -2,7 +2,7 @@
 
 获取微信授权,授权类型分为两种:  
 1.小程序 Button 按钮的 OpenType 类型,[参考文档](https://developers.weixin.qq.com/miniprogram/dev/component/button.html)  
-2.请求获取用户侧授权信息,[参考文档](https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/authorize.html)
+2.请求获取用户授权信息,[参考文档](https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/authorize.html)
 
 ## 参数
 

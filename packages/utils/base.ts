@@ -198,19 +198,19 @@ export const isEmpty = (value: any): boolean => {
  * @returns { [] | object } 返回过滤后的值
  */
 
-export function compact(
-  value: [] | object,
+export function compact<T>(
+  value: T,
   fn?: (arg: any) => boolean,
   deep: boolean = false
-): [] | object {
+): T {
   const predicate = fn || Boolean;
   if (isArray(value)) {
-    return value.filter(predicate);
+    return value.filter(predicate) as any;
   }
   if (!isObject(value)) return value;
   let keys = Object.keys(value);
   if (keys.length <= 0) return value;
-  let res = {};
+  let res = <T>{};
   for (let i = 0, len = keys.length; i < len; i++) {
     let item = value[keys[i]];
     if (deep && (isArray(item) || isObject(item))) {
