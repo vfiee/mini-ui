@@ -1,23 +1,19 @@
-import { useRef } from "react";
-import { getMenuButtonBoundingClientRect, get } from "utils";
-import { useSystemInfo } from "hooks";
-import type { BaseObject, navigationBarTextStyle } from "types";
+import { getMenuButtonBoundingClientRect, get, getSystemInfoSync } from "utils";
+import type { navigationBarTextStyle } from "types";
 
 export declare type menuProps = {
   type?: navigationBarTextStyle;
 };
 
 export declare type menuData = {
-  rect: BaseObject;
-  wrapStyle: BaseObject;
-  menuStyle: BaseObject;
-  delimiterStyle: BaseObject;
+  rect: Taro.getMenuButtonBoundingClientRect.Rect;
+  wrapStyle: React.CSSProperties;
+  menuStyle: React.CSSProperties;
+  delimiterStyle: React.CSSProperties;
   system: Taro.getSystemInfoSync.Result;
 };
 
-const defaultMenuProps = {
-  type: "white"
-};
+const defaultMenuProps: menuProps = { type: "white" };
 
 const defaultColors = {
   border: {
@@ -39,14 +35,12 @@ const useMenuButton = (props: menuProps = {}): menuData => {
     ...defaultMenuProps,
     ...props
   };
-  const rectRef = useRef(getMenuButtonBoundingClientRect());
-  const systemInfo = useSystemInfo();
-  const { width, height, top, right } = rectRef.current;
-  const { screenWidth, statusBarHeight } = systemInfo;
-  const menuRef = useRef({
+  const rect = getMenuButtonBoundingClientRect();
+  const system = getSystemInfoSync();
+  const { width, height, top, right } = rect;
+  const { screenWidth, statusBarHeight } = system;
+  return {
     wrapStyle: {
-      position: "fixed",
-      zIndex: 1000,
       boxSizing: "border-box",
       width: screenWidth + "px",
       paddingTop: statusBarHeight + "px",
@@ -68,12 +62,9 @@ const useMenuButton = (props: menuProps = {}): menuData => {
       width: `1px`,
       height: "18px",
       backgroundColor: get(defaultColors, `delimiter.${typeStyle}`)
-    }
-  });
-  return {
-    ...menuRef.current,
-    system: systemInfo,
-    rect: rectRef.current
+    },
+    system,
+    rect
   };
 };
 

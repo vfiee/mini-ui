@@ -2,7 +2,7 @@ import React, { useMemo, useCallback } from "react";
 import { Button } from "@tarojs/components";
 import { isFunction, ensureAuthScope } from "utils";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { AuthorizeProps } from "types";
+import { AuthorizeProps, FunctionComponent } from "types";
 
 function authorizeScope(eve: any) {
   this.authScope &&
@@ -20,14 +20,14 @@ function onSuccess(fn: Function, ...args: any) {
   isFunction(fn) && fn(...args);
 }
 
-const OPENTYPE_EVENTNAME = {
+const OPENABLE = {
   contact: "onContact",
   launchApp: "onLaunchapp",
   getUserInfo: "onGetUserInfo",
   getPhoneNumber: "onGetPhoneNumber"
 };
 
-const Authorize = (props: AuthorizeProps) => {
+const Authorize: FunctionComponent<AuthorizeProps> = props => {
   const {
     authorize,
     onAuthorize,
@@ -51,7 +51,7 @@ const Authorize = (props: AuthorizeProps) => {
       if (authorize) {
         _props = { onClick: fn };
       } else {
-        const eventName = openType && OPENTYPE_EVENTNAME[openType];
+        const eventName = openType && OPENABLE[openType];
         _props = {
           openType
         };
@@ -67,7 +67,6 @@ const Authorize = (props: AuthorizeProps) => {
   );
 
   return (
-    // @ts-ignore
     <Button {...rest} {...buttonProps} className={`__authorize__ ${className}`}>
       {props.children}
     </Button>

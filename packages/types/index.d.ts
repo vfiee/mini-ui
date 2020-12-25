@@ -62,3 +62,9 @@ export declare type TransitionStatus =
   | "enterTo"
   | "leave"
   | "leaveTo";
+
+export interface FunctionComponent<T> extends React.FunctionComponent<T> {
+  options?: {
+    [key: string]: any;
+  };
+}

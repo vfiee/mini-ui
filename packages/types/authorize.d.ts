@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import { StandardProps } from "@tarojs/components";
+import { FunctionComponent } from "./index";
 
 declare type AuthScope =
   | "werun"
@@ -24,6 +25,6 @@ declare interface AuthorizeProps extends StandardProps {
   children?: React.ReactNode;
 }
 
-declare const Authorize: React.ComponentType<AuthorizeProps>;
+declare const Authorize: FunctionComponent<AuthorizeProps>;
 
 export { Authorize, AuthorizeProps, OpenType, AuthScope };

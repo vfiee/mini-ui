@@ -1,18 +1,34 @@
-.__appbar__ {
+.mini-appbar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-
-  .__right__menu__ {
-    visibility: hidden;
-    opacity: 0;
-
-    &hidden__ {
-      display: none;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+  &__left {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &--full {
+      .mini-appbar__icon {
+        flex: 1;
+      }
     }
   }
-
-  &title__ {
+  &__right {
+    visibility: hidden;
+    opacity: 0;
+  }
+  &__delimiter {
+    transform: scaleX(0.5);
+  }
+  &__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  &__title {
     flex: 1;
     text-align: center;
     font-size: 32px;
@@ -24,35 +40,8 @@
     white-space: nowrap;
     padding: 0 10px;
 
-    &white {
+    &--white {
       color: #fff;
-    }
-  }
-
-  .__left__menu__ {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    &hidden__ {
-      display: none;
-    }
-
-    .__delimiter__ {
-      transform: scaleX(0.5);
-    }
-
-    .__menu__item__wrap__ {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-    }
-  }
-
-  .__left__menu__full__ {
-    .__menu__item__wrap__ {
-      flex: 1;
     }
   }
 }

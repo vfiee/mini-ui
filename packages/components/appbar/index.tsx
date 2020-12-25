@@ -1,11 +1,11 @@
-import React, { isValidElement } from "react";
+import React, { isValidElement, useRef } from "react";
 import { CoverView, View } from "@tarojs/components";
 import Icon from "components/icon";
 import { useMenuButton } from "hooks";
-import { mergeStyle } from "utils";
-import type { AppBarProps } from "types";
+import { mergeStyle, createBEM } from "utils";
+import type { AppBarProps, FunctionComponent } from "types";
 
-const AppBar = (props: AppBarProps) => {
+const AppBar: FunctionComponent<AppBarProps> = props => {
   const {
     type,
     title,
@@ -30,6 +30,7 @@ const AppBar = (props: AppBarProps) => {
       : { ...menuStyle, backgroundColor: "transparent", borderWidth: 0 };
 
   const AppBarView = isCoverView ? CoverView : View;
+  const { current: bem } = useRef(createBEM("appbar"));
   return (
     <React.Fragment>
       <AppBarView
@@ -40,7 +41,7 @@ const AppBar = (props: AppBarProps) => {
           },
           style
         )}
-        className={`__appbar__ ${className ?? ""}`}
+        className={`${bem()} ${className ?? ""}`}
       >
         {!!left &&
           (isValidElement(left) ? (
@@ -48,23 +49,19 @@ const AppBar = (props: AppBarProps) => {
           ) : (
             <AppBarView
               style={mergeMenuStyle}
-              className={`__left__menu__ ${
-                left && right ? "__left__menu__full__" : ""
-              }`}
+              className={`${bem("left", { full: left && right })}`}
             >
-              {!!left && (
+              <AppBarView
+                className={bem("icon")}
+                onClick={eve =>
+                  onLeftClick?.({ menuStyle: mergeMenuStyle, rect }, eve)
+                }
+              >
+                <Icon {...left} />
+              </AppBarView>
+              {!!right && (
                 <AppBarView
-                  className="__menu__item__wrap__"
-                  onClick={eve =>
-                    onLeftClick?.({ menuStyle: mergeMenuStyle, rect }, eve)
-                  }
-                >
-                  <Icon {...left} />
-                </AppBarView>
-              )}
-              {left && right && (
-                <AppBarView
-                  className={`__delimiter__ ${delimiterCls ?? ""}`}
+                  className={`${bem("delimiter")} ${delimiterCls ?? ""}`}
                   style={mergeStyle(delimiterStyle, delimiterSty)}
                 />
               )}
@@ -73,7 +70,7 @@ const AppBar = (props: AppBarProps) => {
                   right
                 ) : (
                   <AppBarView
-                    className="__menu__item__wrap__"
+                    className={bem("icon")}
                     onClick={eve =>
                       onRightClick?.({ menuStyle: mergeMenuStyle, rect }, eve)
                     }
@@ -88,16 +85,18 @@ const AppBar = (props: AppBarProps) => {
             title
           ) : (
             <AppBarView
-              onClick={eve => onTitleClick?.(eve)}
-              className={`__appbar__title__ __appbar__title__${type}`}
+              onClick={onTitleClick}
+              className={bem("title", { [type as string]: !!type })}
             >
               {title}
             </AppBarView>
           ))}
-        <AppBarView
-          className="__right__menu__"
-          style={{ width: menuStyle.width, height: menuStyle.height }}
-        />
+        {!!left && (
+          <AppBarView
+            className={bem("right")}
+            style={{ width: menuStyle.width, height: menuStyle.height }}
+          />
+        )}
       </AppBarView>
       <AppBarView style={wrapStyle} />
     </React.Fragment>
@@ -111,7 +110,7 @@ AppBar.options = {
 };
 
 AppBar.defaultProps = {
-  title: null,
+  title: "",
   type: "white",
   isCoverView: false,
   backgroundColor: "#fff"

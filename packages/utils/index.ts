@@ -1,5 +1,4 @@
 import get from "lodash.get";
-import kebabcase from "lodash.kebabcase";
 import { createSelectorQuery } from "@tarojs/taro";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { BaseObject, BaseMap } from "types";
@@ -14,7 +13,7 @@ export * from "./style";
 
 export { default as MiniConsole } from "./log";
 
-export { get, kebabcase };
+export { get };
 /**
  * 判断src是否为图片类型
  * @param {string} src 图片地址

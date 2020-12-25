@@ -1,6 +1,7 @@
 /// <reference types="react" />
 import { ViewProps } from "@tarojs/components/types/View";
-import { IconProps, navigationBarTextStyle } from "./index";
+import { IconProps, navigationBarTextStyle, FunctionComponent } from "./index";
+import { ITouchEvent } from "@tarojs/components/types/common";
 
 declare interface AppBarProps extends ViewProps {
   isCoverView?: boolean;
@@ -10,11 +11,11 @@ declare interface AppBarProps extends ViewProps {
   left?: IconProps;
   middle?: ViewProps;
   right?: IconProps;
-  onTitleClick?: Function;
+  onTitleClick?: (event: ITouchEvent<any>) => void;
   onLeftClick?: Function;
   onRightClick?: Function;
 }
 
-declare const AppBar: React.ComponentType<AppBarProps>;
+declare const AppBar: FunctionComponent<AppBarProps>;
 
 export { AppBar, AppBarProps };

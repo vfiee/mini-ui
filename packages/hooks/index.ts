@@ -15,5 +15,3 @@ export { default as useMenuButton } from "hooks/useMenuButton";
 export { default as usePrevious } from "hooks/usePrevious";
 
 export { default as useTransition } from "hooks/useTransition";
-
-export { default as useSystemInfo } from "hooks/useSystemInfo";

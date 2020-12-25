@@ -76,6 +76,7 @@
     "eslint-config-prettier": "^7.0.0",
     "eslint-config-taro": "^3.0.14",
     "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.3.0",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "1.6.1",
     "husky": "^4.3.0",
@@ -99,8 +100,7 @@
     "v-prettier": "^1.0.1"
   },
   "dependencies": {
-    "lodash.get": "^4.4.2",
-    "lodash.kebabcase": "^4.1.1"
+    "lodash.get": "^4.4.2"
   },
   "peerDependencies": {
     "@tarojs/components": "^3.0.16",

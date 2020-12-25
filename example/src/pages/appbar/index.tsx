@@ -28,7 +28,7 @@ export default function AppBarExample() {
         <AppBar
           isCoverView
           type="white"
-          title="首页"
+          title="全部"
           left={{
             isCover: true,
             localImage: true,
@@ -56,14 +56,13 @@ export default function AppBarExample() {
       {appbarKey === "BACK" && (
         <AppBar
           type="white"
-          title="首页"
+          title="返回"
           left={{
             // isCover: true,
             localImage: true,
             style: {
               width: "10px",
-              height: "18px",
-              marginLeft: "10px"
+              height: "18px"
             },
             type: backIcon
           }}
@@ -81,8 +80,7 @@ export default function AppBarExample() {
             localImage: true,
             style: {
               width: "34rpx",
-              height: "34rpx",
-              marginLeft: "20rpx"
+              height: "34rpx"
             },
             type: homeWhiteIcon
           }}
@@ -94,7 +92,7 @@ export default function AppBarExample() {
       {appbarKey === "SEARCH" && (
         <AppBar
           type="white"
-          title="首页"
+          title={<View className="search">搜索</View>}
           left={
             <CoverImage
               src={logo}

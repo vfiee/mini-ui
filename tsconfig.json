@@ -1,64 +1,64 @@
 {
-    "compilerOptions": {
-        "target": "es5",
-        "moduleResolution": "node",
-        "allowSyntheticDefaultImports": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "strictNullChecks": true,
-        "sourceMap": true,
-        "baseUrl": ".",
-        "rootDir": ".",
-        "jsx": "react",
-        "jsxFactory": "React.createElement",
-        "resolveJsonModule": true,
-        "skipLibCheck": true,
-        "declaration": true,
-        "declarationDir": "lib",
-        "typeRoots": [
-            "node_modules/@types"
-        ],
-        "lib": [
-            "dom",
-            "es5"
-        ],
-        "paths": {
-            "components/*": [
-                "packages/components/*"
-            ],
-            "utils": [
-                "packages/utils/index.ts",
-            ],
-            "hooks": [
-                "packages/hooks/index.ts",
-            ],
-            "types": [
-                "packages/types/index.d.ts",
-            ],
-            "utils/*": [
-                "packages/utils/*",
-            ],
-            "hooks/*": [
-                "packages/hooks/*",
-            ],
-            "types/*": [
-                "packages/types/*",
-            ],
-            "@vyron/mini-components": [
-                "lib/index.js"
-            ],
-            "@vyron/mini-components/*": [
-                "lib/*/index.js"
-            ]
-        }
-    },
-    "exclude": [
-        "node_modules",
+  "compilerOptions": {
+    "target": "es5",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "rootDir": ".",
+    "jsx": "react",
+    "jsxFactory": "React.createElement",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "declarationDir": "lib",
+    "typeRoots": [
+      "node_modules/@types"
     ],
-    "include": [
-        "lib",
-        "packages",
-        "global.d.ts",
-        "packages/types"
+    "lib": [
+      "dom",
+      "es5"
     ],
+    "paths": {
+      "components/*": [
+        "packages/components/*"
+      ],
+      "utils": [
+        "packages/utils/index.ts",
+      ],
+      "hooks": [
+        "packages/hooks/index.ts",
+      ],
+      "types": [
+        "packages/types/index.d.ts",
+      ],
+      "utils/*": [
+        "packages/utils/*",
+      ],
+      "hooks/*": [
+        "packages/hooks/*",
+      ],
+      "types/*": [
+        "packages/types/*",
+      ],
+      "@vyron/mini-components": [
+        "lib/index.js"
+      ],
+      "@vyron/mini-components/*": [
+        "lib/*/index.js"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules",
+  ],
+  "include": [
+    "lib",
+    "packages",
+    "global.d.ts",
+    "packages/types"
+  ],
 }
