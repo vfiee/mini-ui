@@ -1,4 +1,4 @@
-@import "./var.less";
+@import "./var/color.less";
 @import "./mixins/haireline.less";
 
 .border,
@@ -82,24 +82,24 @@
   }
 }
 
-.borderLeft(@top: 0; @bototm: 0; @width: 1px) {
+.borderLeft(@top: 0; @bottom: 0; @width: 1px) {
   &::after {
     .baseBorder();
 
     border-left-width: @width;
     top: @top;
-    bottom: @bototm;
+    bottom: @bottom;
     left: 0;
     transform: scaleX(0.5);
   }
 }
 
-.borderRight(@top: 0; @bototm: 0; @width: 1px) {
+.borderRight(@top: 0; @bottom: 0; @width: 1px) {
   &::after {
     .baseBorder();
 
     top: @top;
-    bottom: @bototm;
+    bottom: @bottom;
     left: 0;
     border-left-width: @width;
     transform: scaleX(0.5);

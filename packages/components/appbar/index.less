@@ -1,10 +1,13 @@
+@import "../../style/theme.less";
+@import "../../style/ellipsis.less";
+
 .mini-appbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: fixed;
   top: 0;
-  z-index: 9999;
+  z-index: @appbar-zIndex;
   &__left {
     display: flex;
     align-items: center;
@@ -20,7 +23,7 @@
     opacity: 0;
   }
   &__delimiter {
-    transform: scaleX(0.5);
+    transform: scaleX(@appbar-delimiter-scale);
   }
   &__icon {
     display: flex;
@@ -29,15 +32,14 @@
     height: 100%;
   }
   &__title {
+    .ellipsis();
+
     flex: 1;
     text-align: center;
-    font-size: 32px;
-    font-weight: 500;
-    color: #333;
-    line-height: 40px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
+    font-size: @appbar-title-font-size;
+    font-weight: @appbar-title-font-weight;
+    color: @appbar-title-black-color;
+    line-height: @appbar-title-line-height;
     padding: 0 10px;
 
     &--white {
